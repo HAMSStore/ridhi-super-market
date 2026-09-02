@@ -1,118 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ridhi Super Market</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f7f9;color:#171717}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
-    <title>Ridhi Super Market - Login Test</title>
+.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e7e7e7}
+.topbar-inner{max-width:1180px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:16px}
+.brand{font-size:22px;font-weight:800;white-space:nowrap}
+.brand small{display:block;font-size:11px;color:#777;font-weight:500;margin-top:2px}
+.search-wrap{flex:1;position:relative}
+.search{width:100%;border:1px solid #ddd;border-radius:12px;padding:12px 42px 12px 14px;outline:none;background:#f8f8f8}
+.search:focus{border-color:#222;background:#fff}
+.cart-btn,.profile-btn{border:1px solid #ddd;background:#fff;border-radius:11px;padding:10px 13px}
+.cart-btn{position:relative}
+.cart-count{position:absolute;right:-6px;top:-7px;background:#111;color:#fff;border-radius:99px;min-width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center}
+.profile-btn{display:flex;align-items:center;gap:8px}
+.profile-btn img{width:30px;height:30px;border-radius:50%;object-fit:cover}
 
-    <!-- Google Identity Services -->
-    <script src="https://accounts.google.com/gsi/client"
-            async
-            defer></script>
+.page{max-width:1180px;margin:auto;padding:18px}
+.hero{background:#111;color:#fff;border-radius:18px;padding:24px;margin-bottom:18px}
+.hero h1{margin:0 0 6px;font-size:28px}
+.hero p{margin:0;color:#d6d6d6}
+.section-title{font-size:20px;margin:22px 0 12px}
+.categories{display:flex;gap:10px;overflow:auto;padding-bottom:5px}
+.cat{border:1px solid #ddd;background:#fff;border-radius:999px;padding:9px 15px;white-space:nowrap}
+.cat.active{background:#111;color:#fff;border-color:#111}
 
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
+.products{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.card{background:#fff;border:1px solid #e8e8e8;border-radius:15px;overflow:hidden;min-width:0}
+.product-image{height:160px;background:#f2f2f2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover}
+.product-placeholder{font-size:52px}
+.product-info{padding:12px}
+.product-name{font-weight:700;line-height:1.3;min-height:38px}
+.brand-line{font-size:12px;color:#777;margin:5px 0}
+.price-row{display:flex;align-items:center;gap:7px;margin-top:8px}
+.price{font-size:18px;font-weight:800}
+.mrp{text-decoration:line-through;color:#999;font-size:12px}
+.unit{font-size:11px;color:#777}
+.add-btn{width:100%;margin-top:10px;padding:10px;border:1px solid #111;border-radius:9px;background:#fff;font-weight:700}
+.add-btn:hover{background:#111;color:#fff}
+.availability{font-size:11px;margin-top:7px}
+.available{color:#18753a}.unavailable{color:#a33}
 
-        .card {
-            width: 90%;
-            max-width: 420px;
-            background: white;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            text-align: center;
-        }
+.empty{text-align:center;padding:40px;color:#777;background:#fff;border-radius:15px}
+.loading{text-align:center;padding:35px;color:#777}
 
-        h1 {
-            margin-bottom: 8px;
-        }
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{width:100%;max-width:430px;background:#fff;border-radius:18px;padding:34px;box-shadow:0 8px 30px rgba(0,0,0,.10);text-align:center}
+.login-card h1{margin:0 0 8px}
+.login-card p{color:#666}
+#googleSignInButton{display:flex;justify-content:center;margin:28px 0}
+.result{margin-top:18px;text-align:left}
+.success,.error{padding:14px;border-radius:10px}
+.success{background:#e8f5e9}.error{background:#ffebee}
 
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-        }
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40}
+.cart-drawer{position:fixed;right:0;top:0;height:100%;width:min(430px,100%);background:#fff;z-index:50;padding:18px;display:flex;flex-direction:column}
+.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px}
+.close{border:0;background:#eee;border-radius:8px;padding:8px 11px}
+.cart-items{flex:1;overflow:auto;padding:10px 0}
+.cart-item{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.cart-item-main{flex:1}
+.cart-item-name{font-weight:700}
+.qty-controls{display:flex;align-items:center;gap:8px;margin-top:7px}
+.qty-controls button{width:28px;height:28px;border:1px solid #ddd;background:#fff;border-radius:7px}
+.cart-footer{border-top:1px solid #eee;padding-top:14px}
+.total-row{display:flex;justify-content:space-between;font-weight:800;font-size:18px}
+.checkout-placeholder{margin-top:12px;width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff}
+.checkout-note{font-size:12px;color:#777;margin-top:8px}
 
-        #googleSignInButton {
-            display: flex;
-            justify-content: center;
-            margin: 25px 0;
-        }
+.profile-menu{position:absolute;right:18px;top:62px;background:#fff;border:1px solid #ddd;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:12px;width:250px;z-index:30}
+.profile-menu strong{display:block}
+.profile-menu small{color:#777;word-break:break-all}
+.logout{margin-top:12px;width:100%;padding:9px;border:1px solid #ddd;background:#fff;border-radius:8px}
 
-        #result {
-            margin-top: 25px;
-            text-align: left;
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-size: 14px;
-        }
-
-        .success {
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 10px;
-        }
-
-        .error {
-            padding: 15px;
-            background: #ffebee;
-            border-radius: 10px;
-        }
-
-        .profile {
-            margin-top: 20px;
-        }
-
-        .profile img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
+@media(max-width:1000px){.products{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){
+ .topbar-inner{flex-wrap:wrap}.brand{width:auto}.search-wrap{order:3;flex-basis:100%}
+ .products{grid-template-columns:repeat(2,1fr)}
+ .product-image{height:145px}.hero h1{font-size:23px}
+}
+@media(max-width:430px){
+ .page{padding:12px}.products{gap:9px}.product-image{height:130px}.product-info{padding:9px}
+ .product-name{font-size:14px}.price{font-size:16px}
+}
+</style>
 </head>
 
 <body>
 
-<div class="card">
-
+<!-- LOGIN -->
+<section id="loginScreen" class="login-screen">
+  <div class="login-card">
     <h1>Ridhi Super Market</h1>
-
-    <div class="subtitle">
-        Customer Login Test
-    </div>
-
+    <p>Sign in to shop groceries online</p>
     <div id="googleSignInButton"></div>
+    <div id="loginResult" class="result">Please sign in with Google.</div>
+  </div>
+</section>
 
-    <div id="result">
-        Please sign in with Google.
+<!-- DASHBOARD -->
+<section id="dashboard" class="hidden">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        Ridhi Super Market
+        <small>Nallasopara West</small>
+      </div>
+
+      <div class="search-wrap">
+        <input id="searchInput" class="search" type="search"
+               placeholder="Search products, brands or SKU...">
+      </div>
+
+      <button id="cartButton" class="cart-btn" type="button">
+        🛒 Cart
+        <span id="cartCount" class="cart-count">0</span>
+      </button>
+
+      <button id="profileButton" class="profile-btn" type="button">
+        <span>Account</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="profileMenu" class="profile-menu hidden"></div>
+
+  <main class="page">
+    <section class="hero">
+      <h1 id="welcomeTitle">Welcome</h1>
+      <p>Fresh groceries and daily essentials delivered to your doorstep.</p>
+    </section>
+
+    <h2 class="section-title">Shop by Category</h2>
+    <div id="categories" class="categories">
+      <button class="cat active" data-category="">All</button>
     </div>
 
-</div>
+    <h2 class="section-title">Products</h2>
+    <div id="products" class="products">
+      <div class="loading">Loading products...</div>
+    </div>
+  </main>
+</section>
 
+<!-- CART -->
+<div id="overlay" class="overlay hidden"></div>
+<aside id="cartDrawer" class="cart-drawer hidden">
+  <div class="cart-head">
+    <h2 style="margin:0">Your Cart</h2>
+    <button id="closeCart" class="close" type="button">✕</button>
+  </div>
+
+  <div id="cartItems" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="total-row">
+      <span>Total</span>
+      <span id="cartTotal">₹0</span>
+    </div>
+    <button class="checkout-placeholder" type="button" onclick="alert('Checkout will be connected after the cart and order flow is completed.')">
+      Continue to Checkout
+    </button>
+    <div class="checkout-note">
+      Checkout/order placement is intentionally not enabled in this stage.
+    </div>
+  </div>
+</aside>
 
 <script>
-
 /* ============================================================
    RIDHI CONFIGURATION
-   ============================================================ */
+============================================================ */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbywn4Lfap2OZzdeScBFHvthoT5yd-fGC69glIjvE69mQvwW9S5u9xmegLFPA7kwv9URtQ/exec";
@@ -122,348 +191,631 @@ const GOOGLE_CLIENT_ID =
 
 
 /* ============================================================
-   RIDHI AUTHENTICATED API HELPER
-   ============================================================ */
+   STATE
+============================================================ */
+
+let ridhiGoogleIdToken = null;
+let customer = null;
+let allProducts = [];
+let allCategories = [];
+let selectedCategory = "";
+let searchTerm = "";
+
+let cart = JSON.parse(
+  sessionStorage.getItem("ridhiCart") || "{}"
+);
+
+
+/* ============================================================
+   PUBLIC API
+   Products/Categories do not require customer authentication.
+============================================================ */
+
+async function publicGet(action, params = {}) {
+
+  const url = new URL(API_URL);
+  url.searchParams.set("action", action);
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, value);
+    }
+  });
+
+  const r = await fetch(url.toString(), {
+    method: "GET",
+    cache: "no-store"
+  });
+
+  if (!r.ok) {
+    throw new Error("Ridhi API request failed. HTTP " + r.status);
+  }
+
+  const data = await r.json();
+
+  if (!data.success) {
+    throw new Error(data.error || "Ridhi API request failed.");
+  }
+
+  return data.data || {};
+}
+
+
+/* ============================================================
+   AUTHENTICATED POST API
+   Reserved for customer-specific operations in later stages.
+============================================================ */
 
 async function ridhiPost(action, payload = {}) {
 
-    const idToken = window.ridhiGoogleIdToken;
+  if (!ridhiGoogleIdToken) {
+    throw new Error("Customer session is not available. Please sign in again.");
+  }
 
-    if (!idToken) {
-        throw new Error("Customer session is not available. Please sign in again.");
-    }
+  const r = await fetch(API_URL, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action,
+      idToken: ridhiGoogleIdToken,
+      ...payload
+    })
+  });
 
-    const r = await fetch(
-        API_URL,
-        {
-            method: "POST",
-            cache: "no-store",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify({
-                action: action,
-                idToken: idToken,
-                ...payload
-            })
-        }
-    );
+  if (!r.ok) {
+    throw new Error("Ridhi backend request failed. HTTP " + r.status);
+  }
 
-    if (!r.ok) {
-        throw new Error(
-            "Ridhi backend request failed. HTTP " + r.status
-        );
-    }
+  const data = await r.json();
 
-    const data = await r.json();
+  if (!data.success) {
+    throw new Error(data.error || data.message || "Ridhi API request failed.");
+  }
 
-    if (!data.success) {
-        throw new Error(
-            data.error ||
-            data.message ||
-            "Ridhi API request failed."
-        );
-    }
-
-    return data;
+  return data.data || {};
 }
 
 
 /* ============================================================
-   INITIALIZE GOOGLE LOGIN
-   ============================================================ */
+   GOOGLE LOGIN
+============================================================ */
 
 function setupGoogleLogin() {
 
-    if (
-        !window.google ||
-        !google.accounts ||
-        !google.accounts.id
-    ) {
-        console.log("Google Identity Services not loaded yet.");
-        setTimeout(setupGoogleLogin, 500);
-        return;
+  if (!window.google || !google.accounts || !google.accounts.id) {
+    setTimeout(setupGoogleLogin, 500);
+    return;
+  }
+
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: handleGoogleCredential,
+    auto_select: false,
+    cancel_on_tap_outside: true,
+    use_fedcm_for_prompt: true
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById("googleSignInButton"),
+    {
+      theme: "outline",
+      size: "large",
+      type: "standard",
+      text: "signin_with",
+      shape: "rectangular",
+      width: 280,
+      logo_alignment: "left"
     }
-
-
-    google.accounts.id.initialize({
-
-        client_id: GOOGLE_CLIENT_ID,
-
-        callback: handleGoogleCredential,
-
-        auto_select: false,
-
-        cancel_on_tap_outside: true,
-
-        use_fedcm_for_prompt: true
-
-    });
-
-
-    google.accounts.id.renderButton(
-
-        document.getElementById("googleSignInButton"),
-
-        {
-            theme: "outline",
-            size: "large",
-            type: "standard",
-            text: "signin_with",
-            shape: "rectangular",
-            width: 280,
-            logo_alignment: "left"
-        }
-
-    );
-
-
-    console.log("Ridhi Google Login initialized.");
+  );
 }
 
 
 /* ============================================================
-   GOOGLE LOGIN CALLBACK
-   ============================================================ */
+   LOGIN CALLBACK
+============================================================ */
 
 async function handleGoogleCredential(response) {
 
-    const result = document.getElementById("result");
+  const result = document.getElementById("loginResult");
 
+  if (!response || !response.credential) {
+    result.innerHTML = '<div class="error">Google sign-in failed.</div>';
+    return;
+  }
 
-    if (
-        !response ||
-        !response.credential
-    ) {
+  result.textContent = "Signing you in...";
 
-        result.innerHTML =
-            '<div class="error">Google sign-in failed.</div>';
+  try {
 
-        return;
-    }
+    const data = await ridhiPostWithToken(
+      "verifyCustomerGoogle",
+      response.credential
+    );
 
+    customer = data.customer || {};
+
+    ridhiGoogleIdToken = response.credential;
+
+    sessionStorage.setItem(
+      "ridhiCustomerProfile",
+      JSON.stringify(customer)
+    );
+
+    showDashboard();
+
+  } catch (error) {
+
+    console.error("Ridhi Login Error:", error);
 
     result.innerHTML =
-        "Checking your Google account...";
+      '<div class="error"><strong>❌ Login Failed</strong><p>' +
+      escapeHtml(error.message) +
+      '</p></div>';
+  }
+}
 
 
-    try {
+/* Login helper used only before the token is stored in state. */
+async function ridhiPostWithToken(action, idToken, payload = {}) {
 
-        /* ----------------------------------------------------
-           SEND GOOGLE ID TOKEN TO RIDHI BACKEND
-           Secure authenticated requests use POST.
-           The ID token is sent in the request body, not the URL.
-           ---------------------------------------------------- */
+  const r = await fetch(API_URL, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action,
+      idToken,
+      ...payload
+    })
+  });
 
-        console.log("Calling Ridhi backend...");
+  if (!r.ok) {
+    throw new Error("Ridhi backend request failed. HTTP " + r.status);
+  }
 
-        const r = await fetch(
-            API_URL,
-            {
-                method: "POST",
-                cache: "no-store",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: JSON.stringify({
-                    action: "verifyCustomerGoogle",
-                    idToken: response.credential
-                })
-            }
-        );
+  const data = await r.json();
 
+  if (!data.success) {
+    throw new Error(data.error || data.message || "Ridhi API request failed.");
+  }
 
-        if (!r.ok) {
-
-            throw new Error(
-                "Ridhi backend request failed. HTTP " +
-                r.status
-            );
-
-        }
-
-
-        const data = await r.json();
-
-
-        console.log(
-            "Ridhi backend response:",
-            data
-        );
-
-
-        /* ----------------------------------------------------
-           BACKEND ERROR
-           ---------------------------------------------------- */
-
-        if (!data.success) {
-
-            throw new Error(
-                data.error ||
-                data.message ||
-                "Google account verification failed."
-            );
-
-        }
-
-
-        /* ----------------------------------------------------
-           LOGIN SUCCESS
-           Apps Script returns:
-           { success: true, data: { customer: {...} } }
-           ---------------------------------------------------- */
-
-        const payload =
-            data.data || data;
-
-        const customer =
-            payload.customer || {};
-
-
-        /*
-         * Store the profile for this browser session.
-         * Keep the Google ID token out of localStorage because it is
-         * an authentication credential. The token is kept in memory
-         * for the current page session and will be used by future
-         * authenticated POST API calls.
-         */
-        window.ridhiGoogleIdToken = response.credential;
-
-        sessionStorage.setItem(
-            "ridhiCustomerProfile",
-            JSON.stringify(customer)
-        );
-
-
-        /* ----------------------------------------------------
-           DISPLAY CUSTOMER
-           ---------------------------------------------------- */
-
-        const name =
-            customer.FULL_NAME ||
-            customer.fullName ||
-            customer.name ||
-            payload.name ||
-            "Customer";
-
-
-        const email =
-            customer.GOOGLE_EMAIL ||
-            customer.googleEmail ||
-            customer.email ||
-            payload.email ||
-            "";
-
-
-        const picture =
-            customer.PROFILE_IMAGE ||
-            customer.profileImage ||
-            customer.picture ||
-            payload.picture ||
-            "";
-
-
-        result.innerHTML = `
-
-            <div class="success">
-
-                <strong>✅ Google Login Successful!</strong>
-
-                <div class="profile">
-
-                    ${
-                        picture
-                        ?
-                        `<img src="${picture}"
-                              alt="Profile">`
-                        :
-                        ""
-                    }
-
-                    <p>
-                        <strong>Name:</strong>
-                        ${escapeHtml(name)}
-                    </p>
-
-                    <p>
-                        <strong>Email:</strong>
-                        ${escapeHtml(email)}
-                    </p>
-
-                    ${
-                        customer.CUSTOMER_ID
-                        ?
-                        `<p>
-                            <strong>Customer ID:</strong>
-                            ${escapeHtml(customer.CUSTOMER_ID)}
-                        </p>`
-                        :
-                        ""
-                    }
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        console.log(
-            "Customer:",
-            customer
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Ridhi Login Error:",
-            error
-        );
-
-
-        result.innerHTML = `
-
-            <div class="error">
-
-                <strong>❌ Login Failed</strong>
-
-                <p>
-                    ${escapeHtml(error.message)}
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
+  return data.data || {};
 }
 
 
 /* ============================================================
-   BASIC HTML ESCAPE
-   ============================================================ */
+   DASHBOARD
+============================================================ */
+
+async function showDashboard() {
+
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  const name =
+    customer.FULL_NAME ||
+    customer.fullName ||
+    customer.name ||
+    "Customer";
+
+  document.getElementById("welcomeTitle").textContent =
+    "Hi, " + name.split(" ")[0] + "! 👋";
+
+  renderProfileButton();
+  renderCart();
+
+  await loadStoreData();
+}
+
+
+async function loadStoreData() {
+
+  const productsEl = document.getElementById("products");
+
+  productsEl.innerHTML =
+    '<div class="loading">Loading products and categories...</div>';
+
+  try {
+
+    const [categoryData, productData] = await Promise.all([
+      publicGet("categories"),
+      publicGet("products")
+    ]);
+
+    allCategories = categoryData.categories || [];
+    allProducts = productData.products || [];
+
+    renderCategories();
+    renderProducts();
+
+  } catch (error) {
+
+    console.error("Store loading error:", error);
+
+    productsEl.innerHTML =
+      '<div class="empty">Unable to load products right now.<br><br>' +
+      escapeHtml(error.message) +
+      '</div>';
+  }
+}
+
+
+/* ============================================================
+   CATEGORIES
+============================================================ */
+
+function renderCategories() {
+
+  const el = document.getElementById("categories");
+
+  el.innerHTML = "";
+
+  const allButton = document.createElement("button");
+  allButton.className = "cat" + (selectedCategory === "" ? " active" : "");
+  allButton.textContent = "All";
+  allButton.onclick = () => {
+    selectedCategory = "";
+    renderCategories();
+    renderProducts();
+  };
+  el.appendChild(allButton);
+
+  allCategories.forEach(category => {
+
+    const id = String(category.categoryId || "");
+    const name = String(category.name || id || "Category");
+
+    const button = document.createElement("button");
+
+    button.className =
+      "cat" + (selectedCategory === id ? " active" : "");
+
+    button.textContent = name;
+
+    button.onclick = () => {
+      selectedCategory = id;
+      renderCategories();
+      renderProducts();
+    };
+
+    el.appendChild(button);
+  });
+}
+
+
+/* ============================================================
+   PRODUCTS
+============================================================ */
+
+function getFilteredProducts() {
+
+  const q = searchTerm.trim().toLowerCase();
+
+  return allProducts.filter(product => {
+
+    const categoryId = String(product.categoryId || "");
+
+    if (selectedCategory && categoryId !== selectedCategory) {
+      return false;
+    }
+
+    if (!q) {
+      return true;
+    }
+
+    const searchable = [
+      product.productId,
+      product.productName,
+      product.name,
+      product.brand,
+      product.sku,
+      product.category
+    ].join(" ").toLowerCase();
+
+    return searchable.includes(q);
+  });
+}
+
+
+function renderProducts() {
+
+  const el = document.getElementById("products");
+  const products = getFilteredProducts();
+
+  if (!products.length) {
+    el.innerHTML =
+      '<div class="empty" style="grid-column:1/-1">No products found.</div>';
+    return;
+  }
+
+  el.innerHTML = "";
+
+  products.forEach(product => {
+
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const image = product.image
+      ? '<img src="' + escapeAttribute(product.image) +
+        '" alt="' + escapeAttribute(product.productName || product.name || "Product") +
+        '" loading="lazy">'
+      : '<div class="product-placeholder">🛍️</div>';
+
+    const price = Number(product.price || 0);
+    const mrp = Number(product.mrp || 0);
+
+    const availability = product.available
+      ? '<div class="availability available">✓ Available</div>'
+      : '<div class="availability unavailable">Currently unavailable</div>';
+
+    card.innerHTML = `
+      <div class="product-image">${image}</div>
+      <div class="product-info">
+        <div class="product-name">${escapeHtml(product.productName || product.name || "Product")}</div>
+        <div class="brand-line">${escapeHtml(product.brand || "")} ${product.unit ? "• " + escapeHtml(product.unit) : ""}</div>
+        <div class="price-row">
+          <span class="price">₹${formatMoney(price)}</span>
+          ${mrp > price ? `<span class="mrp">₹${formatMoney(mrp)}</span>` : ""}
+        </div>
+        ${availability}
+        <button class="add-btn" type="button"
+          ${product.available ? "" : "disabled"}
+          onclick="addToCart('${escapeJs(product.productId)}')">
+          ${product.available ? "Add to Cart" : "Out of Stock"}
+        </button>
+      </div>
+    `;
+
+    el.appendChild(card);
+  });
+}
+
+
+/* ============================================================
+   CART
+============================================================ */
+
+function addToCart(productId) {
+
+  const product = allProducts.find(
+    p => String(p.productId) === String(productId)
+  );
+
+  if (!product || !product.available) {
+    return;
+  }
+
+  const id = String(product.productId);
+
+  if (!cart[id]) {
+    cart[id] = {
+      productId: id,
+      productName: product.productName || product.name || "Product",
+      price: Number(product.price || 0),
+      unit: product.unit || "",
+      quantity: 0
+    };
+  }
+
+  cart[id].quantity += 1;
+
+  saveCart();
+  renderCart();
+}
+
+
+function changeQty(productId, delta) {
+
+  if (!cart[productId]) return;
+
+  cart[productId].quantity += delta;
+
+  if (cart[productId].quantity <= 0) {
+    delete cart[productId];
+  }
+
+  saveCart();
+  renderCart();
+}
+
+
+function saveCart() {
+  sessionStorage.setItem("ridhiCart", JSON.stringify(cart));
+}
+
+
+function getCartCount() {
+  return Object.values(cart)
+    .reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+}
+
+
+function getCartTotal() {
+  return Object.values(cart)
+    .reduce((sum, item) =>
+      sum + Number(item.price || 0) * Number(item.quantity || 0), 0);
+}
+
+
+function renderCart() {
+
+  document.getElementById("cartCount").textContent = getCartCount();
+
+  const el = document.getElementById("cartItems");
+  const items = Object.values(cart);
+
+  if (!items.length) {
+    el.innerHTML =
+      '<div class="empty">Your cart is empty.</div>';
+  } else {
+
+    el.innerHTML = items.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-main">
+          <div class="cart-item-name">${escapeHtml(item.productName)}</div>
+          <div>₹${formatMoney(item.price)} ${item.unit ? "• " + escapeHtml(item.unit) : ""}</div>
+          <div class="qty-controls">
+            <button type="button" onclick="changeQty('${escapeJs(item.productId)}', -1)">−</button>
+            <strong>${item.quantity}</strong>
+            <button type="button" onclick="changeQty('${escapeJs(item.productId)}', 1)">+</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("cartTotal").textContent =
+    "₹" + formatMoney(getCartTotal());
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+function renderProfileButton() {
+
+  const button = document.getElementById("profileButton");
+
+  const name =
+    customer.FULL_NAME ||
+    customer.fullName ||
+    customer.name ||
+    "Account";
+
+  const picture =
+    customer.PROFILE_IMAGE ||
+    customer.profileImage ||
+    customer.picture ||
+    "";
+
+  button.innerHTML =
+    (picture
+      ? '<img src="' + escapeAttribute(picture) + '" alt="Profile">'
+      : '') +
+    '<span>' + escapeHtml(name.split(" ")[0]) + '</span>';
+}
+
+
+function toggleProfileMenu() {
+
+  const menu = document.getElementById("profileMenu");
+
+  if (!menu.classList.contains("hidden")) {
+    menu.classList.add("hidden");
+    return;
+  }
+
+  const name =
+    customer.FULL_NAME ||
+    customer.fullName ||
+    customer.name ||
+    "Customer";
+
+  const email =
+    customer.GOOGLE_EMAIL ||
+    customer.googleEmail ||
+    customer.email ||
+    "";
+
+  const id =
+    customer.CUSTOMER_ID ||
+    "";
+
+  menu.innerHTML = `
+    <strong>${escapeHtml(name)}</strong>
+    <small>${escapeHtml(email)}</small>
+    ${id ? `<small>Customer ID: ${escapeHtml(id)}</small>` : ""}
+    <button class="logout" type="button" onclick="logout()">Sign out</button>
+  `;
+
+  menu.classList.remove("hidden");
+}
+
+
+function logout() {
+
+  ridhiGoogleIdToken = null;
+  customer = null;
+
+  sessionStorage.removeItem("ridhiCustomerProfile");
+  sessionStorage.removeItem("ridhiCart");
+
+  try {
+    google.accounts.id.disableAutoSelect();
+  } catch (e) {}
+
+  location.reload();
+}
+
+
+/* ============================================================
+   UI EVENTS
+============================================================ */
+
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchTerm = e.target.value;
+  renderProducts();
+});
+
+document.getElementById("cartButton").addEventListener("click", () => {
+  document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("cartDrawer").classList.remove("hidden");
+});
+
+document.getElementById("closeCart").addEventListener("click", closeCart);
+document.getElementById("overlay").addEventListener("click", closeCart);
+
+function closeCart() {
+  document.getElementById("overlay").classList.add("hidden");
+  document.getElementById("cartDrawer").classList.add("hidden");
+}
+
+document.getElementById("profileButton").addEventListener("click", toggleProfileMenu);
+
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function formatMoney(value) {
+  return Number(value || 0).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
+}
 
 function escapeHtml(value) {
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-    return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function escapeAttribute(value) {
+  return escapeHtml(value);
+}
 
+function escapeJs(value) {
+  return String(value == null ? "" : value)
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, "\\r")
+    .replace(/\n/g, "\\n");
 }
 
 
 /* ============================================================
    START
-   ============================================================ */
+============================================================ */
 
 setupGoogleLogin();
-
 </script>
-
 </body>
 </html>
