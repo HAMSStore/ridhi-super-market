@@ -1,68 +1,9687 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ridhi Super Market</title>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#222}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
-.top{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.08)}.nav{background:linear-gradient(90deg,#5b006f,#780090);color:#fff}.navin{max-width:1280px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:16px}.logo{font-size:28px;font-weight:900;letter-spacing:-1.5px}.divider{height:28px;width:1px;background:rgba(255,255,255,.35)}.loc{font-size:12px;white-space:nowrap}.loc b{display:block;font-size:13px}.search{flex:1;position:relative}.search input{width:100%;height:44px;border:0;border-radius:7px;padding:0 15px 0 40px;outline:0}.search span{position:absolute;left:14px;top:9px;color:#777;font-size:21px}.account{border:0;background:transparent;color:#fff;font-weight:700}.cart{position:relative;border:0;background:#ff2f78;color:#fff;font-weight:800;border-radius:7px;padding:12px 18px}.count{position:absolute;right:-7px;top:-7px;background:#111;color:#fff;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}.userbar{max-width:1280px;margin:auto;display:flex;justify-content:flex-end;align-items:center;gap:10px;padding:7px 18px;font-size:12px}.userbar img{width:28px;height:28px;border-radius:50%;object-fit:cover}.userbar button{border:1px solid #ddd;background:#fff;border-radius:6px;padding:5px 9px}
-.page{max-width:1280px;margin:auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:center;margin:17px 2px 9px}.head h2{font-size:18px;margin:0}.see{font-size:13px;color:#d22b6b;font-weight:700}.feature{display:grid;grid-auto-flow:column;grid-auto-columns:150px;gap:10px;overflow-x:auto;padding:2px 1px 9px}.fcard{border:1px solid #eee;border-radius:5px;padding:8px;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.08)}.fimg{height:112px;display:flex;align-items:center;justify-content:center}.fimg img{width:100%;height:100%;object-fit:contain}.fname{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:7px}.funit{font-size:11px;color:#777;margin-top:4px}.fprice{font-weight:900;margin-top:6px}.mini{float:right;margin-top:-25px;border:1px solid #e4a0bc;color:#d02d6b;background:#fff;border-radius:5px;padding:5px 8px;font-weight:800}
-.cats{display:grid;grid-auto-flow:column;grid-auto-columns:175px;gap:12px;overflow-x:auto;padding:2px 2px 12px}.cat{height:112px;border:0;border-radius:16px;overflow:hidden;position:relative;background:#f1e7ff;padding:0}.cat img{width:100%;height:100%;object-fit:cover}.cat:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.7))}.cat span{position:absolute;z-index:2;left:10px;bottom:9px;color:#fff;font-weight:800;text-shadow:0 1px 3px #000}
-.products{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding-bottom:35px}.card{position:relative;border:1px solid #eee;border-radius:7px;overflow:hidden;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.06)}.discount{position:absolute;left:0;top:0;background:#7c008f;color:#fff;font-size:10px;padding:5px 7px;border-radius:0 0 5px 0;font-weight:800}.pimg{height:175px;display:flex;align-items:center;justify-content:center;padding:12px}.pimg img{width:100%;height:100%;object-fit:contain}.body{padding:10px}.pname{font-size:14px;font-weight:700;line-height:1.25;height:36px;overflow:hidden}.unit{font-size:11px;color:#777;margin-top:5px;height:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.prices{display:flex;gap:7px;align-items:center;margin-top:7px}.price{font-size:15px;font-weight:900}.mrp{text-decoration:line-through;color:#999;font-size:11px}.add{width:100%;margin-top:9px;border:1px solid #d88aaa;background:#fff;color:#d02d6b;border-radius:5px;padding:8px;font-weight:800}.add:hover{background:#fff3f7}.unavailable{font-size:11px;color:#999;margin-top:10px}
-.login{min-height:100vh;background:#f7f7f8;display:flex;align-items:center;justify-content:center;padding:20px}.loginbox{width:min(430px,100%);background:#fff;border-radius:16px;padding:32px;box-shadow:0 8px 35px rgba(0,0,0,.12);text-align:center}.loginbox h1{margin:0 0 8px}.loginbox p{color:#666}.google{display:flex;justify-content:center;margin:25px 0}.msg{padding:12px;border-radius:8px;text-align:left;font-size:13px}.error{background:#ffebee}.success{background:#e8f5e9}
-.qoverlay{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding:18px}.qmodal{position:relative;width:min(420px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 12px 45px rgba(0,0,0,.25);text-align:center}.qclose{position:absolute;right:12px;top:12px;border:0;background:#f1f1f1;border-radius:50%;width:30px;height:30px}.qimage{height:150px;display:flex;align-items:center;justify-content:center}.qimage img{max-width:100%;max-height:100%;object-fit:contain}.qname{margin:8px 35px 4px;font-size:18px}.qprice{font-weight:900;font-size:17px}.qhint{color:#777;font-size:12px;margin-top:14px}.qcontrols{display:flex;justify-content:center;align-items:center;gap:20px;margin:10px 0 16px}.qcontrols button{width:38px;height:38px;border:1px solid #ddd;background:#fff;border-radius:9px;font-size:22px}.qcontrols strong{min-width:25px;font-size:18px}.qadd{width:100%;border:0;background:#111;color:#fff;border-radius:9px;padding:13px;font-weight:800}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:200}.drawer{position:fixed;right:0;top:0;height:100%;width:min(440px,100%);background:#fff;z-index:210;display:flex;flex-direction:column}.dhead{padding:17px;border-bottom:1px solid #eee;display:flex;justify-content:space-between}.dhead button{border:0;background:#eee;border-radius:7px;padding:7px 10px}.ditems{flex:1;overflow:auto;padding:12px 17px}.ditem{border-bottom:1px solid #eee;padding:12px 0}.dname{font-weight:700}.dprice{font-size:13px;color:#555;margin-top:4px}.qty{display:flex;align-items:center;gap:10px;margin-top:8px}.qty button{width:29px;height:29px;border:1px solid #ddd;background:#fff;border-radius:6px}.dfoot{padding:17px;border-top:1px solid #eee}.total{display:flex;justify-content:space-between;font-size:19px;font-weight:900}.checkout{width:100%;margin-top:12px;background:#111;color:#fff;border:0;border-radius:8px;padding:13px}
-.fly{position:fixed;z-index:500;width:56px;height:56px;border-radius:12px;background:#fff;box-shadow:0 7px 25px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden;transition:transform .72s cubic-bezier(.2,.85,.25,1),opacity .72s ease}.fly img{width:100%;height:100%;object-fit:contain}.toast{position:fixed;z-index:600;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff;border-radius:8px;padding:10px 15px;font-size:13px}
-@media(max-width:1050px){.products{grid-template-columns:repeat(4,1fr)}}@media(max-width:780px){.navin{flex-wrap:wrap;padding:9px 12px}.loc,.divider,.account{display:none}.search{order:5;flex-basis:100%}.products{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.page{padding:0 10px}.products{grid-template-columns:repeat(2,1fr);gap:9px}.pimg{height:145px}.feature{grid-auto-columns:145px}.cats{grid-auto-columns:135px}.cat{height:96px}}
-</style>
-</head>
-<body>
-<section id="loginScreen" class="login"><div class="loginbox"><h1>Ridhi Super Market</h1><p>Sign in to shop groceries online</p><div id="googleSignInButton" class="google"></div><div id="loginMsg" class="msg">Please sign in with Google.</div></div></section>
-<section id="app" class="hidden">
-<header class="top"><div class="nav"><div class="navin"><div class="logo">ridhi</div><div class="divider"></div><div class="loc">Delivering to<b>Nallasopara West⌄</b></div><div class="search"><span>⌕</span><input id="search" placeholder="Search for products, brands or SKU"></div><button class="account" onclick="scrollToTop()">Account</button><button id="cartButton" class="cart">🛍 My Cart <span id="cartCount" class="count">0</span></button></div></div><div id="userbar" class="userbar"></div></header>
-<main class="page"><section><div class="head"><h2>Products for you</h2><span class="see">See All ›</span></div><div id="featured" class="feature"></div></section><section><div class="head"><h2>Explore By Categories</h2><span class="see">See All ›</span></div><div id="categories" class="cats"></div></section><section><div class="head"><h2 id="productTitle">All Products</h2></div><div id="products" class="products"></div></section></main></section>
-<div id="quantityOverlay" class="qoverlay hidden"><div class="qmodal"><button class="qclose" onclick="closeQuantityPicker()">✕</button><div id="qimage" class="qimage"></div><h3 id="qname" class="qname">Product</h3><div id="qprice" class="qprice">₹0</div><div class="qhint">Select quantity</div><div class="qcontrols"><button onclick="adjustPendingQty(-1)">−</button><strong id="qvalue">1</strong><button onclick="adjustPendingQty(1)">+</button></div><button class="qadd" onclick="confirmQuantity()">Add to Cart</button></div></div>
-<div id="overlay" class="overlay hidden"></div><aside id="drawer" class="drawer hidden"><div class="dhead"><h2 style="margin:0">My Cart</h2><button id="closeCart">✕</button></div><div id="cartItems" class="ditems"></div><div class="dfoot"><div class="total"><span>Total</span><span id="cartTotal">₹0</span></div><button class="checkout" onclick="alert('Checkout will be connected in the next stage.')">Continue to Checkout</button></div></aside>
-<script>
-const API_URL="https://script.google.com/macros/s/AKfycbywn4Lfap2OZzdeScBFHvthoT5yd-fGC69glIjvE69mQvwW9S5u9xmegLFPA7kwv9URtQ/exec";
-const GOOGLE_CLIENT_ID="326159645063-jmbghp2v7qu8c9ik67bq6mmbcn3u44mp.apps.googleusercontent.com";
-const SESSION_KEY="ridhiCustomerSession",PROFILE_KEY="ridhiCustomerProfile",ACTIVITY_KEY="ridhiLastActivity",DAY=86400000;
-let sessionToken=localStorage.getItem(SESSION_KEY)||null,customer=readJson(localStorage.getItem(PROFILE_KEY))||null,allProducts=[],allCategories=[],selectedCategory="",searchTerm="",cart=readJson(localStorage.getItem("ridhiCart"))||{},refreshTimer=null,refreshBusy=false,lastRefresh=0,pendingProduct=null,pendingQty=1;
-function readJson(v){try{return v?JSON.parse(v):null}catch(e){return null}}
-async function apiPost(action,payload={}){const r=await fetch(API_URL,{method:"POST",cache:"no-store",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,...payload})});if(!r.ok)throw new Error("Ridhi backend request failed. HTTP "+r.status);const d=await r.json();if(!d.success){const e=new Error(d.error||d.message||"Request failed.");e.code=d.code;throw e}return d.data||{}}
-async function publicGet(action,params={}){const u=new URL(API_URL);u.searchParams.set("action",action);Object.entries(params).forEach(([k,v])=>{if(v!==undefined&&v!==null&&v!=="")u.searchParams.set(k,v)});const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("Ridhi API request failed. HTTP "+r.status);const d=await r.json();if(!d.success)throw new Error(d.error||"Request failed.");return d.data||{}}
-function saveProfile(){localStorage.setItem(PROFILE_KEY,JSON.stringify(customer||{}))}
-function sessionFresh(){const last=Number(localStorage.getItem(ACTIVITY_KEY)||0);return !!sessionToken&&last>0&&(Date.now()-last)<DAY}
-async function refreshSession(){if(!sessionToken||refreshBusy)return false;refreshBusy=true;try{const d=await apiPost("refreshCustomerSession",{sessionToken});sessionToken=d.sessionToken;customer=d.customer||customer;localStorage.setItem(SESSION_KEY,sessionToken);localStorage.setItem(ACTIVITY_KEY,String(Date.now()));saveProfile();lastRefresh=Date.now();return true}catch(e){forceLogin();return false}finally{refreshBusy=false}}
-function markActivity(){if(!sessionToken)return;localStorage.setItem(ACTIVITY_KEY,String(Date.now()));if(Date.now()-lastRefresh>5*60*1000&&!refreshTimer){refreshTimer=setTimeout(async()=>{refreshTimer=null;await refreshSession()},700)}}
-function forceLogin(){sessionToken=null;customer=null;localStorage.removeItem(SESSION_KEY);localStorage.removeItem(PROFILE_KEY);localStorage.removeItem(ACTIVITY_KEY);document.getElementById("app").classList.add("hidden");document.getElementById("loginScreen").classList.remove("hidden");const m=document.getElementById("loginMsg");m.className="msg error";m.textContent="Your 24-hour session has expired. Please sign in again."}
-function setupGoogle(){if(!window.google||!google.accounts?.id){setTimeout(setupGoogle,400);return}google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:googleCallback,auto_select:false,cancel_on_tap_outside:true,use_fedcm_for_prompt:true});google.accounts.id.renderButton(document.getElementById("googleSignInButton"),{theme:"outline",size:"large",type:"standard",text:"signin_with",shape:"rectangular",width:280,logo_alignment:"left"})}
-async function googleCallback(response){const m=document.getElementById("loginMsg");m.className="msg";m.textContent="Signing you in...";try{const d=await apiPost("verifyCustomerGoogle",{idToken:response.credential});sessionToken=d.sessionToken;customer=d.customer||{};localStorage.setItem(SESSION_KEY,sessionToken);localStorage.setItem(ACTIVITY_KEY,String(Date.now()));saveProfile();await showApp()}catch(e){m.className="msg error";m.textContent=e.message}}
-async function showApp(){document.getElementById("loginScreen").classList.add("hidden");document.getElementById("app").classList.remove("hidden");renderUser();renderCart();if(!(await refreshSession()))return;try{await loadStore()}catch(e){document.getElementById("products").innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777">'+esc(e.message)+'</div>'}}
-async function start(){if(sessionFresh()){document.getElementById("loginScreen").classList.add("hidden");document.getElementById("app").classList.remove("hidden");renderUser();renderCart();if(await refreshSession())await loadStore()}else if(sessionToken)forceLogin()}
-function renderUser(){const e=document.getElementById("userbar"),n=customer?.name||customer?.FULL_NAME||"Customer",mail=customer?.email||customer?.GOOGLE_EMAIL||"",pic=customer?.picture||customer?.PROFILE_IMAGE||"";e.innerHTML=(pic?`<img src="${attr(pic)}" alt="">`:"")+`<span>Hi, <b>${esc(n)}</b>${mail?" · "+esc(mail):""}</span><button onclick="logout()">Sign out</button>`}
-async function loadStore(){const [c,p,f]=await Promise.all([publicGet("categories"),publicGet("products"),publicGet("products",{featured:"true"})]);allCategories=c.categories||[];allProducts=p.products||[];renderCategories();renderFeatured(f.products||[]);renderProducts()}
-function renderFeatured(list){const e=document.getElementById("featured");if(!list.length)list=allProducts.slice(0,10);e.innerHTML=list.slice(0,10).map(p=>{const n=p.productName||p.name||"Product";return `<article class="fcard"><div class="fimg">${p.image?`<img src="${attr(p.image)}" alt="${attr(n)}" loading="lazy">`:"🛍️"}</div><div class="fname">${esc(n)}</div><div class="funit">${esc(p.packSize||p.unit||"")}</div><div class="fprice">₹${money(p.price)}</div><button class="mini" onclick="addToCart('${js(p.productId)}',this)">Add</button></article>`}).join("")}
-function renderCategories(){document.getElementById("categories").innerHTML=allCategories.map(c=>`<button class="cat" onclick="chooseCategory('${js(c.categoryId)}')">${c.image?`<img src="${attr(c.image)}" alt="${attr(c.name)}" loading="lazy">`:""}<span>${esc(c.name||"Category")}</span></button>`).join("")}
-function chooseCategory(id){selectedCategory=String(id||"");const c=allCategories.find(x=>String(x.categoryId)===selectedCategory);document.getElementById("productTitle").textContent=c?c.name:"All Products";renderProducts();window.scrollTo({top:document.getElementById("products").offsetTop-90,behavior:"smooth"});markActivity()}
-function filteredProducts(){const q=searchTerm.trim().toLowerCase();return allProducts.filter(p=>{if(selectedCategory&&String(p.categoryId||"")!==selectedCategory)return false;if(!q)return true;return [p.productId,p.productName,p.name,p.brand,p.sku,p.category,p.searchKeywords].join(" ").toLowerCase().includes(q)})}
-function renderProducts(){const e=document.getElementById("products"),list=filteredProducts();if(!list.length){e.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777">No products found.</div>';return}e.innerHTML=list.map(p=>{const n=p.productName||p.name||"Product",price=Number(p.price||0),mrp=Number(p.mrp||0),disc=mrp>price?Math.round((1-price/mrp)*100):0;return `<article class="card">${disc?`<div class="discount">${disc}% OFF</div>`:""}<div class="pimg">${p.image?`<img src="${attr(p.image)}" alt="${attr(n)}" loading="lazy">`:"🛍️"}</div><div class="body"><div class="pname">${esc(n)}</div><div class="unit">${esc(p.packSize||p.unit||"")}</div><div class="prices"><span class="price">₹${money(price)}</span>${mrp>price?`<span class="mrp">₹${money(mrp)}</span>`:""}</div>${p.available?`<button class="add" onclick="addToCart('${js(p.productId)}',this)">Add</button>`:`<div class="unavailable">Currently unavailable</div>`}</div></article>`}).join("")}
-function addToCart(id,source){const p=allProducts.find(x=>String(x.productId)===String(id));if(!p||!p.available)return;pendingProduct=p;pendingQty=1;flyToCart(source,p.image,()=>openQuantityPicker(p));markActivity()}
-function openQuantityPicker(p){document.getElementById("qname").textContent=p.productName||p.name||"Product";document.getElementById("qprice").textContent="₹"+money(p.price)+(p.packSize||p.unit?" • "+(p.packSize||p.unit):"");document.getElementById("qvalue").textContent=pendingQty;document.getElementById("qimage").innerHTML=p.image?`<img src="${attr(p.image)}" alt="">`:"🛍️";document.getElementById("quantityOverlay").classList.remove("hidden")}
-function closeQuantityPicker(){document.getElementById("quantityOverlay").classList.add("hidden");pendingProduct=null;pendingQty=1}
-function adjustPendingQty(delta){pendingQty=Math.max(1,Math.min(100,pendingQty+delta));document.getElementById("qvalue").textContent=pendingQty}
-function confirmQuantity(){if(!pendingProduct)return;const p=pendingProduct,key=String(p.productId);if(!cart[key])cart[key]={productId:key,productName:p.productName||p.name||"Product",price:Number(p.price||0),unit:p.packSize||p.unit||"",image:p.image||"",quantity:0};cart[key].quantity=Math.min(1000,cart[key].quantity+pendingQty);saveCart();renderCart();const n=p.productName||p.name||"Product",q=pendingQty;closeQuantityPicker();showToast(q+" × "+n+" added to cart");markActivity()}
-function flyToCart(source,img,done){if(!source){if(done)done();return}const a=source.getBoundingClientRect(),b=document.getElementById("cartButton").getBoundingClientRect(),f=document.createElement("div");f.className="fly";f.style.left=a.left+"px";f.style.top=a.top+"px";f.innerHTML=img?`<img src="${attr(img)}" alt="">`:"🛍️";document.body.appendChild(f);requestAnimationFrame(()=>{const dx=b.left-a.left+b.width/2-28,dy=b.top-a.top+b.height/2-28;f.style.transform=`translate(${dx}px,${dy}px) scale(.25) rotate(12deg)`;f.style.opacity="0"});setTimeout(()=>{f.remove();if(done)done()},760)}
-function saveCart(){localStorage.setItem("ridhiCart",JSON.stringify(cart))}
-function renderCart(){const list=Object.values(cart),e=document.getElementById("cartItems");document.getElementById("cartCount").textContent=list.reduce((s,x)=>s+Number(x.quantity||0),0);e.innerHTML=list.length?list.map(x=>`<div class="ditem"><div class="dname">${esc(x.productName)}</div><div class="dprice">₹${money(x.price)} ${x.unit?"· "+esc(x.unit):""}</div><div class="qty"><button onclick="changeQty('${js(x.productId)}',-1)">−</button><b>${x.quantity}</b><button onclick="changeQty('${js(x.productId)}',1)">+</button></div></div>`).join(""):'<div style="text-align:center;color:#777;padding:40px 10px">Your cart is empty.</div>';document.getElementById("cartTotal").textContent="₹"+money(list.reduce((s,x)=>s+Number(x.price||0)*Number(x.quantity||0),0))}
-function changeQty(id,d){if(!cart[id])return;cart[id].quantity+=d;if(cart[id].quantity<=0)delete cart[id];saveCart();renderCart();markActivity()}
-function openCart(){document.getElementById("overlay").classList.remove("hidden");document.getElementById("drawer").classList.remove("hidden");markActivity()}function closeCart(){document.getElementById("overlay").classList.add("hidden");document.getElementById("drawer").classList.add("hidden")}
-function logout(){sessionToken=null;customer=null;localStorage.removeItem(SESSION_KEY);localStorage.removeItem(PROFILE_KEY);localStorage.removeItem(ACTIVITY_KEY);try{google.accounts.id.disableAutoSelect()}catch(e){}location.reload()}function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"});markActivity()}
-document.getElementById("search").addEventListener("input",e=>{searchTerm=e.target.value;renderProducts();markActivity()});document.getElementById("cartButton").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("overlay").onclick=closeCart;document.getElementById("quantityOverlay").addEventListener("click",e=>{if(e.target.id==="quantityOverlay")closeQuantityPicker()});document.addEventListener("keydown",()=>markActivity());document.addEventListener("scroll",()=>markActivity(),{passive:true});document.addEventListener("click",()=>markActivity(),{passive:true});
-function showToast(t){const x=document.createElement("div");x.className="toast";x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),1300)}function money(v){return Number(v||0).toLocaleString("en-IN",{maximumFractionDigits:2})}function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}function attr(v){return esc(v)}function js(v){return String(v==null?"":v).replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\r/g,"\\r").replace(/\n/g,"\\n")}
-setupGoogle();start();
-</script>
-</body>
-</html>
+/***************************************************************
+ * RIDHI SUPER MARKET
+ * GOOGLE SHEETS BACKEND API
+ *
+ * Authentication:
+ *   Google Identity Services (GIS)
+ *
+ * Database:
+ *   Google Sheets
+ *
+ * Identity:
+ *   01_CUSTOMERS
+ *   02_EMPLOYEES
+ *
+ * Employee Roles:
+ *   STAFF
+ *   DELIVERY
+ *   MANAGER
+ *   ADMIN
+ *
+ * IMPORTANT:
+ *   Backend authorization is authoritative.
+ *   Never trust userId / role / email / localStorage
+ *   supplied by the browser without verifying the Google
+ *   ID token first.
+ ***************************************************************/
+
+
+/* =============================================================
+   CONFIGURATION
+============================================================= */
+
+const CONFIG = {
+
+  /*
+   * If this Apps Script is BOUND to the Ridhi spreadsheet,
+   * getActiveSpreadsheet() will work.
+   *
+   * For production, you can also put the Spreadsheet ID
+   * into Script Properties using:
+   *
+   * RIDHI_SPREADSHEET_ID
+   */
+
+  SPREADSHEET_ID:
+    PropertiesService
+      .getScriptProperties()
+      .getProperty("RIDHI_SPREADSHEET_ID") || "",
+
+
+  /*
+   * Ridhi Google OAuth Web Client ID.
+   *
+   * DO NOT use the HAMS client ID here for production.
+   *
+   * Set this in Script Properties as:
+   *
+   * RIDHI_GOOGLE_CLIENT_ID
+   *
+   * OR replace the fallback string below.
+   */
+
+  GOOGLE_CLIENT_ID:
+    PropertiesService
+      .getScriptProperties()
+      .getProperty("RIDHI_GOOGLE_CLIENT_ID") ||
+    "PUT_RIDHI_GOOGLE_CLIENT_ID_HERE",
+
+
+  /*
+   * Google token verification endpoint.
+   *
+   * Google validates the ID token and returns the claims.
+   */
+
+  GOOGLE_TOKENINFO_URL:
+    "https://oauth2.googleapis.com/tokeninfo?id_token=",
+
+
+  /*
+   * Your exact database sheet names.
+   */
+
+  SHEETS: {
+
+    CUSTOMERS: "01_CUSTOMERS",
+    EMPLOYEES: "02_EMPLOYEES",
+    ADDRESSES: "03_ADDRESSES",
+    CATEGORIES: "04_CATEGORIES",
+    PRODUCTS: "05_PRODUCTS",
+    INVENTORY: "06_INVENTORY",
+    ORDERS: "07_ORDERS",
+    ORDER_ITEMS: "08_ORDER_ITEMS",
+    ORDER_STATUS: "09_ORDER_STATUS",
+    STAFF: "10_STAFF",
+    DELIVERY_PERSONS: "11_DELIVERY_PERSONS",
+    DELIVERY_TRACKING: "12_DELIVERY_TRACKING",
+    PAYMENTS: "13_PAYMENTS",
+    COUPONS: "14_COUPONS",
+    SETTINGS: "15_SETTING",
+    AUDIT_LOG: "16_AUDIT_LOG"
+  },
+
+
+  /*
+   * Employee roles.
+   */
+
+  ROLES: [
+    "STAFF",
+    "DELIVERY",
+    "MANAGER",
+    "ADMIN"
+  ],
+
+
+  /*
+   * Order statuses.
+   */
+
+  ORDER_STATUS: [
+
+    "PLACED",
+    "RECEIVED",
+    "CALLING_CUSTOMER",
+    "CUSTOMER_CONFIRMED",
+    "PICKING",
+    "PRODUCT_ISSUE",
+    "PACKING",
+    "READY_FOR_DELIVERY",
+    "DELIVERY_ASSIGNED",
+    "RIDER_ACCEPTED",
+    "OUT_FOR_DELIVERY",
+    "ARRIVING",
+    "DELIVERED",
+    "CANCELLED",
+    "DELIVERY_FAILED",
+    "CUSTOMER_UNAVAILABLE"
+  ],
+
+
+  /*
+   * Product statuses.
+   */
+
+  PRODUCT_STATUS: [
+    "PENDING",
+    "CONFIRMED",
+    "AVAILABLE",
+    "UNAVAILABLE",
+    "CANCELLED",
+    "ISSUE",
+    "REPLACED"
+  ],
+
+
+  /*
+   * Default order settings.
+   */
+
+  DEFAULT_MINIMUM_ORDER: 0,
+  DEFAULT_DELIVERY_CHARGE: 0,
+  DEFAULT_TAX_PERCENT: 0,
+
+
+  /*
+   * Security / performance.
+   */
+
+  TOKEN_CACHE_SECONDS: 300,
+  LOCK_TIMEOUT_MS: 30000,
+
+  /* Sliding customer browser session: 24 hours from last activity. */
+  CUSTOMER_SESSION_TTL_SECONDS: 86400,
+  CUSTOMER_SESSION_PREFIX: "RDS1."
+};
+
+
+/* =============================================================
+   RESPONSE HELPERS
+============================================================= */
+
+function success(data) {
+
+  return {
+    success: true,
+    data: data === undefined ? {} : data
+  };
+}
+
+
+function failure(message, code, extra) {
+
+  var result = {
+    success: false,
+    message: String(message || "Request failed."),
+    error: String(message || "Request failed."),
+    code: String(code || "ERROR")
+  };
+
+  if (extra && typeof extra === "object") {
+
+    Object.keys(extra).forEach(function(key) {
+      result[key] = extra[key];
+    });
+  }
+
+  return result;
+}
+
+
+/* =============================================================
+   HTTP ENTRY POINTS
+============================================================= */
+
+function doGet(e) {
+
+  try {
+
+    var params = e && e.parameter
+      ? e.parameter
+      : {};
+
+    var action = String(params.action || "").trim();
+
+    if (!action) {
+      return jsonOutput(
+        success({
+          api: "Ridhi Super Market API",
+          version: "2.1.0",
+          status: "ONLINE"
+        })
+      );
+    }
+
+    /*
+     * SECURITY RULE:
+     * GET is intentionally limited to public, non-sensitive data.
+     * All authenticated operations, including Google token
+     * verification, MUST use POST so bearer tokens are not placed
+     * in URLs/browser history/proxy logs.
+     */
+    switch (action) {
+
+      case "products":
+        return jsonOutput(getProducts(params, true));
+
+      case "product":
+        return jsonOutput(getProduct(params.productId, true));
+
+      case "categories":
+        return jsonOutput(getCategories());
+
+      case "settings":
+        return jsonOutput(getPublicSettings());
+
+      case "verifyCustomerGoogle":
+      case "verifyAdmin":
+      case "verifyEmployee":
+      case "user":
+      case "customerOrders":
+      case "order":
+      case "tracking":
+      case "employeeProfile":
+      case "adminOrders":
+      case "staffOrders":
+      case "deliveryOrders":
+      case "deliveryPersons":
+        return jsonOutput(
+          failure(
+            "Authenticated actions must use POST.",
+            "POST_REQUIRED"
+          )
+        );
+
+      default:
+        return jsonOutput(
+          failure(
+            "Unknown action: " + action,
+            "UNKNOWN_ACTION"
+          )
+        );
+    }
+
+  } catch (err) {
+    console.error(err);
+    return jsonOutput(
+      failure(
+        "Server error.",
+        "SERVER_ERROR"
+      )
+    );
+  }
+}
+
+/* =============================================================
+   POST ENTRY POINT
+============================================================= */
+
+function doPost(e) {
+
+  try {
+
+    var body = parsePostBody(e);
+
+    var action = String(
+      body.action || ""
+    ).trim();
+
+
+    switch (action) {
+
+      /* -------------------------------------------------------
+         GOOGLE AUTH / AUTHENTICATED READS
+      ------------------------------------------------------- */
+
+      case "verifyCustomerGoogle":
+        return jsonOutput(
+          verifyCustomerGoogle(
+            body.idToken
+          )
+        );
+
+      case "refreshCustomerSession":
+        try {
+          return jsonOutput(
+            success(
+              refreshCustomerSession_(
+                body.sessionToken
+              )
+            )
+          );
+        } catch (err) {
+          return jsonOutput(authFailure(err));
+        }
+
+      case "verifyAdmin":
+        return jsonOutput(
+          verifyEmployeeGoogle(
+            body.idToken,
+            ["ADMIN"]
+          )
+        );
+
+      case "verifyEmployee":
+        return jsonOutput(
+          verifyEmployeeGoogle(
+            body.idToken,
+            body.roles
+          )
+        );
+
+      case "user":
+        return jsonOutput(
+          getAuthenticatedUser(body)
+        );
+
+      case "customerOrders":
+        return jsonOutput(
+          getCustomerOrdersSecure(
+            body.idToken
+          )
+        );
+
+      case "order":
+        return jsonOutput(
+          getOrderSecure(
+            body.idToken,
+            body.orderId
+          )
+        );
+
+      case "tracking":
+        return jsonOutput(
+          getTrackingSecure(
+            body.idToken,
+            body.orderId
+          )
+        );
+
+      case "employeeProfile":
+        return jsonOutput(
+          getEmployeeProfile(
+            body.idToken
+          )
+        );
+
+      case "adminOrders":
+        return jsonOutput(
+          getEmployeeOrders(
+            body.idToken,
+            ["ADMIN"]
+          )
+        );
+
+      case "staffOrders":
+        return jsonOutput(
+          getEmployeeOrders(
+            body.idToken,
+            ["STAFF", "MANAGER", "ADMIN"]
+          )
+        );
+
+      case "deliveryOrders":
+        return jsonOutput(
+          getEmployeeOrders(
+            body.idToken,
+            ["DELIVERY", "MANAGER", "ADMIN"]
+          )
+        );
+
+      case "deliveryPersons":
+        return jsonOutput(
+          getDeliveryPersons(
+            body.idToken
+          )
+        );
+
+      case "createUser":
+        return jsonOutput(
+          createCustomerFromGoogle(
+            body
+          )
+        );
+
+
+      case "createOrder":
+        return jsonOutput(
+          createOrderSecure(
+            body
+          )
+        );
+
+
+      case "updateOrderStatus":
+        return jsonOutput(
+          updateOrderStatusSecure(
+            body
+          )
+        );
+
+
+      case "assignDeliveryPerson":
+        return jsonOutput(
+          assignDeliveryPersonSecure(
+            body
+          )
+        );
+
+
+      case "updateDeliveryLocation":
+        return jsonOutput(
+          updateDeliveryLocationSecure(
+            body
+          )
+        );
+
+
+      case "addProduct":
+        return jsonOutput(
+          addProductSecure(
+            body
+          )
+        );
+
+
+      case "updateProductStatus":
+        return jsonOutput(
+          updateProductStatusSecure(
+            body
+          )
+        );
+
+
+      case "updateCustomerProfile":
+        return jsonOutput(
+          updateCustomerProfileSecure(
+            body
+          )
+        );
+
+
+      case "customerAddresses":
+        return jsonOutput(
+          getCustomerAddressesSecure(
+            body
+          )
+        );
+
+
+      case "saveAddress":
+        return jsonOutput(
+          saveAddressSecure(
+            body
+          )
+        );
+
+
+      default:
+
+        return jsonOutput(
+          failure(
+            "Unknown POST action: " + action,
+            "UNKNOWN_ACTION"
+          )
+        );
+    }
+
+
+  } catch (err) {
+
+    console.error(err);
+
+    return jsonOutput(
+      failure(
+        err.message || "Server error.",
+        "SERVER_ERROR"
+      )
+    );
+  }
+}
+
+
+/* =============================================================
+   JSON OUTPUT
+============================================================= */
+
+function jsonOutput(obj) {
+
+  return ContentService
+    .createTextOutput(
+      JSON.stringify(obj)
+    )
+    .setMimeType(
+      ContentService.MimeType.JSON
+    );
+}
+
+
+/* =============================================================
+   POST BODY PARSER
+============================================================= */
+
+function parsePostBody(e) {
+
+  if (!e) {
+    return {};
+  }
+
+  if (
+    e.postData &&
+    e.postData.contents
+  ) {
+
+    var raw = e.postData.contents;
+
+    try {
+      return JSON.parse(raw);
+    } catch (jsonError) {
+
+      /*
+       * Support URL encoded form payloads.
+       */
+
+      if (e.parameter) {
+        return e.parameter;
+      }
+
+      throw new Error(
+        "Invalid JSON request body."
+      );
+    }
+  }
+
+  return e.parameter || {};
+}
+
+
+/* =============================================================
+   SPREADSHEET
+============================================================= */
+
+function getSpreadsheet() {
+
+  if (CONFIG.SPREADSHEET_ID) {
+
+    return SpreadsheetApp.openById(
+      CONFIG.SPREADSHEET_ID
+    );
+  }
+
+  var active =
+    SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!active) {
+
+    throw new Error(
+      "Ridhi spreadsheet could not be found. Set RIDHI_SPREADSHEET_ID in Script Properties."
+    );
+  }
+
+  return active;
+}
+
+
+/* =============================================================
+   SHEET
+============================================================= */
+
+function getSheet(sheetName) {
+
+  var sheet =
+    getSpreadsheet()
+      .getSheetByName(sheetName);
+
+  if (!sheet) {
+
+    throw new Error(
+      "Required sheet not found: " +
+      sheetName
+    );
+  }
+
+  return sheet;
+}
+
+
+/* =============================================================
+   OPTIONAL SHEET
+============================================================= */
+
+function getOptionalSheet(sheetName) {
+
+  return getSpreadsheet()
+    .getSheetByName(sheetName);
+}
+
+
+/* =============================================================
+   SHEET DATA
+============================================================= */
+
+function getSheetData(sheetName) {
+
+  var sheet =
+    getSheet(sheetName);
+
+  var values =
+    sheet.getDataRange()
+      .getValues();
+
+  if (
+    !values ||
+    values.length < 2
+  ) {
+    return [];
+  }
+
+  var headers =
+    values[0].map(function(header) {
+
+      return String(
+        header || ""
+      ).trim();
+    });
+
+
+  var result = [];
+
+
+  for (
+    var r = 1;
+    r < values.length;
+    r++
+  ) {
+
+    var row = values[r];
+
+    var object = {
+      _rowNumber: r + 1
+    };
+
+
+    for (
+      var c = 0;
+      c < headers.length;
+      c++
+    ) {
+
+      if (!headers[c]) {
+        continue;
+      }
+
+      object[headers[c]] =
+        normalizeCellValue(
+          row[c]
+        );
+    }
+
+
+    result.push(object);
+  }
+
+
+  return result;
+}
+
+
+/* =============================================================
+   NORMALIZE CELL
+============================================================= */
+
+function normalizeCellValue(value) {
+
+  if (
+    value instanceof Date
+  ) {
+
+    return value
+      .toISOString();
+  }
+
+  return value;
+}
+
+
+/* =============================================================
+   HEADER MAP
+============================================================= */
+
+function getHeaderMap(sheetName) {
+
+  var sheet =
+    getSheet(sheetName);
+
+  var lastColumn =
+    sheet.getLastColumn();
+
+  if (!lastColumn) {
+    return {};
+  }
+
+  var headers =
+    sheet
+      .getRange(
+        1,
+        1,
+        1,
+        lastColumn
+      )
+      .getValues()[0];
+
+
+  var map = {};
+
+
+  headers.forEach(function(header, index) {
+
+    var name =
+      String(
+        header || ""
+      )
+      .trim()
+      .toUpperCase();
+
+
+    if (name) {
+      map[name] = index + 1;
+    }
+  });
+
+
+  return map;
+}
+
+
+/* =============================================================
+   FIND COLUMN BY ALIASES
+============================================================= */
+
+function findColumn(
+  headerMap,
+  aliases
+) {
+
+  for (
+    var i = 0;
+    i < aliases.length;
+    i++
+  ) {
+
+    var key =
+      String(
+        aliases[i]
+      )
+      .trim()
+      .toUpperCase();
+
+
+    if (
+      headerMap[key]
+    ) {
+
+      return headerMap[key];
+    }
+  }
+
+
+  return 0;
+}
+
+
+/* =============================================================
+   GET OBJECT FIELD
+============================================================= */
+
+function getField(
+  object,
+  aliases,
+  defaultValue
+) {
+
+  if (
+    !object ||
+    typeof object !== "object"
+  ) {
+
+    return defaultValue;
+  }
+
+
+  for (
+    var i = 0;
+    i < aliases.length;
+    i++
+  ) {
+
+    var key = aliases[i];
+
+
+    if (
+      Object.prototype
+        .hasOwnProperty
+        .call(object, key)
+    ) {
+
+      var value =
+        object[key];
+
+      if (
+        value !== null &&
+        value !== undefined &&
+        String(value) !== ""
+      ) {
+
+        return value;
+      }
+    }
+
+
+    var upper =
+      String(key)
+        .toUpperCase();
+
+
+    var objectKeys =
+      Object.keys(object);
+
+
+    for (
+      var j = 0;
+      j < objectKeys.length;
+      j++
+    ) {
+
+      if (
+        String(objectKeys[j])
+          .toUpperCase() === upper
+      ) {
+
+        var v =
+          object[
+            objectKeys[j]
+          ];
+
+
+        if (
+          v !== null &&
+          v !== undefined &&
+          String(v) !== ""
+        ) {
+
+          return v;
+        }
+      }
+    }
+  }
+
+
+  return defaultValue;
+}
+
+
+/* =============================================================
+   WRITE OBJECT TO SHEET
+============================================================= */
+
+function sanitizeSheetWriteValue_(value) {
+
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  if (value instanceof Date) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    /* Prevent Google Sheets formula injection from user input. */
+    if (/^[=+\-@]/.test(value)) {
+      return "'" + value;
+    }
+    return value;
+  }
+
+  return value;
+}
+
+
+function appendObject(
+  sheetName,
+  object
+) {
+
+  var sheet =
+    getSheet(sheetName);
+
+  var headerMap =
+    getHeaderMap(sheetName);
+
+  var lastColumn =
+    sheet.getLastColumn();
+
+  if (!lastColumn) {
+
+    throw new Error(
+      "Sheet has no headers: " +
+      sheetName
+    );
+  }
+
+
+  var row =
+    new Array(
+      lastColumn
+    )
+    .fill("");
+
+
+  Object.keys(object)
+    .forEach(function(key) {
+
+      var column =
+        headerMap[
+          String(key)
+            .toUpperCase()
+        ];
+
+
+      if (column) {
+
+        row[column - 1] =
+          sanitizeSheetWriteValue_(object[key]);
+      }
+    });
+
+
+  sheet
+    .getRange(
+      sheet.getLastRow() + 1,
+      1,
+      1,
+      lastColumn
+    )
+    .setValues([row]);
+
+
+  return sheet.getLastRow();
+}
+
+
+/* =============================================================
+   UPDATE OBJECT ROW
+============================================================= */
+
+function updateObjectRow(
+  sheetName,
+  rowNumber,
+  object
+) {
+
+  var sheet =
+    getSheet(sheetName);
+
+  var headerMap =
+    getHeaderMap(sheetName);
+
+  var lastColumn =
+    sheet.getLastColumn();
+
+
+  var current =
+    sheet
+      .getRange(
+        rowNumber,
+        1,
+        1,
+        lastColumn
+      )
+      .getValues()[0];
+
+
+  Object.keys(object)
+    .forEach(function(key) {
+
+      var column =
+        headerMap[
+          String(key)
+            .toUpperCase()
+        ];
+
+
+      if (column) {
+
+        current[column - 1] =
+          sanitizeSheetWriteValue_(object[key]);
+      }
+    });
+
+
+  sheet
+    .getRange(
+      rowNumber,
+      1,
+      1,
+      lastColumn
+    )
+    .setValues([current]);
+}
+
+
+/* =============================================================
+   ID GENERATOR
+============================================================= */
+
+function generateId(prefix) {
+
+  return (
+    String(prefix || "RIDHI")
+    .toUpperCase() +
+    "-" +
+    Utilities
+      .getUuid()
+      .replace(/-/g, "")
+      .substring(0, 12)
+      .toUpperCase()
+  );
+}
+
+
+/* =============================================================
+   ORDER NUMBER
+============================================================= */
+
+function generateOrderNumber() {
+
+  var today =
+    Utilities.formatDate(
+      new Date(),
+      Session.getScriptTimeZone(),
+      "yyyyMMdd"
+    );
+
+
+  var prefix =
+    "RIDHI-" +
+    today +
+    "-";
+
+
+  var orders =
+    getSheetData(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  var highest = 0;
+
+
+  orders.forEach(function(order) {
+
+    var number =
+      String(
+        getField(
+          order,
+          [
+            "ORDER_NUMBER",
+            "ORDER_NO",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      number.indexOf(prefix) === 0
+    ) {
+
+      var suffix =
+        Number(
+          number
+            .substring(
+              prefix.length
+            )
+        );
+
+
+      if (
+        isFinite(suffix) &&
+        suffix > highest
+      ) {
+
+        highest = suffix;
+      }
+    }
+  });
+
+
+  return (
+    prefix +
+    String(
+      highest + 1
+    )
+    .padStart(4, "0")
+  );
+}
+
+
+/* =============================================================
+   NORMALIZE EMAIL
+============================================================= */
+
+function normalizePhone_(phone) {
+
+  var value = String(phone || "")
+    .replace(/\D/g, "")
+    .substring(0, 10);
+
+  if (!value) {
+    return "";
+  }
+
+  if (!/^[6-9]\d{9}$/.test(value)) {
+    throw new AuthError(
+      "Invalid Indian mobile number.",
+      "INVALID_PHONE"
+    );
+  }
+
+  return value;
+}
+
+
+function normalizeEmail(email) {
+
+  return String(
+    email || ""
+  )
+  .trim()
+  .toLowerCase();
+}
+
+
+/* =============================================================
+   NORMALIZE ROLE
+============================================================= */
+
+function normalizeRole(role) {
+
+  return String(
+    role || ""
+  )
+  .trim()
+  .toUpperCase();
+}
+
+
+/* =============================================================
+   ACTIVE STATUS
+============================================================= */
+
+function isActiveStatus(status) {
+
+  var value =
+    String(
+      status || ""
+    )
+    .trim()
+    .toUpperCase();
+
+
+  return [
+    "ACTIVE",
+    "ENABLED",
+    "YES",
+    "TRUE"
+  ].indexOf(value) !== -1;
+}
+
+
+/* =============================================================
+   GOOGLE ID TOKEN VERIFICATION
+============================================================= */
+
+function verifyGoogleIdToken_(
+  idToken
+) {
+
+  if (!idToken) {
+
+    throw new AuthError(
+      "Google ID token is required.",
+      "AUTH_REQUIRED"
+    );
+  }
+
+
+  idToken =
+    String(idToken)
+      .trim();
+
+  if (idToken.length < 100 || idToken.length > 12000) {
+    throw new AuthError(
+      "Google ID token has an invalid size.",
+      "TOKEN_INVALID"
+    );
+  }
+
+  var jwtParts = idToken.split(".");
+  if (jwtParts.length !== 3) {
+    throw new AuthError(
+      "Google ID token format is invalid.",
+      "TOKEN_INVALID"
+    );
+  }
+
+  var untrustedPayload;
+  try {
+    untrustedPayload = JSON.parse(
+      Utilities.newBlob(
+        Utilities.base64DecodeWebSafe(jwtParts[1])
+      ).getDataAsString()
+    );
+  } catch (jwtParseError) {
+    throw new AuthError(
+      "Google ID token payload is invalid.",
+      "TOKEN_INVALID"
+    );
+  }
+
+  if (String(untrustedPayload.iss || "") !== "https://accounts.google.com") {
+    throw new AuthError(
+      "Google token issuer is invalid.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  /*
+   * Cache verified token briefly.
+   *
+   * This reduces calls to Google during rapid
+   * page refreshes while keeping the cache short.
+   */
+
+  var cache =
+    CacheService
+      .getScriptCache();
+
+
+  var hash =
+    Utilities
+      .computeDigest(
+        Utilities.DigestAlgorithm.SHA_256,
+        idToken
+      );
+
+
+  var cacheKey =
+    "google_token_" +
+    Utilities
+      .base64EncodeWebSafe(
+        hash
+      )
+      .substring(0, 80);
+
+
+  var cached =
+    cache.get(cacheKey);
+
+
+  if (cached) {
+
+    try {
+
+      var cachedClaims = JSON.parse(cached);
+      var cachedExp = Number(cachedClaims.exp || 0);
+
+      if (cachedExp && Math.floor(Date.now() / 1000) < cachedExp) {
+        return cachedClaims;
+      }
+
+      cache.remove(cacheKey);
+
+    } catch (cacheError) {
+      // Ignore corrupt/expired cache.
+      try { cache.remove(cacheKey); } catch (ignore) {}
+    }
+  }
+
+
+  var url =
+    CONFIG.GOOGLE_TOKENINFO_URL +
+    encodeURIComponent(
+      idToken
+    );
+
+
+  var response =
+    UrlFetchApp.fetch(
+      url,
+      {
+        method: "get",
+        muteHttpExceptions: true,
+        headers: {
+          Accept:
+            "application/json"
+        }
+      }
+    );
+
+
+  var status =
+    response.getResponseCode();
+
+
+  if (
+    status !== 200
+  ) {
+
+    throw new AuthError(
+      "Google ID token is invalid or expired.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  var claims;
+
+
+  try {
+
+    claims =
+      JSON.parse(
+        response.getContentText()
+      );
+
+  } catch (parseError) {
+
+    throw new AuthError(
+      "Google token verification failed.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  /* The tokeninfo response is authoritative because Google validated the token.
+   * The local JWT payload checks above only add early rejection for malformed
+   * tokens; never use the local payload as authentication by itself. */
+
+  if (String(untrustedPayload.aud || "") !== String(CONFIG.GOOGLE_CLIENT_ID)) {
+    throw new AuthError(
+      "Google token audience does not match Ridhi.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  /*
+   * -----------------------------------------------------------
+   * AUDIENCE CHECK
+   * -----------------------------------------------------------
+   */
+
+  if (
+    String(
+      claims.aud || ""
+    ) !==
+    String(
+      CONFIG.GOOGLE_CLIENT_ID
+    )
+  ) {
+
+    throw new AuthError(
+      "Google token audience does not match Ridhi.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  /*
+   * -----------------------------------------------------------
+   * ISSUER CHECK
+   * -----------------------------------------------------------
+   *
+   * Google tokeninfo normally does not require us to
+   * manually verify the JWT signature because Google has
+   * already validated the token through tokeninfo.
+   *
+   * We still require a Google account identity.
+   */
+
+
+  if (
+    !claims.sub
+  ) {
+
+    throw new AuthError(
+      "Google account identity is missing.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  if (
+    !claims.email
+  ) {
+
+    throw new AuthError(
+      "Google email is missing.",
+      "TOKEN_INVALID"
+    );
+  }
+
+  if (claims.email_verified !== undefined && String(claims.email_verified).toLowerCase() !== "true") {
+    throw new AuthError(
+      "Google email is not verified.",
+      "TOKEN_INVALID"
+    );
+  }
+
+
+  /*
+   * -----------------------------------------------------------
+   * EXPIRATION CHECK
+   * -----------------------------------------------------------
+   */
+
+  var expiration = Number(claims.exp || 0);
+
+  if (!isFinite(expiration) || expiration <= 0) {
+    throw new AuthError(
+      "Google token expiration is missing.",
+      "TOKEN_INVALID"
+    );
+  }
+
+  if (
+    Math.floor(Date.now() / 1000) >= expiration
+  ) {
+    throw new AuthError(
+      "Google ID token has expired.",
+      "TOKEN_EXPIRED"
+    );
+  }
+
+
+  /*
+   * Cache only after all checks pass.
+   */
+
+  cache.put(
+    cacheKey,
+    JSON.stringify(claims),
+    CONFIG.TOKEN_CACHE_SECONDS
+  );
+
+
+  return claims;
+}
+
+
+/* =============================================================
+   AUTH ERROR
+============================================================= */
+
+function AuthError(
+  message,
+  code
+) {
+
+  this.name =
+    "AuthError";
+
+  this.message =
+    message;
+
+  this.code =
+    code;
+}
+
+
+AuthError.prototype =
+  Object.create(
+    Error.prototype
+  );
+
+
+/* =============================================================
+   CUSTOMER LOOKUP
+============================================================= */
+
+function getCustomerByGoogleSub_(
+  googleSub
+) {
+
+  var customers =
+    getSheetData(
+      CONFIG.SHEETS.CUSTOMERS
+    );
+
+
+  var target =
+    String(
+      googleSub || ""
+    );
+
+
+  for (
+    var i = 0;
+    i < customers.length;
+    i++
+  ) {
+
+    if (
+      String(
+        getField(
+          customers[i],
+          [
+            "GOOGLE_SUB"
+          ],
+          ""
+        )
+      ) === target
+    ) {
+
+      return customers[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   EMPLOYEE LOOKUP
+============================================================= */
+
+function getEmployeeByGoogleSub_(
+  googleSub
+) {
+
+  var employees =
+    getSheetData(
+      CONFIG.SHEETS.EMPLOYEES
+    );
+
+
+  var target =
+    String(
+      googleSub || ""
+    );
+
+
+  for (
+    var i = 0;
+    i < employees.length;
+    i++
+  ) {
+
+    if (
+      String(
+        getField(
+          employees[i],
+          [
+            "GOOGLE_SUB"
+          ],
+          ""
+        )
+      ) === target
+    ) {
+
+      return employees[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   CUSTOMER AUTHENTICATION
+============================================================= */
+
+/*
+ * =============================================================
+ * CUSTOMER 24-HOUR SLIDING SESSION
+ * =============================================================
+ *
+ * Google ID tokens are short-lived credentials. They are used only
+ * to establish the Ridhi session. The browser then stores a signed
+ * Ridhi session token, not the Google token.
+ *
+ * The session expires 24 hours after the most recent successful
+ * refresh. The frontend refreshes it while the customer is active.
+ */
+
+function getCustomerSessionSecret_() {
+
+  var props = PropertiesService.getScriptProperties();
+
+  var secret = props.getProperty("RIDHI_SESSION_SECRET");
+
+  if (!secret) {
+    secret =
+      Utilities.getUuid().replace(/-/g, "") +
+      Utilities.getUuid().replace(/-/g, "") +
+      Utilities.getUuid().replace(/-/g, "");
+
+    props.setProperty("RIDHI_SESSION_SECRET", secret);
+  }
+
+  return secret;
+}
+
+
+function encodeSessionPart_(value) {
+
+  return Utilities.base64EncodeWebSafe(
+    String(value),
+    Utilities.Charset.UTF_8
+  ).replace(/=+$/g, "");
+}
+
+
+function decodeSessionPart_(value) {
+
+  var padded = String(value || "");
+
+  while (padded.length % 4) {
+    padded += "=";
+  }
+
+  return Utilities.newBlob(
+    Utilities.base64DecodeWebSafe(padded)
+  ).getDataAsString();
+}
+
+
+function signCustomerSession_(payload) {
+
+  var signature =
+    Utilities.computeHmacSha256Signature(
+      payload,
+      getCustomerSessionSecret_(),
+      Utilities.Charset.UTF_8
+    );
+
+  return Utilities.base64EncodeWebSafe(
+    signature
+  ).replace(/=+$/g, "");
+}
+
+
+function issueCustomerSession_(customer, claims) {
+
+  var now = Math.floor(Date.now() / 1000);
+
+  var session = {
+    v: 1,
+    customerId: String(
+      getField(customer, ["CUSTOMER_ID"], "")
+    ),
+    sub: String(claims.sub || ""),
+    iat: now,
+    exp: now + CONFIG.CUSTOMER_SESSION_TTL_SECONDS,
+    nonce: Utilities.getUuid()
+  };
+
+  var payload = encodeSessionPart_(
+    JSON.stringify(session)
+  );
+
+  return CONFIG.CUSTOMER_SESSION_PREFIX +
+    payload +
+    "." +
+    signCustomerSession_(payload);
+}
+
+
+function verifyCustomerSession_(sessionToken) {
+
+  sessionToken = String(sessionToken || "").trim();
+
+  if (
+    sessionToken.indexOf(CONFIG.CUSTOMER_SESSION_PREFIX) !== 0
+  ) {
+    throw new AuthError(
+      "Customer session is invalid.",
+      "SESSION_INVALID"
+    );
+  }
+
+  var raw =
+    sessionToken.substring(
+      CONFIG.CUSTOMER_SESSION_PREFIX.length
+    );
+
+  var parts = raw.split(".");
+
+  if (parts.length !== 2) {
+    throw new AuthError(
+      "Customer session is invalid.",
+      "SESSION_INVALID"
+    );
+  }
+
+  var payload = parts[0];
+  var signature = parts[1];
+
+  if (
+    signCustomerSession_(payload) !== signature
+  ) {
+    throw new AuthError(
+      "Customer session is invalid.",
+      "SESSION_INVALID"
+    );
+  }
+
+  var session;
+
+  try {
+    session = JSON.parse(
+      decodeSessionPart_(payload)
+    );
+  } catch (err) {
+    throw new AuthError(
+      "Customer session is invalid.",
+      "SESSION_INVALID"
+    );
+  }
+
+  var now = Math.floor(Date.now() / 1000);
+
+  if (
+    Number(session.v) !== 1 ||
+    !session.customerId ||
+    !session.sub ||
+    !Number(session.exp) ||
+    now >= Number(session.exp)
+  ) {
+    throw new AuthError(
+      "Customer session has expired. Please sign in again.",
+      "SESSION_EXPIRED"
+    );
+  }
+
+  return session;
+}
+
+
+function refreshCustomerSession_(sessionToken) {
+
+  var session = verifyCustomerSession_(sessionToken);
+
+  var customer = getCustomerByGoogleSub_(session.sub);
+
+  if (!customer) {
+    throw new AuthError(
+      "Customer account was not found.",
+      "CUSTOMER_NOT_FOUND"
+    );
+  }
+
+  var customerId =
+    String(getField(customer, ["CUSTOMER_ID"], ""));
+
+  if (customerId !== String(session.customerId)) {
+    throw new AuthError(
+      "Customer session is invalid.",
+      "SESSION_INVALID"
+    );
+  }
+
+  if (
+    !isActiveStatus(
+      getField(customer, ["STATUS"], "")
+    )
+  ) {
+    throw new AuthError(
+      "Customer account is blocked or inactive.",
+      "ACCOUNT_BLOCKED"
+    );
+  }
+
+  var freshToken = issueCustomerSession_(
+    customer,
+    { sub: session.sub }
+  );
+
+  return {
+    sessionToken: freshToken,
+    expiresAt: new Date(
+      Date.now() +
+      CONFIG.CUSTOMER_SESSION_TTL_SECONDS * 1000
+    ).toISOString(),
+    customer: sanitizeCustomer(customer)
+  };
+}
+
+
+function requireCustomer_(
+  idToken
+) {
+
+  var credential =
+    String(idToken || "").trim();
+
+  /*
+   * Existing callers still use the field name idToken.
+   * It may now contain either a Google ID token or a Ridhi session.
+   */
+  if (
+    credential.indexOf(
+      CONFIG.CUSTOMER_SESSION_PREFIX
+    ) === 0
+  ) {
+
+    var session =
+      verifyCustomerSession_(
+        credential
+      );
+
+    var sessionCustomer =
+      getCustomerByGoogleSub_(
+        session.sub
+      );
+
+    if (!sessionCustomer) {
+      throw new AuthError(
+        "Customer account was not found.",
+        "CUSTOMER_NOT_FOUND"
+      );
+    }
+
+    if (
+      String(
+        getField(
+          sessionCustomer,
+          ["CUSTOMER_ID"],
+          ""
+        )
+      ) !==
+      String(session.customerId)
+    ) {
+      throw new AuthError(
+        "Customer session is invalid.",
+        "SESSION_INVALID"
+      );
+    }
+
+    if (
+      !isActiveStatus(
+        getField(
+          sessionCustomer,
+          ["STATUS"],
+          ""
+        )
+      )
+    ) {
+      throw new AuthError(
+        "Customer account is blocked or inactive.",
+        "ACCOUNT_BLOCKED"
+      );
+    }
+
+    return {
+      claims: {
+        sub: session.sub
+      },
+      customer: sessionCustomer,
+      authType: "SESSION",
+      session: session
+    };
+  }
+
+  var claims =
+    verifyGoogleIdToken_(
+      credential
+    );
+
+  var customer =
+    getCustomerByGoogleSub_(
+      claims.sub
+    );
+
+  if (!customer) {
+
+    throw new AuthError(
+      "Google account is not registered as a Ridhi customer.",
+      "CUSTOMER_NOT_FOUND"
+    );
+  }
+
+  if (
+    !isActiveStatus(
+      getField(
+        customer,
+        ["STATUS"],
+        ""
+      )
+    )
+  ) {
+
+    throw new AuthError(
+      "Customer account is blocked or inactive.",
+      "ACCOUNT_BLOCKED"
+    );
+  }
+
+  return {
+    claims: claims,
+    customer: customer,
+    authType: "GOOGLE"
+  };
+}
+
+/* =============================================================
+   EMPLOYEE AUTHENTICATION
+============================================================= */
+
+function requireEmployee_(
+  idToken,
+  allowedRoles
+) {
+
+  var claims =
+    verifyGoogleIdToken_(
+      idToken
+    );
+
+
+  var employee =
+    getEmployeeByGoogleSub_(
+      claims.sub
+    );
+
+
+  if (!employee) {
+
+    throw new AuthError(
+      "Google account is not authorized as a Ridhi employee.",
+      "EMPLOYEE_NOT_AUTHORIZED"
+    );
+  }
+
+
+  var status =
+    getField(
+      employee,
+      [
+        "STATUS"
+      ],
+      ""
+    );
+
+
+  if (
+    !isActiveStatus(status)
+  ) {
+
+    throw new AuthError(
+      "Employee account is inactive.",
+      "ACCOUNT_BLOCKED"
+    );
+  }
+
+
+  var role =
+    normalizeRole(
+      getField(
+        employee,
+        [
+          "ROLE"
+        ],
+        ""
+      )
+    );
+
+
+  if (
+    CONFIG.ROLES.indexOf(role) === -1
+  ) {
+
+    throw new AuthError(
+      "Employee role is invalid.",
+      "EMPLOYEE_NOT_AUTHORIZED"
+    );
+  }
+
+
+  if (
+    allowedRoles &&
+    allowedRoles.length &&
+    allowedRoles.indexOf(role) === -1
+  ) {
+
+    throw new AuthError(
+      "You are not authorized to perform this operation.",
+      "ROLE_NOT_ALLOWED"
+    );
+  }
+
+
+  return {
+    claims: claims,
+    employee: employee,
+    role: role
+  };
+}
+
+
+/* =============================================================
+   VERIFY CUSTOMER GOOGLE
+============================================================= */
+
+function verifyCustomerGoogle(
+  idToken
+) {
+
+  try {
+
+    var claims = verifyGoogleIdToken_(idToken);
+    var customer = getCustomerByGoogleSub_(claims.sub);
+
+    if (!customer) {
+      return createCustomerFromGoogle({
+        idToken: idToken
+      });
+    }
+
+    if (!isActiveStatus(getField(customer, ["STATUS"], ""))) {
+      return failure(
+        "Customer account is blocked or inactive.",
+        "ACCOUNT_BLOCKED"
+      );
+    }
+
+    updateCustomerLogin_(customer, claims);
+
+    var fresh = getCustomerByGoogleSub_(claims.sub) || customer;
+
+    return success({
+      customer: sanitizeCustomer(fresh),
+      sessionToken:
+        issueCustomerSession_(
+          fresh,
+          claims
+        ),
+      expiresAt:
+        new Date(
+          Date.now() +
+          CONFIG.CUSTOMER_SESSION_TTL_SECONDS * 1000
+        ).toISOString()
+    });
+
+  } catch (err) {
+    return authFailure(err);
+  }
+}
+
+
+/* =============================================================
+   VERIFY EMPLOYEE GOOGLE
+============================================================= */
+
+function verifyEmployeeGoogle(
+  idToken,
+  requestedRoles
+) {
+
+  try {
+
+    var allowedRoles = null;
+
+
+    if (
+      requestedRoles
+    ) {
+
+      allowedRoles =
+        String(
+          requestedRoles
+        )
+        .split(",")
+        .map(function(role) {
+
+          return normalizeRole(
+            role
+          );
+
+        })
+        .filter(Boolean);
+    }
+
+
+    var auth =
+      requireEmployee_(
+        idToken,
+        allowedRoles
+      );
+
+
+    updateEmployeeLogin_(
+      auth.employee,
+      auth.claims
+    );
+
+
+    return success({
+      employee:
+        sanitizeEmployee(
+          auth.employee
+        ),
+
+      user:
+        sanitizeEmployee(
+          auth.employee
+        ),
+
+      role:
+        auth.role
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   AUTH FAILURE
+============================================================= */
+
+function authFailure(
+  err
+) {
+
+  if (
+    err &&
+    err.name === "AuthError"
+  ) {
+
+    return failure(
+      err.message,
+      err.code
+    );
+  }
+
+
+  return failure(
+    err &&
+    err.message
+      ? err.message
+      : "Authentication failed.",
+    "AUTH_ERROR"
+  );
+}
+
+
+/* =============================================================
+   CUSTOMER LOGIN UPDATE
+============================================================= */
+
+function updateCustomerLogin_(
+  customer,
+  claims
+) {
+
+  if (
+    !customer ||
+    !customer._rowNumber
+  ) {
+    return;
+  }
+
+
+  var now =
+    new Date();
+
+
+  updateObjectRow(
+    CONFIG.SHEETS.CUSTOMERS,
+    customer._rowNumber,
+    {
+
+      GOOGLE_EMAIL:
+        normalizeEmail(
+          claims.email
+        ),
+
+      FULL_NAME:
+        claims.name ||
+        getField(
+          customer,
+          ["FULL_NAME"],
+          ""
+        ),
+
+      PROFILE_IMAGE:
+        claims.picture ||
+        getField(
+          customer,
+          ["PROFILE_IMAGE"],
+          ""
+        ),
+
+      LAST_LOGIN:
+        now,
+
+      UPDATED_AT:
+        now
+    }
+  );
+}
+
+
+/* =============================================================
+   EMPLOYEE LOGIN UPDATE
+============================================================= */
+
+function updateEmployeeLogin_(
+  employee,
+  claims
+) {
+
+  if (
+    !employee ||
+    !employee._rowNumber
+  ) {
+    return;
+  }
+
+
+  updateObjectRow(
+    CONFIG.SHEETS.EMPLOYEES,
+    employee._rowNumber,
+    {
+
+      GOOGLE_EMAIL:
+        normalizeEmail(
+          claims.email
+        ),
+
+      FULL_NAME:
+        claims.name ||
+        getField(
+          employee,
+          ["FULL_NAME"],
+          ""
+        ),
+
+      PROFILE_IMAGE:
+        claims.picture ||
+        getField(
+          employee,
+          ["PROFILE_IMAGE"],
+          ""
+        ),
+
+      LAST_LOGIN:
+        new Date(),
+
+      UPDATED_AT:
+        new Date()
+    }
+  );
+}
+
+
+/* =============================================================
+   SANITIZE CUSTOMER
+============================================================= */
+
+function sanitizeCustomer(
+  customer
+) {
+
+  return {
+
+    customerId:
+      getField(
+        customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      ),
+
+    googleSub:
+      getField(
+        customer,
+        [
+          "GOOGLE_SUB"
+        ],
+        ""
+      ),
+
+    email:
+      getField(
+        customer,
+        [
+          "GOOGLE_EMAIL",
+          "EMAIL"
+        ],
+        ""
+      ),
+
+    name:
+      getField(
+        customer,
+        [
+          "FULL_NAME",
+          "NAME"
+        ],
+        ""
+      ),
+
+    phone:
+      getField(
+        customer,
+        [
+          "PHONE",
+          "MOBILE"
+        ],
+        ""
+      ),
+
+    picture:
+      getField(
+        customer,
+        [
+          "PROFILE_IMAGE",
+          "PICTURE"
+        ],
+        ""
+      ),
+
+    status:
+      getField(
+        customer,
+        [
+          "STATUS"
+        ],
+        ""
+      )
+  };
+}
+
+
+/* =============================================================
+   SANITIZE EMPLOYEE
+============================================================= */
+
+function sanitizeEmployee(
+  employee
+) {
+
+  return {
+
+    employeeId:
+      getField(
+        employee,
+        [
+          "EMPLOYEE_ID"
+        ],
+        ""
+      ),
+
+    googleSub:
+      getField(
+        employee,
+        [
+          "GOOGLE_SUB"
+        ],
+        ""
+      ),
+
+    email:
+      getField(
+        employee,
+        [
+          "GOOGLE_EMAIL",
+          "EMAIL"
+        ],
+        ""
+      ),
+
+    name:
+      getField(
+        employee,
+        [
+          "FULL_NAME",
+          "NAME"
+        ],
+        ""
+      ),
+
+    phone:
+      getField(
+        employee,
+        [
+          "PHONE",
+          "MOBILE"
+        ],
+        ""
+      ),
+
+    role:
+      normalizeRole(
+        getField(
+          employee,
+          [
+            "ROLE"
+          ],
+          ""
+        )
+      ),
+
+    department:
+      getField(
+        employee,
+        [
+          "DEPARTMENT"
+        ],
+        ""
+      ),
+
+    designation:
+      getField(
+        employee,
+        [
+          "DESIGNATION"
+        ],
+        ""
+      ),
+
+    status:
+      getField(
+        employee,
+        [
+          "STATUS"
+        ],
+        ""
+      ),
+
+    shift:
+      getField(
+        employee,
+        [
+          "SHIFT"
+        ],
+        ""
+      ),
+
+    picture:
+      getField(
+        employee,
+        [
+          "PROFILE_IMAGE",
+          "PICTURE"
+        ],
+        ""
+      )
+  };
+}
+
+
+/* =============================================================
+   CUSTOMER GET USER
+============================================================= */
+
+function getAuthenticatedUser(
+  params
+) {
+
+  try {
+
+    var idToken =
+      params.idToken;
+
+
+    if (!idToken) {
+
+      return failure(
+        "Google ID token is required.",
+        "AUTH_REQUIRED"
+      );
+    }
+
+
+    var auth =
+      requireCustomer_(
+        idToken
+      );
+
+
+    return success({
+      customer:
+        sanitizeCustomer(
+          auth.customer
+        )
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   CREATE CUSTOMER
+============================================================= */
+
+function createCustomerFromGoogle(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var claims = verifyGoogleIdToken_(data.idToken);
+    var existing = getCustomerByGoogleSub_(claims.sub);
+
+    if (existing) {
+
+      if (!isActiveStatus(getField(existing, ["STATUS"], ""))) {
+        return failure(
+          "Customer account is blocked.",
+          "ACCOUNT_BLOCKED"
+        );
+      }
+
+      updateCustomerLogin_(existing, claims);
+      var freshExisting = getCustomerByGoogleSub_(claims.sub) || existing;
+
+      return success({
+        customer: sanitizeCustomer(freshExisting),
+        sessionToken:
+          issueCustomerSession_(
+            freshExisting,
+            claims
+          ),
+        expiresAt:
+          new Date(
+            Date.now() +
+            CONFIG.CUSTOMER_SESSION_TTL_SECONDS * 1000
+          ).toISOString()
+      });
+    }
+
+    var customerId = generateId("CUS");
+    var now = new Date();
+
+    var phone = getField(
+      data,
+      ["phone", "PHONE", "mobile", "MOBILE"],
+      ""
+    );
+
+    var customer = {
+      CUSTOMER_ID: customerId,
+      GOOGLE_SUB: claims.sub,
+      GOOGLE_EMAIL: normalizeEmail(claims.email),
+      FULL_NAME: claims.name || "",
+      PHONE: normalizePhone_(phone),
+      PROFILE_IMAGE: claims.picture || "",
+      STATUS: "ACTIVE",
+      CREATED_AT: now,
+      LAST_LOGIN: now,
+      UPDATED_AT: now
+    };
+
+    appendObject(
+      CONFIG.SHEETS.CUSTOMERS,
+      customer
+    );
+
+    addAuditLogSafe({
+      action: "CUSTOMER_CREATED",
+      entityType: "CUSTOMER",
+      entityId: customerId,
+      actorId: customerId,
+      actorRole: "CUSTOMER",
+      details: "Customer created through Google Sign-In."
+    });
+
+    var fresh = getCustomerByGoogleSub_(claims.sub) || customer;
+
+    return success({
+      customer: sanitizeCustomer(fresh),
+      sessionToken:
+        issueCustomerSession_(
+          fresh,
+          claims
+        ),
+      expiresAt:
+        new Date(
+          Date.now() +
+          CONFIG.CUSTOMER_SESSION_TTL_SECONDS * 1000
+        ).toISOString()
+    });
+
+  } catch (err) {
+    return authFailure(err);
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+/* =============================================================
+   GET PRODUCTS
+============================================================= */
+
+function getProducts(
+  params,
+  publicOnly
+) {
+
+  try {
+
+    var products =
+      getSheetData(
+        CONFIG.SHEETS.PRODUCTS
+      );
+
+
+    var inventory =
+      getSheetData(
+        CONFIG.SHEETS.INVENTORY
+      );
+
+
+    /* Public callers can never request inactive products. */
+    var activeOnly = publicOnly
+      ? true
+      : String(
+          params.active
+            || "true"
+        ).toLowerCase() !== "false";
+
+
+    var category =
+      String(
+        params.category
+          || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    var search =
+      String(
+        params.search
+          || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    var featured =
+      String(
+        params.featured
+          || ""
+      )
+      .toLowerCase();
+
+
+    /*
+     * Build inventory map.
+     */
+
+    var inventoryMap = {};
+
+
+    inventory.forEach(function(item) {
+
+      var productId =
+        String(
+          getField(
+            item,
+            [
+              "PRODUCT_ID"
+            ],
+            ""
+          )
+        );
+
+
+      if (!productId) {
+        return;
+      }
+
+
+      inventoryMap[
+        productId
+      ] = item;
+    });
+
+
+    var result =
+      products.filter(function(product) {
+
+        if (
+          activeOnly &&
+          !isProductActive(
+            product
+          )
+        ) {
+
+          return false;
+        }
+
+
+        var productCategory =
+          String(
+            getField(
+              product,
+              [
+                "CATEGORY_ID",
+                "CATEGORY",
+                "CATEGORY_NAME"
+              ],
+              ""
+            )
+          )
+          .toLowerCase();
+
+
+        if (
+          category &&
+          productCategory !== category
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          search
+        ) {
+
+          var searchable =
+            [
+              getField(
+                product,
+                [
+                  "PRODUCT_ID"
+                ],
+                ""
+              ),
+
+              getField(
+                product,
+                [
+                  "PRODUCT_NAME",
+                  "NAME"
+                ],
+                ""
+              ),
+
+              getField(
+                product,
+                [
+                  "BRAND"
+                ],
+                ""
+              ),
+
+              getField(
+                product,
+                [
+                  "SKU"
+                ],
+                ""
+              )
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+          if (
+            searchable.indexOf(
+              search
+            ) === -1
+          ) {
+
+            return false;
+          }
+        }
+
+
+        if (
+          featured &&
+          featured !== "all"
+        ) {
+
+          var isFeatured =
+            String(
+              getField(
+                product,
+                [
+                  "FEATURED",
+                  "IS_FEATURED"
+                ],
+                ""
+              )
+            )
+            .toLowerCase();
+
+
+          if (
+            featured === "true" &&
+            !(
+              isFeatured === "true" ||
+              isFeatured === "yes" ||
+              isFeatured === "1"
+            )
+          ) {
+
+            return false;
+          }
+        }
+
+
+        return true;
+      });
+
+
+    /*
+     * Attach inventory information.
+     */
+
+    result =
+      result.map(function(product) {
+
+        var id =
+          String(
+            getField(
+              product,
+              [
+                "PRODUCT_ID"
+              ],
+              ""
+            )
+          );
+
+
+        var stock =
+          inventoryMap[id];
+
+
+        var output =
+          sanitizeProduct(
+            product
+          );
+
+
+        if (stock) {
+
+          output.available =
+            isInventoryAvailable(
+              stock
+            );
+
+          /* Exact inventory counts are internal information. */
+          if (!publicOnly) {
+            output.stock =
+              Number(
+                getField(
+                  stock,
+                  [
+                    "STOCK",
+                    "QUANTITY",
+                    "AVAILABLE_QTY",
+                    "CURRENT_STOCK"
+                  ],
+                  0
+                )
+              ) || 0;
+          }
+        }
+
+
+        return output;
+      });
+
+
+    return success({
+      products:
+        result
+    });
+
+
+  } catch (err) {
+
+    return failure(
+      err.message,
+      "PRODUCTS_ERROR"
+    );
+  }
+}
+
+
+/* =============================================================
+   PRODUCT ACTIVE
+============================================================= */
+
+function isProductActive(
+  product
+) {
+
+  var status =
+    String(
+      getField(
+        product,
+        [
+          "STATUS"
+        ],
+        "ACTIVE"
+      )
+    )
+    .toUpperCase();
+
+
+  if (
+    status === "INACTIVE" ||
+    status === "DISABLED" ||
+    status === "DELETED"
+  ) {
+
+    return false;
+  }
+
+
+  var active =
+    getField(
+      product,
+      [
+        "ACTIVE",
+        "IS_ACTIVE"
+      ],
+      null
+    );
+
+
+  if (
+    active === null
+  ) {
+
+    return true;
+  }
+
+
+  return (
+    String(active)
+      .toLowerCase() === "true" ||
+    String(active)
+      .toLowerCase() === "yes" ||
+    String(active) === "1"
+  );
+}
+
+
+/* =============================================================
+   INVENTORY AVAILABLE
+============================================================= */
+
+function isInventoryAvailable(
+  inventory
+) {
+
+  var status =
+    String(
+      getField(
+        inventory,
+        [
+          "STATUS"
+        ],
+        "ACTIVE"
+      )
+    )
+    .toUpperCase();
+
+
+  if (
+    status === "INACTIVE" ||
+    status === "OUT_OF_STOCK"
+  ) {
+
+    return false;
+  }
+
+
+  var quantity =
+    Number(
+      getField(
+        inventory,
+        [
+          "AVAILABLE_STOCK",
+          "AVAILABLE_QTY",
+          "STOCK",
+          "QUANTITY",
+          "CURRENT_STOCK"
+        ],
+        0
+      )
+    ) || 0;
+
+
+  return quantity > 0;
+}
+
+
+/* =============================================================
+   TRUTHY VALUE
+============================================================= */
+
+function isTruthy(value) {
+  var v = String(value == null ? "" : value).trim().toLowerCase();
+  return v === "true" || v === "yes" || v === "1" || v === "y";
+}
+
+
+/* =============================================================
+   GET PRODUCT
+============================================================= */
+
+function getProduct(
+  productId,
+  publicOnly
+) {
+
+  try {
+
+    var id =
+      String(
+        productId || ""
+      ).trim();
+
+
+    if (!id) {
+
+      return failure(
+        "Product ID is required.",
+        "PRODUCT_ID_REQUIRED"
+      );
+    }
+
+
+    var products =
+      getSheetData(
+        CONFIG.SHEETS.PRODUCTS
+      );
+
+
+    for (
+      var i = 0;
+      i < products.length;
+      i++
+    ) {
+
+      var currentId =
+        String(
+          getField(
+            products[i],
+            [
+              "PRODUCT_ID"
+            ],
+            ""
+          )
+        );
+
+
+      if (
+        currentId === id
+      ) {
+
+        if (
+          publicOnly &&
+          !isProductActive(products[i])
+        ) {
+          return failure(
+            "Product not found.",
+            "PRODUCT_NOT_FOUND"
+          );
+        }
+
+        return success({
+          product:
+            sanitizeProduct(
+              products[i]
+            )
+        });
+      }
+    }
+
+
+    return failure(
+      "Product not found.",
+      "PRODUCT_NOT_FOUND"
+    );
+
+
+  } catch (err) {
+
+    return failure(
+      err.message,
+      "PRODUCT_ERROR"
+    );
+  }
+}
+
+
+/* =============================================================
+   SANITIZE PRODUCT
+============================================================= */
+
+function sanitizeProduct(
+  product
+) {
+
+  return {
+
+    productId:
+      getField(
+        product,
+        [
+          "PRODUCT_ID"
+        ],
+        ""
+      ),
+
+    productName:
+      getField(
+        product,
+        [
+          "PRODUCT_NAME",
+          "NAME"
+        ],
+        ""
+      ),
+
+    name:
+      getField(
+        product,
+        [
+          "PRODUCT_NAME",
+          "NAME"
+        ],
+        ""
+      ),
+
+    categoryId:
+      getField(
+        product,
+        [
+          "CATEGORY_ID"
+        ],
+        ""
+      ),
+
+    category:
+      getField(
+        product,
+        [
+          "CATEGORY",
+          "CATEGORY_NAME"
+        ],
+        ""
+      ),
+
+    brand:
+      getField(
+        product,
+        [
+          "BRAND"
+        ],
+        ""
+      ),
+
+    sku:
+      getField(
+        product,
+        [
+          "SKU"
+        ],
+        ""
+      ),
+
+    price:
+      Number(
+        getField(
+          product,
+          [
+            "PRICE",
+            "SELLING_PRICE",
+            "SALE_PRICE"
+          ],
+          0
+        )
+      ) || 0,
+
+    mrp:
+      Number(
+        getField(
+          product,
+          [
+            "MRP"
+          ],
+          0
+        )
+      ) || 0,
+
+    unit:
+      getField(
+        product,
+        [
+          "UNIT"
+        ],
+        ""
+      ),
+
+    packSize:
+      getField(
+        product,
+        [
+          "PACK_SIZE"
+        ],
+        ""
+      ),
+
+    featured:
+      isTruthy(
+        getField(
+          product,
+          [
+            "FEATURED"
+          ],
+          false
+        )
+      ),
+
+    searchKeywords:
+      getField(
+        product,
+        [
+          "SEARCH_KEYWORDS"
+        ],
+        ""
+      ),
+
+    image:
+      getField(
+        product,
+        [
+          "IMAGE",
+          "IMAGE_URL",
+          "PRODUCT_IMAGE"
+        ],
+        ""
+      ),
+
+    description:
+      getField(
+        product,
+        [
+          "DESCRIPTION"
+        ],
+        ""
+      ),
+
+    status:
+      getField(
+        product,
+        [
+          "STATUS"
+        ],
+        "ACTIVE"
+      )
+  };
+}
+
+
+/* =============================================================
+   CATEGORIES
+============================================================= */
+
+function getCategories() {
+
+  try {
+
+    var categories =
+      getSheetData(
+        CONFIG.SHEETS.CATEGORIES
+      );
+
+
+    return success({
+      categories:
+        categories
+          .filter(function(category) {
+
+            return isProductActive(
+              category
+            );
+
+          })
+          .map(function(category) {
+
+            return {
+
+              categoryId:
+                getField(
+                  category,
+                  [
+                    "CATEGORY_ID"
+                  ],
+                  ""
+                ),
+
+              name:
+                getField(
+                  category,
+                  [
+                    "CATEGORY_NAME",
+                    "NAME"
+                  ],
+                  ""
+                ),
+
+              image:
+                getField(
+                  category,
+                  [
+                    "IMAGE",
+                    "IMAGE_URL"
+                  ],
+                  ""
+                ),
+
+              sortOrder:
+                Number(
+                  getField(
+                    category,
+                    [
+                      "SORT_ORDER"
+                    ],
+                    0
+                  )
+                ) || 0
+            };
+          })
+          .sort(function(a, b) {
+            if (a.sortOrder !== b.sortOrder) {
+              return a.sortOrder - b.sortOrder;
+            }
+            return String(a.name || "").localeCompare(
+              String(b.name || "")
+            );
+          })
+    });
+
+
+  } catch (err) {
+
+    return failure(
+      err.message,
+      "CATEGORY_ERROR"
+    );
+  }
+}
+
+
+/* =============================================================
+   SETTINGS
+============================================================= */
+
+function getSettings() {
+
+  try {
+
+    var settings =
+      getSheetData(
+        CONFIG.SHEETS.SETTINGS
+      );
+
+
+    var result = {};
+
+
+    settings.forEach(function(row) {
+
+      var key =
+        getField(
+          row,
+          [
+            "KEY",
+            "SETTING_KEY",
+            "NAME"
+          ],
+          ""
+        );
+
+
+      var value =
+        getField(
+          row,
+          [
+            "VALUE",
+            "SETTING_VALUE"
+          ],
+          ""
+        );
+
+
+      if (key) {
+        result[key] = value;
+      }
+    });
+
+
+    /*
+     * Defaults.
+     */
+
+    if (
+      result.MINIMUM_ORDER === undefined
+    ) {
+
+      result.MINIMUM_ORDER =
+        CONFIG.DEFAULT_MINIMUM_ORDER;
+    }
+
+
+    if (
+      result.DELIVERY_CHARGE === undefined
+    ) {
+
+      result.DELIVERY_CHARGE =
+        CONFIG.DEFAULT_DELIVERY_CHARGE;
+    }
+
+
+    if (
+      result.TAX_PERCENT === undefined
+    ) {
+
+      result.TAX_PERCENT =
+        CONFIG.DEFAULT_TAX_PERCENT;
+    }
+
+
+    return success({
+      settings:
+        result
+    });
+
+
+  } catch (err) {
+
+    return failure(
+      err.message,
+      "SETTINGS_ERROR"
+    );
+  }
+}
+
+
+/* =============================================================
+   PUBLIC SETTINGS
+============================================================= */
+
+function getPublicSettings() {
+
+  try {
+
+    var result = getSettings();
+
+    if (!result.success) {
+      return result;
+    }
+
+    var source = result.data.settings || {};
+    var allowedKeys = [
+      "MINIMUM_ORDER",
+      "MINIMUM_ORDER_AMOUNT",
+      "DELIVERY_CHARGE",
+      "DELIVERY_FEE",
+      "TAX_PERCENT",
+      "GST_PERCENT",
+      "STORE_NAME",
+      "STORE_PHONE",
+      "STORE_ADDRESS",
+      "STORE_TIMINGS",
+      "SUPPORT_PHONE",
+      "CURRENCY"
+    ];
+
+    var safe = {};
+
+    allowedKeys.forEach(function(key) {
+      if (source[key] !== undefined) {
+        safe[key] = source[key];
+      }
+    });
+
+    if (safe.MINIMUM_ORDER === undefined && safe.MINIMUM_ORDER_AMOUNT === undefined) {
+      safe.MINIMUM_ORDER = CONFIG.DEFAULT_MINIMUM_ORDER;
+    }
+
+    if (safe.DELIVERY_CHARGE === undefined && safe.DELIVERY_FEE === undefined) {
+      safe.DELIVERY_CHARGE = CONFIG.DEFAULT_DELIVERY_CHARGE;
+    }
+
+    if (safe.TAX_PERCENT === undefined && safe.GST_PERCENT === undefined) {
+      safe.TAX_PERCENT = CONFIG.DEFAULT_TAX_PERCENT;
+    }
+
+    return success({settings: safe});
+
+  } catch (err) {
+    return failure("Unable to load public settings.", "SETTINGS_ERROR");
+  }
+}
+
+
+/* =============================================================
+   CREATE ORDER
+============================================================= */
+
+function getInventoryByProductId_(productId) {
+
+  var inventory = getSheetData(CONFIG.SHEETS.INVENTORY);
+
+  for (var i = 0; i < inventory.length; i++) {
+    if (
+      String(getField(inventory[i], ["PRODUCT_ID"], "")) ===
+      String(productId)
+    ) {
+      return inventory[i];
+    }
+  }
+
+  return null;
+}
+
+
+function createOrderSecure(
+  data
+) {
+
+  var lock =
+    LockService
+      .getScriptLock();
+
+  var inventoryReservation = null;
+  var orderRowNumber = 0;
+  var orderItemRowNumbers = [];
+  var orderStatusRowNumbers = [];
+
+
+  try {
+
+    lock.waitLock(
+      CONFIG.LOCK_TIMEOUT_MS
+    );
+
+
+    var auth =
+      requireCustomer_(
+        data.idToken
+      );
+
+
+    var customer =
+      auth.customer;
+
+
+    var customerId =
+      getField(
+        customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    if (!customerId) {
+
+      return failure(
+        "Customer ID is missing.",
+        "CUSTOMER_ID_MISSING"
+      );
+    }
+
+
+    var addressId =
+      String(
+        getField(
+          data,
+          [
+            "addressId",
+            "ADDRESS_ID"
+          ],
+          ""
+        )
+      );
+
+    validateAddressInput_(data);
+
+
+    var items =
+      getField(
+        data,
+        [
+          "items"
+        ],
+        []
+      );
+
+
+    if (
+      typeof items === "string"
+    ) {
+
+      try {
+        items =
+          JSON.parse(items);
+      } catch (e) {
+        items = [];
+      }
+    }
+
+
+    if (
+      !Array.isArray(items) ||
+      !items.length
+    ) {
+
+      return failure(
+        "Order must contain at least one product.",
+        "EMPTY_CART"
+      );
+    }
+
+    if (items.length > 100) {
+      return failure(
+        "Order contains too many different products.",
+        "CART_TOO_LARGE"
+      );
+    }
+
+
+    /*
+     * Validate address ownership if addressId supplied.
+     */
+
+    var address = null;
+
+
+    if (
+      addressId
+    ) {
+
+      address =
+        getCustomerAddress_(
+          customerId,
+          addressId
+        );
+
+
+      if (!address) {
+
+        return failure(
+          "Delivery address does not belong to this customer.",
+          "ADDRESS_NOT_AUTHORIZED"
+        );
+      }
+    }
+
+
+    /*
+     * Product validation.
+     */
+
+    var products =
+      getSheetData(
+        CONFIG.SHEETS.PRODUCTS
+      );
+
+
+    var productMap = {};
+
+
+    products.forEach(function(product) {
+
+      var id =
+        String(
+          getField(
+            product,
+            [
+              "PRODUCT_ID"
+            ],
+            ""
+          )
+        );
+
+
+      if (id) {
+        productMap[id] =
+          product;
+      }
+    });
+
+
+    var normalizedItems = [];
+    var requestedQuantityByProduct = {};
+
+    items.forEach(function(rawItem) {
+      var rawProductId = String(getField(rawItem, ["productId", "PRODUCT_ID"], "")).trim();
+      var rawQuantity = Number(getField(rawItem, ["quantity", "QUANTITY"], 0));
+      if (rawProductId && isFinite(rawQuantity) && rawQuantity > 0) {
+        requestedQuantityByProduct[rawProductId] =
+          (requestedQuantityByProduct[rawProductId] || 0) + Math.floor(rawQuantity);
+      }
+    });
+
+
+    var subtotal = 0;
+
+
+    items.forEach(function(item) {
+
+      var productId =
+        String(
+          getField(
+            item,
+            [
+              "productId",
+              "PRODUCT_ID"
+            ],
+            ""
+          )
+        ).trim();
+
+
+      var quantity =
+        Number(
+          getField(
+            item,
+            [
+              "quantity",
+              "QUANTITY"
+            ],
+            0
+          )
+        );
+
+
+      if (
+        !productId ||
+        !isFinite(quantity) ||
+        quantity <= 0 ||
+        quantity > 1000
+      ) {
+
+        throw new Error(
+          "Invalid product or quantity in cart."
+        );
+      }
+
+
+      quantity =
+        Math.floor(
+          quantity
+        );
+
+
+      var product =
+        productMap[
+          productId
+        ];
+
+
+      if (!product) {
+
+        throw new Error(
+          "Product not found: " +
+          productId
+        );
+      }
+
+
+      if (
+        !isProductActive(
+          product
+        )
+      ) {
+
+        throw new Error(
+          "Product is currently unavailable: " +
+          getField(
+            product,
+            [
+              "PRODUCT_NAME",
+              "NAME"
+            ],
+            productId
+          )
+        );
+      }
+
+
+      var inventoryRow = getInventoryByProductId_(productId);
+      if (!inventoryRow || !isInventoryAvailable(inventoryRow)) {
+        throw new Error(
+          "Product is out of stock: " +
+          getField(product, ["PRODUCT_NAME", "NAME"], productId)
+        );
+      }
+
+      var availableQty = Number(
+        getField(
+          inventoryRow,
+          ["AVAILABLE_STOCK", "AVAILABLE_QTY", "STOCK", "QUANTITY", "CURRENT_STOCK"],
+          0
+        )
+      ) || 0;
+
+      if ((requestedQuantityByProduct[productId] || quantity) > availableQty) {
+        throw new Error(
+          "Only " + availableQty + " unit(s) available for " +
+          getField(product, ["PRODUCT_NAME", "NAME"], productId)
+        );
+      }
+
+      var price =
+        Number(
+          getField(
+            product,
+            [
+              "PRICE",
+              "SELLING_PRICE",
+              "SALE_PRICE"
+            ],
+            0
+          )
+        );
+
+
+      if (
+        !isFinite(price) ||
+        price < 0
+      ) {
+
+        throw new Error(
+          "Invalid price for product: " +
+          productId
+        );
+      }
+
+
+      var lineTotal =
+        price * quantity;
+
+
+      subtotal +=
+        lineTotal;
+
+
+      normalizedItems.push({
+
+        productId:
+          productId,
+
+        productName:
+          getField(
+            product,
+            [
+              "PRODUCT_NAME",
+              "NAME"
+            ],
+            ""
+          ),
+
+        quantity:
+          quantity,
+
+        price:
+          price,
+
+        total:
+          lineTotal,
+
+        productStatus:
+          "PENDING"
+      });
+    });
+
+
+    /*
+     * Settings.
+     */
+
+    var settingsResult =
+      getSettings();
+
+
+    var settings =
+      settingsResult.success
+        ? settingsResult.data.settings
+        : {};
+
+
+    var minimumOrder =
+      Number(
+        settings.MINIMUM_ORDER ||
+        settings.MINIMUM_ORDER_AMOUNT ||
+        CONFIG.DEFAULT_MINIMUM_ORDER
+      ) || 0;
+
+
+    if (
+      subtotal < minimumOrder
+    ) {
+
+      return failure(
+        "Minimum order amount is ₹" +
+        minimumOrder +
+        ".",
+        "MINIMUM_ORDER_NOT_MET",
+        {
+          minimumOrder:
+            minimumOrder,
+
+          subtotal:
+            subtotal
+        }
+      );
+    }
+
+
+    var deliveryCharge =
+      Number(
+        settings.DELIVERY_CHARGE ||
+        settings.DELIVERY_FEE ||
+        CONFIG.DEFAULT_DELIVERY_CHARGE
+      ) || 0;
+
+
+    var taxPercent =
+      Number(
+        settings.TAX_PERCENT ||
+        settings.GST_PERCENT ||
+        CONFIG.DEFAULT_TAX_PERCENT
+      ) || 0;
+
+
+    var discount =
+      calculateDiscount(
+        data,
+        subtotal
+      );
+
+
+    var taxableAmount =
+      Math.max(
+        0,
+        subtotal -
+        discount
+      );
+
+
+    var tax =
+      taxableAmount *
+      taxPercent /
+      100;
+
+
+    var grandTotal =
+      taxableAmount +
+      deliveryCharge +
+      tax;
+
+
+    grandTotal =
+      roundMoney(
+        grandTotal
+      );
+
+
+    var paymentMethod = String(
+      getField(data, ["paymentMethod", "PAYMENT_METHOD"], "Cash on Delivery")
+    ).trim();
+
+    var allowedPaymentMethods = ["CASH ON DELIVERY", "COD", "ONLINE", "UPI"];
+    if (allowedPaymentMethods.indexOf(paymentMethod.toUpperCase()) === -1) {
+      return failure(
+        "Invalid payment method.",
+        "INVALID_PAYMENT_METHOD"
+      );
+    }
+
+    var orderId =
+      generateId(
+        "ORD"
+      );
+
+
+    var orderNumber =
+      generateOrderNumber();
+
+
+    var now =
+      new Date();
+
+
+    /*
+     * Address compatibility.
+     */
+
+    var deliveryAddress =
+      getField(
+        data,
+        [
+          "deliveryAddress",
+          "address",
+          "ADDRESS"
+        ],
+        ""
+      );
+
+
+    if (
+      address
+    ) {
+
+      deliveryAddress =
+        getField(
+          address,
+          [
+            "FULL_ADDRESS",
+            "ADDRESS"
+          ],
+          deliveryAddress
+        ) ||
+        buildAddressText(
+          address
+        );
+    }
+
+
+    /*
+     * Write order.
+     */
+
+    var orderObject = {
+
+      ORDER_ID:
+        orderId,
+
+      ORDER_NUMBER:
+        orderNumber,
+
+      CUSTOMER_ID:
+        customerId,
+
+      USER_ID:
+        customerId,
+
+      ADDRESS_ID:
+        addressId,
+
+      CUSTOMER_NAME:
+        getField(
+          customer,
+          [
+            "FULL_NAME"
+          ],
+          ""
+        ),
+
+      CUSTOMER_EMAIL:
+        getField(
+          customer,
+          [
+            "GOOGLE_EMAIL"
+          ],
+          ""
+        ),
+
+      CUSTOMER_PHONE:
+        getField(
+          customer,
+          [
+            "PHONE"
+          ],
+          ""
+        ),
+
+      DELIVERY_ADDRESS:
+        deliveryAddress,
+
+      ADDRESS:
+        deliveryAddress,
+
+      SUBTOTAL:
+        roundMoney(
+          subtotal
+        ),
+
+      DISCOUNT:
+        roundMoney(
+          discount
+        ),
+
+      DELIVERY_CHARGE:
+        roundMoney(
+          deliveryCharge
+        ),
+
+      TAX:
+        roundMoney(
+          tax
+        ),
+
+      TAX_PERCENT:
+        taxPercent,
+
+      GRAND_TOTAL:
+        grandTotal,
+
+      TOTAL:
+        grandTotal,
+
+      PAYMENT_METHOD:
+        paymentMethod,
+
+      PAYMENT_STATUS:
+        "PENDING",
+
+      ORDER_STATUS:
+        "PLACED",
+
+      STATUS:
+        "PLACED",
+
+      CREATED_AT:
+        now,
+
+      UPDATED_AT:
+        now
+    };
+
+
+    /*
+     * Reserve inventory BEFORE writing the order. The script lock
+     * prevents two concurrent orders from consuming the same stock.
+     */
+    inventoryReservation = reserveInventoryForOrder_(normalizedItems);
+
+
+    orderRowNumber = appendObject(
+      CONFIG.SHEETS.ORDERS,
+      orderObject
+    );
+
+
+    /*
+     * Write order items.
+     */
+
+    normalizedItems.forEach(function(item) {
+
+      orderItemRowNumbers.push(
+        appendObject(
+          CONFIG.SHEETS.ORDER_ITEMS,
+        {
+
+          ORDER_ITEM_ID:
+            generateId(
+              "ITEM"
+            ),
+
+          ORDER_ID:
+            orderId,
+
+          PRODUCT_ID:
+            item.productId,
+
+          PRODUCT_NAME:
+            item.productName,
+
+          QUANTITY:
+            item.quantity,
+
+          PRICE:
+            item.price,
+
+          UNIT_PRICE:
+            item.price,
+
+          TOTAL:
+            item.total,
+
+          PRODUCT_STATUS:
+            item.productStatus,
+
+          CREATED_AT:
+            now,
+
+          UPDATED_AT:
+            now
+        }
+        )
+      );
+    });
+
+
+    /*
+     * Initial order status history.
+     */
+
+    var initialStatusRow = appendOrderStatus_(
+      orderId,
+      "PLACED",
+      customerId,
+      "CUSTOMER",
+      "Order placed."
+    );
+
+    if (initialStatusRow) {
+      orderStatusRowNumbers.push(initialStatusRow);
+    }
+
+
+    /*
+     * Audit.
+     */
+
+    addAuditLogSafe({
+
+      action:
+        "ORDER_CREATED",
+
+      entityType:
+        "ORDER",
+
+      entityId:
+        orderId,
+
+      actorId:
+        customerId,
+
+      actorRole:
+        "CUSTOMER",
+
+      details:
+        "Order " +
+        orderNumber +
+        " created."
+    });
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      orderNumber:
+        orderNumber,
+
+      status:
+        "PLACED",
+
+      orderStatus:
+        "PLACED",
+
+      subtotal:
+        roundMoney(
+          subtotal
+        ),
+
+      discount:
+        roundMoney(
+          discount
+        ),
+
+      deliveryCharge:
+        roundMoney(
+          deliveryCharge
+        ),
+
+      tax:
+        roundMoney(
+          tax
+        ),
+
+      grandTotal:
+        grandTotal,
+
+      total:
+        grandTotal,
+
+      items:
+        normalizedItems
+    });
+
+
+  } catch (err) {
+
+    try {
+      rollbackInventoryReservation_(inventoryReservation);
+    } catch (rollbackError) {
+      console.error("Inventory rollback failed:", rollbackError);
+    }
+
+    try {
+      deleteRowsSafe_(CONFIG.SHEETS.ORDER_STATUS, orderStatusRowNumbers);
+      deleteRowsSafe_(CONFIG.SHEETS.ORDER_ITEMS, orderItemRowNumbers);
+      deleteRowsSafe_(CONFIG.SHEETS.ORDERS, orderRowNumber ? [orderRowNumber] : []);
+    } catch (rowRollbackError) {
+      console.error("Order row rollback failed:", rowRollbackError);
+    }
+
+    if (
+      err &&
+      err.name === "AuthError"
+    ) {
+
+      return authFailure(
+        err
+      );
+    }
+
+
+    return failure(
+      err.message,
+      "ORDER_CREATE_ERROR"
+    );
+
+
+  } finally {
+
+    try {
+      lock.releaseLock();
+    } catch (e) {}
+  }
+}
+
+
+/* =============================================================
+   DISCOUNT
+============================================================= */
+
+function reserveInventoryForOrder_(items) {
+
+  var sheet = getSheet(CONFIG.SHEETS.INVENTORY);
+  var headerMap = getHeaderMap(CONFIG.SHEETS.INVENTORY);
+  var productColumn = findColumn(headerMap, ["PRODUCT_ID"]);
+  var stockColumn = findColumn(headerMap, ["AVAILABLE_STOCK", "AVAILABLE_QTY", "STOCK", "QUANTITY", "CURRENT_STOCK"]);
+  var updatedColumn = findColumn(headerMap, ["UPDATED_AT"]);
+
+  if (!productColumn || !stockColumn) {
+    throw new Error("Inventory sheet is missing PRODUCT_ID or stock column.");
+  }
+
+  var values = sheet.getDataRange().getValues();
+  var requested = {};
+
+  items.forEach(function(item) {
+    requested[item.productId] =
+      (requested[item.productId] || 0) + Number(item.quantity || 0);
+  });
+
+  var changes = [];
+
+  Object.keys(requested).forEach(function(productId) {
+    var rowIndex = -1;
+
+    for (var r = 1; r < values.length; r++) {
+      if (String(values[r][productColumn - 1]) === String(productId)) {
+        rowIndex = r;
+        break;
+      }
+    }
+
+    if (rowIndex === -1) {
+      throw new Error("Inventory record not found for product: " + productId);
+    }
+
+    var current = Number(values[rowIndex][stockColumn - 1]) || 0;
+    if (current < requested[productId]) {
+      throw new Error("Inventory changed while placing the order. Please retry.");
+    }
+
+    changes.push({
+      rowIndex: rowIndex,
+      oldStock: current,
+      newStock: current - requested[productId]
+    });
+  });
+
+  /* All validation is complete before any inventory row is written. */
+  changes.forEach(function(change) {
+    values[change.rowIndex][stockColumn - 1] = change.newStock;
+    if (updatedColumn) {
+      values[change.rowIndex][updatedColumn - 1] = new Date();
+    }
+  });
+
+  changes.forEach(function(change) {
+    sheet.getRange(
+      change.rowIndex + 1,
+      1,
+      1,
+      values[change.rowIndex].length
+    ).setValues([values[change.rowIndex]]);
+  });
+
+  return changes.map(function(change) {
+    return {
+      rowNumber: change.rowIndex + 1,
+      oldStock: change.oldStock,
+      newStock: change.newStock
+    };
+  });
+}
+
+
+function rollbackInventoryReservation_(reservation) {
+
+  if (!reservation || !reservation.length) {
+    return;
+  }
+
+  var sheet = getSheet(CONFIG.SHEETS.INVENTORY);
+  var headerMap = getHeaderMap(CONFIG.SHEETS.INVENTORY);
+  var stockColumn = findColumn(headerMap, ["AVAILABLE_STOCK", "AVAILABLE_QTY", "STOCK", "QUANTITY", "CURRENT_STOCK"]);
+  var updatedColumn = findColumn(headerMap, ["UPDATED_AT"]);
+
+  if (!stockColumn) {
+    return;
+  }
+
+  reservation.forEach(function(change) {
+    sheet.getRange(change.rowNumber, stockColumn).setValue(change.oldStock);
+    if (updatedColumn) {
+      sheet.getRange(change.rowNumber, updatedColumn).setValue(new Date());
+    }
+  });
+}
+
+
+function calculateDiscount(
+  data,
+  subtotal
+) {
+
+  /*
+   * Coupon functionality can be expanded against 14_COUPONS.
+   *
+   * For safety, a browser cannot simply submit a discount amount
+   * and receive it. Only an approved coupon in the sheet can
+   * create a discount.
+   */
+
+  var couponCode =
+    String(
+      getField(
+        data,
+        [
+          "couponCode",
+          "COUPON_CODE"
+        ],
+        ""
+      )
+    )
+    .trim()
+    .toUpperCase();
+
+
+  if (
+    !couponCode
+  ) {
+
+    return 0;
+  }
+
+
+  var coupons =
+    getSheetData(
+      CONFIG.SHEETS.COUPONS
+    );
+
+
+  for (
+    var i = 0;
+    i < coupons.length;
+    i++
+  ) {
+
+    var code =
+      String(
+        getField(
+          coupons[i],
+          [
+            "COUPON_CODE",
+            "CODE"
+          ],
+          ""
+        )
+      )
+      .trim()
+      .toUpperCase();
+
+
+    if (
+      code !== couponCode
+    ) {
+
+      continue;
+    }
+
+
+    var status =
+      getField(
+        coupons[i],
+        [
+          "STATUS"
+        ],
+        "ACTIVE"
+      );
+
+
+    if (
+      !isActiveStatus(
+        status
+      )
+    ) {
+
+      return 0;
+    }
+
+
+    var minimum =
+      Number(
+        getField(
+          coupons[i],
+          [
+            "MIN_ORDER",
+            "MINIMUM_ORDER"
+          ],
+          0
+        )
+      ) || 0;
+
+
+    if (
+      subtotal < minimum
+    ) {
+
+      return 0;
+    }
+
+
+    var type =
+      String(
+        getField(
+          coupons[i],
+          [
+            "DISCOUNT_TYPE",
+            "TYPE"
+          ],
+          "FIXED"
+        )
+      )
+      .toUpperCase();
+
+
+    var value =
+      Number(
+        getField(
+          coupons[i],
+          [
+            "DISCOUNT_VALUE",
+            "VALUE"
+          ],
+          0
+        )
+      ) || 0;
+
+
+    var discount = 0;
+
+
+    if (
+      type === "PERCENT" ||
+      type === "PERCENTAGE"
+    ) {
+
+      discount =
+        subtotal *
+        value /
+        100;
+
+    } else {
+
+      discount =
+        value;
+    }
+
+
+    var maxDiscount =
+      Number(
+        getField(
+          coupons[i],
+          [
+            "MAX_DISCOUNT"
+          ],
+          0
+        )
+      ) || 0;
+
+
+    if (
+      maxDiscount > 0
+    ) {
+
+      discount =
+        Math.min(
+          discount,
+          maxDiscount
+        );
+    }
+
+
+    return Math.max(
+      0,
+      Math.min(
+        discount,
+        subtotal
+      )
+    );
+  }
+
+
+  return 0;
+}
+
+
+/* =============================================================
+   SECURE GET CUSTOMER ORDERS
+============================================================= */
+
+function buildCustomerOrderResponse_(order, allItems) {
+
+  var response = buildOrderResponse_(order, allItems);
+
+  /* Do not expose internal identifiers to the customer application. */
+  delete response.customerId;
+  delete response.deliveryPersonId;
+
+  response.items = response.items.map(function(item) {
+    var safeItem = {};
+    Object.keys(item).forEach(function(key) {
+      if (key !== "rowNumber") {
+        safeItem[key] = item[key];
+      }
+    });
+    return safeItem;
+  });
+
+  return response;
+}
+
+
+function getCustomerOrdersSecure(
+  idToken
+) {
+
+  try {
+
+    var auth =
+      requireCustomer_(
+        idToken
+      );
+
+
+    var customerId =
+      getField(
+        auth.customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    var orders =
+      getOrdersForCustomer_(
+        customerId
+      );
+
+
+    return success({
+      orders:
+        orders
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   GET ORDERS FOR CUSTOMER
+============================================================= */
+
+function getOrdersForCustomer_(
+  customerId
+) {
+
+  var orders =
+    getSheetData(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  var orderItems =
+    getSheetData(
+      CONFIG.SHEETS.ORDER_ITEMS
+    );
+
+
+  var result =
+    orders.filter(function(order) {
+
+      return String(
+        getField(
+          order,
+          [
+            "CUSTOMER_ID",
+            "USER_ID"
+          ],
+          ""
+        )
+      ) === String(
+        customerId
+      );
+
+    });
+
+
+  return result.map(function(order) {
+
+    return buildCustomerOrderResponse_(
+      order,
+      orderItems
+    );
+
+  });
+}
+
+
+/* =============================================================
+   SECURE GET ORDER
+============================================================= */
+
+function getOrderSecure(
+  idToken,
+  orderId
+) {
+
+  try {
+
+    var auth =
+      requireCustomer_(
+        idToken
+      );
+
+
+    var customerId =
+      getField(
+        auth.customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var owner =
+      String(
+        getField(
+          order,
+          [
+            "CUSTOMER_ID",
+            "USER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      owner !==
+      String(customerId)
+    ) {
+
+      return failure(
+        "You are not authorized to view this order.",
+        "ORDER_NOT_AUTHORIZED"
+      );
+    }
+
+
+    var items =
+      getSheetData(
+        CONFIG.SHEETS.ORDER_ITEMS
+      );
+
+
+    return success({
+      order:
+        buildCustomerOrderResponse_(
+          order,
+          items
+        )
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   GET ORDER BY ID
+============================================================= */
+
+function getOrderById_(
+  orderId
+) {
+
+  var id =
+    String(
+      orderId || ""
+    );
+
+
+  if (!id) {
+    return null;
+  }
+
+
+  var orders =
+    getSheetData(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  for (
+    var i = 0;
+    i < orders.length;
+    i++
+  ) {
+
+    var currentId =
+      String(
+        getField(
+          orders[i],
+          [
+            "ORDER_ID",
+            "ORDER_NUMBER"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      currentId === id
+    ) {
+
+      return orders[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   BUILD ORDER RESPONSE
+============================================================= */
+
+function buildOrderResponse_(
+  order,
+  allItems
+) {
+
+  var orderId =
+    getField(
+      order,
+      [
+        "ORDER_ID"
+      ],
+      ""
+    );
+
+
+  var orderItems =
+    allItems.filter(function(item) {
+
+      return String(
+        getField(
+          item,
+          [
+            "ORDER_ID"
+          ],
+          ""
+        )
+      ) === String(
+        orderId
+      );
+
+    });
+
+
+  var status =
+    String(
+      getField(
+        order,
+        [
+          "ORDER_STATUS",
+          "STATUS"
+        ],
+        "PLACED"
+      )
+    )
+    .toUpperCase();
+
+
+  return {
+
+    orderId:
+      orderId,
+
+    orderNumber:
+      getField(
+        order,
+        [
+          "ORDER_NUMBER",
+          "ORDER_NO"
+        ],
+        orderId
+      ),
+
+    customerId:
+      getField(
+        order,
+        [
+          "CUSTOMER_ID",
+          "USER_ID"
+        ],
+        ""
+      ),
+
+    customerName:
+      getField(
+        order,
+        [
+          "CUSTOMER_NAME"
+        ],
+        ""
+      ),
+
+    customerPhone:
+      getField(
+        order,
+        [
+          "CUSTOMER_PHONE",
+          "PHONE"
+        ],
+        ""
+      ),
+
+    deliveryAddress:
+      getField(
+        order,
+        [
+          "DELIVERY_ADDRESS",
+          "ADDRESS"
+        ],
+        ""
+      ),
+
+    subtotal:
+      Number(
+        getField(
+          order,
+          [
+            "SUBTOTAL"
+          ],
+          0
+        )
+      ) || 0,
+
+    discount:
+      Number(
+        getField(
+          order,
+          [
+            "DISCOUNT"
+          ],
+          0
+        )
+      ) || 0,
+
+    deliveryCharge:
+      Number(
+        getField(
+          order,
+          [
+            "DELIVERY_CHARGE",
+            "DELIVERY_FEE"
+          ],
+          0
+        )
+      ) || 0,
+
+    tax:
+      Number(
+        getField(
+          order,
+          [
+            "TAX",
+            "GST"
+          ],
+          0
+        )
+      ) || 0,
+
+    total:
+      Number(
+        getField(
+          order,
+          [
+            "GRAND_TOTAL",
+            "TOTAL"
+          ],
+          0
+        )
+      ) || 0,
+
+    grandTotal:
+      Number(
+        getField(
+          order,
+          [
+            "GRAND_TOTAL",
+            "TOTAL"
+          ],
+          0
+        )
+      ) || 0,
+
+    paymentMethod:
+      getField(
+        order,
+        [
+          "PAYMENT_METHOD"
+        ],
+        "Cash on Delivery"
+      ),
+
+    paymentStatus:
+      getField(
+        order,
+        [
+          "PAYMENT_STATUS"
+        ],
+        "PENDING"
+      ),
+
+    status:
+      status,
+
+    orderStatus:
+      status,
+
+    createdAt:
+      getField(
+        order,
+        [
+          "CREATED_AT"
+        ],
+        ""
+      ),
+
+    updatedAt:
+      getField(
+        order,
+        [
+          "UPDATED_AT"
+        ],
+        ""
+      ),
+
+    deliveryPersonId:
+      getField(
+        order,
+        [
+          "DELIVERY_PERSON_ID",
+          "RIDER_ID"
+        ],
+        ""
+      ),
+
+    deliveryPersonName:
+      getField(
+        order,
+        [
+          "DELIVERY_PERSON_NAME",
+          "RIDER_NAME"
+        ],
+        ""
+      ),
+
+    items:
+      orderItems.map(
+        sanitizeOrderItem
+      )
+  };
+}
+
+
+/* =============================================================
+   SANITIZE ORDER ITEM
+============================================================= */
+
+function sanitizeOrderItem(
+  item
+) {
+
+  return {
+
+    rowNumber:
+      item._rowNumber || 0,
+
+    orderItemId:
+      getField(
+        item,
+        [
+          "ORDER_ITEM_ID",
+          "ITEM_ID"
+        ],
+        ""
+      ),
+
+    productId:
+      getField(
+        item,
+        [
+          "PRODUCT_ID"
+        ],
+        ""
+      ),
+
+    product:
+      getField(
+        item,
+        [
+          "PRODUCT_NAME",
+          "PRODUCT",
+          "NAME"
+        ],
+        ""
+      ),
+
+    productName:
+      getField(
+        item,
+        [
+          "PRODUCT_NAME",
+          "PRODUCT",
+          "NAME"
+        ],
+        ""
+      ),
+
+    quantity:
+      Number(
+        getField(
+          item,
+          [
+            "QUANTITY"
+          ],
+          0
+        )
+      ) || 0,
+
+    price:
+      Number(
+        getField(
+          item,
+          [
+            "PRICE",
+            "UNIT_PRICE"
+          ],
+          0
+        )
+      ) || 0,
+
+    total:
+      Number(
+        getField(
+          item,
+          [
+            "TOTAL",
+            "LINE_TOTAL"
+          ],
+          0
+        )
+      ) || 0,
+
+    productStatus:
+      String(
+        getField(
+          item,
+          [
+            "PRODUCT_STATUS",
+            "STATUS"
+          ],
+          "PENDING"
+        )
+      ).toUpperCase()
+  };
+}
+
+
+/* =============================================================
+   UPDATE ORDER STATUS — SECURE
+============================================================= */
+
+function releaseInventoryForOrder_(orderId) {
+
+  var items = getSheetData(CONFIG.SHEETS.ORDER_ITEMS).filter(function(item) {
+    return String(getField(item, ["ORDER_ID"], "")) === String(orderId);
+  });
+
+  if (!items.length) {
+    return;
+  }
+
+  var quantities = {};
+  items.forEach(function(item) {
+    var status = String(getField(item, ["PRODUCT_STATUS", "STATUS"], "PENDING")).toUpperCase();
+    /* Only statuses that still hold a reservation are released. */
+    if (["PENDING", "CONFIRMED", "AVAILABLE", "ISSUE"].indexOf(status) !== -1) {
+      var productId = String(getField(item, ["PRODUCT_ID"], ""));
+      quantities[productId] = (quantities[productId] || 0) +
+        (Number(getField(item, ["QUANTITY"], 0)) || 0);
+    }
+  });
+
+  var sheet = getSheet(CONFIG.SHEETS.INVENTORY);
+  var headerMap = getHeaderMap(CONFIG.SHEETS.INVENTORY);
+  var productColumn = findColumn(headerMap, ["PRODUCT_ID"]);
+  var stockColumn = findColumn(headerMap, ["AVAILABLE_STOCK", "AVAILABLE_QTY", "STOCK", "QUANTITY", "CURRENT_STOCK"]);
+  var updatedColumn = findColumn(headerMap, ["UPDATED_AT"]);
+
+  if (!productColumn || !stockColumn) {
+    throw new Error("Inventory sheet is missing PRODUCT_ID or stock column.");
+  }
+
+  var values = sheet.getDataRange().getValues();
+  var changes = [];
+  Object.keys(quantities).forEach(function(productId) {
+    for (var r = 1; r < values.length; r++) {
+      if (String(values[r][productColumn - 1]) === productId) {
+        var oldStock = Number(values[r][stockColumn - 1]) || 0;
+        var newStock = oldStock + quantities[productId];
+        values[r][stockColumn - 1] = newStock;
+        changes.push({
+          rowNumber: r + 1,
+          oldStock: oldStock,
+          newStock: newStock
+        });
+        if (updatedColumn) {
+          values[r][updatedColumn - 1] = new Date();
+        }
+        break;
+      }
+    }
+  });
+
+  Object.keys(quantities).forEach(function(productId) {
+    for (var r = 1; r < values.length; r++) {
+      if (String(values[r][productColumn - 1]) === productId) {
+        sheet.getRange(r + 1, 1, 1, values[r].length).setValues([values[r]]);
+        break;
+      }
+    }
+  });
+
+  return changes;
+}
+
+
+function updateOrderStatusSecure(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+  var inventoryAdjustment = null;
+  var statusChanged = false;
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var auth =
+      requireEmployee_(
+        data.idToken,
+        [
+          "STAFF",
+          "DELIVERY",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var orderId =
+      String(
+        getField(
+          data,
+          [
+            "orderId",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var newStatus =
+      String(
+        getField(
+          data,
+          [
+            "status",
+            "orderStatus",
+            "ORDER_STATUS"
+          ],
+          ""
+        )
+      )
+      .trim()
+      .toUpperCase();
+
+
+    if (!orderId) {
+
+      return failure(
+        "Order ID is required.",
+        "ORDER_ID_REQUIRED"
+      );
+    }
+
+
+    if (
+      CONFIG.ORDER_STATUS
+        .indexOf(
+          newStatus
+        ) === -1
+    ) {
+
+      return failure(
+        "Invalid order status: " +
+        newStatus,
+        "INVALID_ORDER_STATUS"
+      );
+    }
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var previousStatus =
+      String(
+        getField(
+          order,
+          [
+            "ORDER_STATUS",
+            "STATUS"
+          ],
+          "PLACED"
+        )
+      )
+      .toUpperCase();
+
+
+    /*
+     * Delivery employees may change only the status of their own
+     * assigned order. Managers/Admins are operational overrides.
+     */
+    if (auth.role === "DELIVERY") {
+
+      var assignedId = String(
+        getField(order, ["DELIVERY_PERSON_ID", "RIDER_ID"], "")
+      );
+
+      var employeeIdForStatus = String(
+        getField(auth.employee, ["EMPLOYEE_ID"], "")
+      );
+
+      if (!assignedId || assignedId !== employeeIdForStatus) {
+        return failure(
+          "You are not assigned to this order.",
+          "DELIVERY_NOT_ASSIGNED"
+        );
+      }
+    }
+
+    /* Role + current-state + requested-state authorization. */
+    validateOrderStatusPermission_(
+      auth.role,
+      previousStatus,
+      newStatus
+    );
+
+
+    var orderSheet =
+      getSheet(
+        CONFIG.SHEETS.ORDERS
+      );
+
+
+    var headerMap =
+      getHeaderMap(
+        CONFIG.SHEETS.ORDERS
+      );
+
+
+    var statusColumn =
+      findColumn(
+        headerMap,
+        [
+          "ORDER_STATUS",
+          "STATUS"
+        ]
+      );
+
+
+    if (!statusColumn) {
+
+      return failure(
+        "ORDER_STATUS column not found in 07_ORDERS.",
+        "ORDER_STATUS_COLUMN_MISSING"
+      );
+    }
+
+
+    var updatedColumn =
+      findColumn(
+        headerMap,
+        [
+          "UPDATED_AT"
+        ]
+      );
+
+
+    if (newStatus === "CANCELLED") {
+      inventoryAdjustment = releaseInventoryForOrder_(orderId);
+    }
+
+    orderSheet
+      .getRange(
+        order._rowNumber,
+        statusColumn
+      )
+      .setValue(
+        newStatus
+      );
+
+    statusChanged = true;
+
+
+    if (updatedColumn) {
+
+      orderSheet
+        .getRange(
+          order._rowNumber,
+          updatedColumn
+        )
+        .setValue(
+          new Date()
+        );
+    }
+
+
+    var employeeId =
+      getField(
+        auth.employee,
+        [
+          "EMPLOYEE_ID"
+        ],
+        ""
+      );
+
+
+    var note =
+      String(
+        getField(
+          data,
+          [
+            "note",
+            "reason",
+            "NOTE",
+            "REASON"
+          ],
+          ""
+        )
+      );
+
+
+    appendOrderStatus_(
+      orderId,
+      newStatus,
+      employeeId,
+      auth.role,
+      note
+    );
+
+
+    addAuditLogSafe({
+
+      action:
+        "ORDER_STATUS_UPDATED",
+
+      entityType:
+        "ORDER",
+
+      entityId:
+        orderId,
+
+      actorId:
+        employeeId,
+
+      actorRole:
+        auth.role,
+
+      details:
+        previousStatus +
+        " → " +
+        newStatus +
+        (
+          note
+            ? " | " + note
+            : ""
+        )
+    });
+
+
+    /*
+     * Return authoritative server status.
+     */
+
+    return success({
+
+      orderId:
+        orderId,
+
+      previousStatus:
+        previousStatus,
+
+      status:
+        newStatus,
+
+      orderStatus:
+        newStatus,
+
+      changedBy:
+        employeeId,
+
+      changedByRole:
+        auth.role
+    });
+
+
+  } catch (err) {
+
+    try {
+      if (inventoryAdjustment) {
+        rollbackInventoryReservation_(inventoryAdjustment);
+      }
+
+      if (statusChanged) {
+        var rollbackSheet = getSheet(CONFIG.SHEETS.ORDERS);
+        var rollbackHeader = getHeaderMap(CONFIG.SHEETS.ORDERS);
+        var rollbackStatusColumn = findColumn(rollbackHeader, ["ORDER_STATUS", "STATUS"]);
+        var rollbackUpdatedColumn = findColumn(rollbackHeader, ["UPDATED_AT"]);
+        if (rollbackStatusColumn) {
+          rollbackSheet.getRange(order._rowNumber, rollbackStatusColumn).setValue(previousStatus);
+        }
+        if (rollbackUpdatedColumn) {
+          rollbackSheet.getRange(order._rowNumber, rollbackUpdatedColumn).setValue(new Date());
+        }
+      }
+    } catch (rollbackError) {
+      console.error("Order status rollback failed:", rollbackError);
+    }
+
+    return authFailure(
+      err
+    );
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+/* =============================================================
+   STATUS PERMISSION
+============================================================= */
+
+function validateOrderStatusPermission_(
+  role,
+  previousStatus,
+  newStatus
+) {
+
+  role = normalizeRole(role);
+  previousStatus = String(previousStatus || "").trim().toUpperCase();
+  newStatus = String(newStatus || "").trim().toUpperCase();
+
+  if (CONFIG.ORDER_STATUS.indexOf(previousStatus) === -1) {
+    throw new AuthError(
+      "Current order status is invalid.",
+      "INVALID_CURRENT_ORDER_STATUS"
+    );
+  }
+
+  if (previousStatus === newStatus) {
+    throw new AuthError(
+      "Order is already in this status.",
+      "STATUS_UNCHANGED"
+    );
+  }
+
+  /* Explicit workflow state machine. */
+  var transitions = {
+    PLACED: ["RECEIVED", "CANCELLED"],
+    RECEIVED: ["CALLING_CUSTOMER", "CANCELLED"],
+    CALLING_CUSTOMER: ["CUSTOMER_CONFIRMED", "CUSTOMER_UNAVAILABLE", "CANCELLED"],
+    CUSTOMER_CONFIRMED: ["PICKING", "CANCELLED"],
+    PICKING: ["PRODUCT_ISSUE", "PACKING", "CANCELLED"],
+    PRODUCT_ISSUE: ["PICKING", "CUSTOMER_CONFIRMED", "CANCELLED"],
+    PACKING: ["PRODUCT_ISSUE", "READY_FOR_DELIVERY", "CANCELLED"],
+    READY_FOR_DELIVERY: ["DELIVERY_ASSIGNED", "CANCELLED"],
+    DELIVERY_ASSIGNED: ["RIDER_ACCEPTED", "CANCELLED"],
+    RIDER_ACCEPTED: ["OUT_FOR_DELIVERY"],
+    OUT_FOR_DELIVERY: ["ARRIVING", "DELIVERY_FAILED", "CUSTOMER_UNAVAILABLE"],
+    ARRIVING: ["DELIVERED", "DELIVERY_FAILED", "CUSTOMER_UNAVAILABLE"],
+    DELIVERY_FAILED: ["DELIVERY_ASSIGNED"],
+    CUSTOMER_UNAVAILABLE: ["DELIVERY_ASSIGNED"],
+    DELIVERED: [],
+    CANCELLED: []
+  };
+
+  /* Admin may correct workflow state, but every correction is audited. */
+  if (role === "ADMIN") {
+    return true;
+  }
+
+  /* Manager has staff-level workflow authority and must still obey transitions. */
+  if (role === "MANAGER" || role === "STAFF") {
+    var staffAllowed = [
+      "RECEIVED",
+      "CALLING_CUSTOMER",
+      "CUSTOMER_CONFIRMED",
+      "PICKING",
+      "PRODUCT_ISSUE",
+      "PACKING",
+      "READY_FOR_DELIVERY",
+      "CANCELLED"
+    ];
+
+    if (staffAllowed.indexOf(newStatus) === -1) {
+      throw new AuthError(
+        "Staff is not authorized to set this order status.",
+        "ROLE_NOT_ALLOWED"
+      );
+    }
+  } else if (role === "DELIVERY") {
+    var deliveryAllowed = [
+      "RIDER_ACCEPTED",
+      "OUT_FOR_DELIVERY",
+      "ARRIVING",
+      "DELIVERED",
+      "DELIVERY_FAILED",
+      "CUSTOMER_UNAVAILABLE"
+    ];
+
+    if (deliveryAllowed.indexOf(newStatus) === -1) {
+      throw new AuthError(
+        "Delivery employee is not authorized to set this order status.",
+        "ROLE_NOT_ALLOWED"
+      );
+    }
+  } else {
+    throw new AuthError(
+      "Invalid employee role.",
+      "EMPLOYEE_NOT_AUTHORIZED"
+    );
+  }
+
+  if (!transitions[previousStatus] || transitions[previousStatus].indexOf(newStatus) === -1) {
+    throw new AuthError(
+      "Invalid order status transition: " + previousStatus + " → " + newStatus,
+      "INVALID_STATUS_TRANSITION"
+    );
+  }
+
+  return true;
+}
+
+
+/* =============================================================
+   APPEND ORDER STATUS HISTORY
+============================================================= */
+
+function appendOrderStatus_(
+  orderId,
+  status,
+  changedBy,
+  changedByRole,
+  note
+) {
+
+  var sheet =
+    getOptionalSheet(
+      CONFIG.SHEETS.ORDER_STATUS
+    );
+
+
+  if (!sheet) {
+    return;
+  }
+
+
+  return appendObject(
+    CONFIG.SHEETS.ORDER_STATUS,
+    {
+
+      ORDER_STATUS_ID:
+        generateId(
+          "OST"
+        ),
+
+      ORDER_ID:
+        orderId,
+
+      STATUS:
+        status,
+
+      ORDER_STATUS:
+        status,
+
+      CHANGED_BY:
+        changedBy || "",
+
+      CHANGED_BY_ROLE:
+        changedByRole || "",
+
+      NOTE:
+        note || "",
+
+      CREATED_AT:
+        new Date(),
+
+      UPDATED_AT:
+        new Date()
+    }
+  );
+}
+
+
+function deleteRowsSafe_(sheetName, rowNumbers) {
+
+  if (!rowNumbers || !rowNumbers.length) {
+    return;
+  }
+
+  var sheet = getOptionalSheet(sheetName);
+  if (!sheet) {
+    return;
+  }
+
+  rowNumbers
+    .filter(function(row) { return Number(row) >= 2; })
+    .sort(function(a, b) { return Number(b) - Number(a); })
+    .forEach(function(row) {
+      if (Number(row) <= sheet.getLastRow()) {
+        sheet.deleteRow(Number(row));
+      }
+    });
+}
+
+
+/* =============================================================
+   ASSIGN DELIVERY PERSON
+============================================================= */
+
+function assignDeliveryPersonSecure(
+  data
+) {
+
+  try {
+
+    var auth =
+      requireEmployee_(
+        data.idToken,
+        [
+          "STAFF",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var orderId =
+      String(
+        getField(
+          data,
+          [
+            "orderId",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var deliveryPersonId =
+      String(
+        getField(
+          data,
+          [
+            "deliveryPersonId",
+            "DELIVERY_PERSON_ID",
+            "riderId",
+            "RIDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (!orderId) {
+
+      return failure(
+        "Order ID is required.",
+        "ORDER_ID_REQUIRED"
+      );
+    }
+
+
+    if (!deliveryPersonId) {
+
+      return failure(
+        "Delivery person ID is required.",
+        "DELIVERY_PERSON_REQUIRED"
+      );
+    }
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var deliveryPerson =
+      getDeliveryPersonById_(
+        deliveryPersonId
+      );
+
+
+    if (!deliveryPerson) {
+
+      return failure(
+        "Delivery person not found.",
+        "DELIVERY_PERSON_NOT_FOUND"
+      );
+    }
+
+
+    if (
+      !isActiveStatus(
+        getField(
+          deliveryPerson,
+          [
+            "STATUS"
+          ],
+          ""
+        )
+      )
+    ) {
+
+      return failure(
+        "Delivery person is inactive.",
+        "DELIVERY_PERSON_INACTIVE"
+      );
+    }
+
+
+    var currentAssignmentStatus = String(
+      getField(order, ["ORDER_STATUS", "STATUS"], "")
+    ).toUpperCase();
+
+    if (["READY_FOR_DELIVERY", "DELIVERY_ASSIGNED", "DELIVERY_FAILED", "CUSTOMER_UNAVAILABLE"].indexOf(currentAssignmentStatus) === -1) {
+      return failure(
+        "Order is not in an assignable delivery state.",
+        "ORDER_NOT_ASSIGNABLE"
+      );
+    }
+
+    if (["DELIVERED", "CANCELLED"].indexOf(currentAssignmentStatus) !== -1) {
+      return failure(
+        "Completed or cancelled orders cannot be assigned.",
+        "ORDER_NOT_ASSIGNABLE"
+      );
+    }
+
+
+    var orderSheet =
+      getSheet(
+        CONFIG.SHEETS.ORDERS
+      );
+
+
+    var headerMap =
+      getHeaderMap(
+        CONFIG.SHEETS.ORDERS
+      );
+
+
+    var personIdColumn =
+      findColumn(
+        headerMap,
+        [
+          "DELIVERY_PERSON_ID",
+          "RIDER_ID"
+        ]
+      );
+
+
+    if (
+      personIdColumn
+    ) {
+
+      orderSheet
+        .getRange(
+          order._rowNumber,
+          personIdColumn
+        )
+        .setValue(
+          deliveryPersonId
+        );
+    }
+
+
+    var personNameColumn =
+      findColumn(
+        headerMap,
+        [
+          "DELIVERY_PERSON_NAME",
+          "RIDER_NAME"
+        ]
+      );
+
+
+    var personName =
+      getField(
+        deliveryPerson,
+        [
+          "FULL_NAME",
+          "NAME",
+          "DELIVERY_PERSON_NAME"
+        ],
+        ""
+      );
+
+
+    if (
+      personNameColumn
+    ) {
+
+      orderSheet
+        .getRange(
+          order._rowNumber,
+          personNameColumn
+        )
+        .setValue(
+          personName
+        );
+    }
+
+
+    var statusColumn =
+      findColumn(
+        headerMap,
+        [
+          "ORDER_STATUS",
+          "STATUS"
+        ]
+      );
+
+
+    if (
+      statusColumn
+    ) {
+
+      orderSheet
+        .getRange(
+          order._rowNumber,
+          statusColumn
+        )
+        .setValue(
+          "DELIVERY_ASSIGNED"
+        );
+    }
+
+
+    var updatedColumn =
+      findColumn(
+        headerMap,
+        [
+          "UPDATED_AT"
+        ]
+      );
+
+
+    if (
+      updatedColumn
+    ) {
+
+      orderSheet
+        .getRange(
+          order._rowNumber,
+          updatedColumn
+        )
+        .setValue(
+          new Date()
+        );
+    }
+
+
+    var employeeId =
+      getField(
+        auth.employee,
+        [
+          "EMPLOYEE_ID"
+        ],
+        ""
+      );
+
+
+    appendOrderStatus_(
+      orderId,
+      "DELIVERY_ASSIGNED",
+      employeeId,
+      auth.role,
+      "Delivery person assigned: " +
+      personName
+    );
+
+
+    addAuditLogSafe({
+
+      action:
+        "DELIVERY_ASSIGNED",
+
+      entityType:
+        "ORDER",
+
+      entityId:
+        orderId,
+
+      actorId:
+        employeeId,
+
+      actorRole:
+        auth.role,
+
+      details:
+        "Assigned to " +
+        personName +
+        " (" +
+        deliveryPersonId +
+        ")"
+    });
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      deliveryPersonId:
+        deliveryPersonId,
+
+      deliveryPersonName:
+        personName,
+
+      status:
+        "DELIVERY_ASSIGNED",
+
+      orderStatus:
+        "DELIVERY_ASSIGNED"
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   DELIVERY PERSON LOOKUP
+============================================================= */
+
+function getDeliveryPersonById_(
+  deliveryPersonId
+) {
+
+  var people =
+    getSheetData(
+      CONFIG.SHEETS.DELIVERY_PERSONS
+    );
+
+
+  for (
+    var i = 0;
+    i < people.length;
+    i++
+  ) {
+
+    var id =
+      String(
+        getField(
+          people[i],
+          [
+            "DELIVERY_PERSON_ID",
+            "RIDER_ID",
+            "EMPLOYEE_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      id ===
+      String(
+        deliveryPersonId
+      )
+    ) {
+
+      return people[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   GET DELIVERY PERSONS
+============================================================= */
+
+function getDeliveryPersons(
+  idToken
+) {
+
+  try {
+
+    var auth =
+      requireEmployee_(
+        idToken,
+        [
+          "STAFF",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var people =
+      getSheetData(
+        CONFIG.SHEETS.DELIVERY_PERSONS
+      );
+
+
+    return success({
+
+      deliveryPersons:
+        people
+          .filter(function(person) {
+
+            return isActiveStatus(
+              getField(
+                person,
+                [
+                  "STATUS"
+                ],
+                "ACTIVE"
+              )
+            );
+
+          })
+          .map(function(person) {
+
+            return {
+
+              deliveryPersonId:
+                getField(
+                  person,
+                  [
+                    "DELIVERY_PERSON_ID",
+                    "RIDER_ID",
+                    "EMPLOYEE_ID"
+                  ],
+                  ""
+                ),
+
+              name:
+                getField(
+                  person,
+                  [
+                    "FULL_NAME",
+                    "NAME"
+                  ],
+                  ""
+                ),
+
+              phone:
+                getField(
+                  person,
+                  [
+                    "PHONE",
+                    "MOBILE"
+                  ],
+                  ""
+                ),
+
+              status:
+                getField(
+                  person,
+                  [
+                    "STATUS"
+                  ],
+                  ""
+                )
+            };
+          })
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   UPDATE DELIVERY LOCATION
+============================================================= */
+
+function updateDeliveryLocationSecure(
+  data
+) {
+
+  try {
+
+    var auth =
+      requireEmployee_(
+        data.idToken,
+        [
+          "DELIVERY",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var orderId =
+      String(
+        getField(
+          data,
+          [
+            "orderId",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var latitude =
+      getField(
+        data,
+        [
+          "latitude",
+          "LATITUDE"
+        ],
+        ""
+      );
+
+
+    var longitude =
+      getField(
+        data,
+        [
+          "longitude",
+          "LONGITUDE"
+        ],
+        ""
+      );
+
+
+    if (!orderId) {
+
+      return failure(
+        "Order ID is required.",
+        "ORDER_ID_REQUIRED"
+      );
+    }
+
+
+    if (
+      latitude === "" ||
+      longitude === ""
+    ) {
+
+      return failure(
+        "Latitude and longitude are required.",
+        "LOCATION_REQUIRED"
+      );
+    }
+
+
+    var latitudeNumber = Number(latitude);
+    var longitudeNumber = Number(longitude);
+
+    if (
+      !isFinite(latitudeNumber) ||
+      latitudeNumber < -90 ||
+      latitudeNumber > 90 ||
+      !isFinite(longitudeNumber) ||
+      longitudeNumber < -180 ||
+      longitudeNumber > 180
+    ) {
+      return failure(
+        "Invalid latitude or longitude.",
+        "INVALID_LOCATION"
+      );
+    }
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    /*
+     * Ensure delivery employee is the assigned rider
+     * unless MANAGER / ADMIN.
+     */
+
+    if (
+      auth.role === "DELIVERY"
+    ) {
+
+      var assignedId =
+        String(
+          getField(
+            order,
+            [
+              "DELIVERY_PERSON_ID",
+              "RIDER_ID"
+            ],
+            ""
+          )
+        );
+
+
+      var employeeId =
+        String(
+          getField(
+            auth.employee,
+            [
+              "EMPLOYEE_ID"
+            ],
+            ""
+          )
+        );
+
+
+      if (!assignedId) {
+        return failure(
+          "No delivery person is assigned to this order.",
+          "DELIVERY_NOT_ASSIGNED"
+        );
+      }
+
+      if (assignedId !== employeeId) {
+        return failure(
+          "You are not assigned to this order.",
+          "DELIVERY_NOT_ASSIGNED"
+        );
+      }
+    }
+
+
+    var trackingStatus = String(
+      getField(order, ["ORDER_STATUS", "STATUS"], "")
+    ).toUpperCase();
+
+    if (["DELIVERY_ASSIGNED", "RIDER_ACCEPTED", "OUT_FOR_DELIVERY", "ARRIVING"].indexOf(trackingStatus) === -1) {
+      return failure(
+        "Live location is not accepted for this order status.",
+        "TRACKING_NOT_ACTIVE"
+      );
+    }
+
+    appendObject(
+      CONFIG.SHEETS.DELIVERY_TRACKING,
+      {
+
+        TRACKING_ID:
+          generateId(
+            "TRK"
+          ),
+
+        ORDER_ID:
+          orderId,
+
+        DELIVERY_PERSON_ID:
+          getField(
+            auth.employee,
+            [
+              "EMPLOYEE_ID"
+            ],
+            ""
+          ),
+
+        LATITUDE:
+          latitudeNumber,
+
+        LONGITUDE:
+          longitudeNumber,
+
+        ACCURACY:
+          getField(
+            data,
+            [
+              "accuracy",
+              "ACCURACY"
+            ],
+            ""
+          ),
+
+        SPEED:
+          getField(
+            data,
+            [
+              "speed",
+              "SPEED"
+            ],
+            ""
+          ),
+
+        HEADING:
+          getField(
+            data,
+            [
+              "heading",
+              "HEADING"
+            ],
+            ""
+          ),
+
+        CREATED_AT:
+          new Date()
+      }
+    );
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      latitude:
+        latitudeNumber,
+
+      longitude:
+        longitudeNumber,
+
+      updatedAt:
+        new Date()
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   CUSTOMER TRACKING
+============================================================= */
+
+function getTrackingSecure(
+  idToken,
+  orderId
+) {
+
+  try {
+
+    var auth =
+      requireCustomer_(
+        idToken
+      );
+
+
+    var customerId =
+      getField(
+        auth.customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var owner =
+      String(
+        getField(
+          order,
+          [
+            "CUSTOMER_ID",
+            "USER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      owner !==
+      String(customerId)
+    ) {
+
+      return failure(
+        "You are not authorized to track this order.",
+        "ORDER_NOT_AUTHORIZED"
+      );
+    }
+
+
+    var tracking =
+      getSheetData(
+        CONFIG.SHEETS.DELIVERY_TRACKING
+      );
+
+
+    var orderTracking =
+      tracking
+        .filter(function(row) {
+
+          return String(
+            getField(
+              row,
+              [
+                "ORDER_ID"
+              ],
+              ""
+            )
+          ) ===
+          String(orderId);
+
+        })
+        .sort(function(a, b) {
+
+          return (
+            Number(a._rowNumber) -
+            Number(b._rowNumber)
+          );
+        });
+
+
+    var latest =
+      orderTracking.length
+        ? orderTracking[
+            orderTracking.length - 1
+          ]
+        : null;
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      status:
+        String(
+          getField(
+            order,
+            [
+              "ORDER_STATUS",
+              "STATUS"
+            ],
+            ""
+          )
+        ).toUpperCase(),
+
+      latest:
+        latest
+          ? sanitizeTrackingForCustomer_(latest)
+          : null,
+
+      history:
+        orderTracking
+          .slice(Math.max(0, orderTracking.length - 100))
+          .map(sanitizeTrackingForCustomer_)
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   SANITIZE TRACKING
+============================================================= */
+
+function sanitizeTracking(
+  row
+) {
+
+  return {
+
+    trackingId:
+      getField(
+        row,
+        [
+          "TRACKING_ID"
+        ],
+        ""
+      ),
+
+    orderId:
+      getField(
+        row,
+        [
+          "ORDER_ID"
+        ],
+        ""
+      ),
+
+    deliveryPersonId:
+      getField(
+        row,
+        [
+          "DELIVERY_PERSON_ID",
+          "RIDER_ID"
+        ],
+        ""
+      ),
+
+    latitude:
+      Number(
+        getField(
+          row,
+          [
+            "LATITUDE"
+          ],
+          0
+        )
+      ),
+
+    longitude:
+      Number(
+        getField(
+          row,
+          [
+            "LONGITUDE"
+          ],
+          0
+        )
+      ),
+
+    accuracy:
+      Number(
+        getField(
+          row,
+          [
+            "ACCURACY"
+          ],
+          0
+        )
+      ) || null,
+
+    speed:
+      Number(
+        getField(
+          row,
+          [
+            "SPEED"
+          ],
+          0
+        )
+      ) || null,
+
+    heading:
+      Number(
+        getField(
+          row,
+          [
+            "HEADING"
+          ],
+          0
+        )
+      ) || null,
+
+    createdAt:
+      getField(
+        row,
+        [
+          "CREATED_AT"
+        ],
+        ""
+      )
+  };
+}
+
+
+function sanitizeTrackingForCustomer_(row) {
+
+  var data = sanitizeTracking(row);
+  delete data.deliveryPersonId;
+  return data;
+}
+
+
+/* =============================================================
+   ADD PRODUCT TO EXISTING ORDER
+============================================================= */
+
+function addProductSecure(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+  var inventoryReservation = null;
+  var itemRowNumber = 0;
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var auth =
+      requireEmployee_(
+        data.idToken,
+        [
+          "STAFF",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var orderId =
+      String(
+        getField(
+          data,
+          [
+            "orderId",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var productId =
+      String(
+        getField(
+          data,
+          [
+            "productId",
+            "PRODUCT_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var quantity =
+      Number(
+        getField(
+          data,
+          [
+            "quantity",
+            "QUANTITY"
+          ],
+          0
+        )
+      );
+
+
+    if (!orderId) {
+
+      return failure(
+        "Order ID is required.",
+        "ORDER_ID_REQUIRED"
+      );
+    }
+
+
+    if (!productId) {
+
+      return failure(
+        "Product ID is required.",
+        "PRODUCT_ID_REQUIRED"
+      );
+    }
+
+
+    if (
+      !isFinite(quantity) ||
+      quantity <= 0
+    ) {
+
+      return failure(
+        "Quantity must be greater than zero.",
+        "INVALID_QUANTITY"
+      );
+    }
+
+
+    quantity =
+      Math.floor(
+        quantity
+      );
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var orderStatus = String(
+      getField(order, ["ORDER_STATUS", "STATUS"], "")
+    ).toUpperCase();
+
+    if (["PLACED", "RECEIVED", "CALLING_CUSTOMER", "CUSTOMER_CONFIRMED", "PICKING", "PRODUCT_ISSUE", "PACKING"].indexOf(orderStatus) === -1) {
+      return failure(
+        "Products can only be added while the order is being prepared.",
+        "ORDER_NOT_MODIFIABLE"
+      );
+    }
+
+
+    var products =
+      getSheetData(
+        CONFIG.SHEETS.PRODUCTS
+      );
+
+
+    var product = null;
+
+
+    for (
+      var i = 0;
+      i < products.length;
+      i++
+    ) {
+
+      if (
+        String(
+          getField(
+            products[i],
+            [
+              "PRODUCT_ID"
+            ],
+            ""
+          )
+        ) === productId
+      ) {
+
+        product =
+          products[i];
+
+        break;
+      }
+    }
+
+
+    if (!product) {
+
+      return failure(
+        "Product not found.",
+        "PRODUCT_NOT_FOUND"
+      );
+    }
+
+
+    if (
+      !isProductActive(
+        product
+      )
+    ) {
+
+      return failure(
+        "Product is not active.",
+        "PRODUCT_UNAVAILABLE"
+      );
+    }
+
+
+    var price =
+      Number(
+        getField(
+          product,
+          [
+            "PRICE",
+            "SELLING_PRICE",
+            "SALE_PRICE"
+          ],
+          0
+        )
+      ) || 0;
+
+
+    inventoryReservation = reserveInventoryForOrder_([
+      { productId: productId, quantity: quantity }
+    ]);
+
+    var employeeId =
+      getField(
+        auth.employee,
+        [
+          "EMPLOYEE_ID"
+        ],
+        ""
+      );
+
+
+    itemRowNumber = appendObject(
+      CONFIG.SHEETS.ORDER_ITEMS,
+      {
+
+        ORDER_ITEM_ID:
+          generateId(
+            "ITEM"
+          ),
+
+        ORDER_ID:
+          orderId,
+
+        PRODUCT_ID:
+          productId,
+
+        PRODUCT_NAME:
+          getField(
+            product,
+            [
+              "PRODUCT_NAME",
+              "NAME"
+            ],
+            ""
+          ),
+
+        QUANTITY:
+          quantity,
+
+        PRICE:
+          price,
+
+        UNIT_PRICE:
+          price,
+
+        TOTAL:
+          roundMoney(
+            price *
+            quantity
+          ),
+
+        PRODUCT_STATUS:
+          "PENDING",
+
+        CREATED_AT:
+          new Date(),
+
+        UPDATED_AT:
+          new Date(),
+
+        ADDED_BY:
+          employeeId
+      }
+    );
+
+
+    /*
+     * Recalculate totals.
+     */
+
+    var updated =
+      recalculateOrderTotals_(
+        orderId
+      );
+
+
+    /*
+     * Determine server-authoritative status.
+     *
+     * Adding a product during active preparation keeps
+     * the order in PACKING unless a previous terminal state
+     * must be preserved.
+     */
+
+    var currentStatus =
+      String(
+        getField(
+          order,
+          [
+            "ORDER_STATUS",
+            "STATUS"
+          ],
+          "PLACED"
+        )
+      )
+      .toUpperCase();
+
+
+    var nextStatus =
+      currentStatus;
+
+
+    if (
+      [
+        "PLACED",
+        "RECEIVED",
+        "CALLING_CUSTOMER",
+        "CUSTOMER_CONFIRMED",
+        "PICKING"
+      ].indexOf(
+        currentStatus
+      ) !== -1
+    ) {
+
+      nextStatus =
+        "PACKING";
+    }
+
+
+    if (
+      nextStatus !==
+      currentStatus
+    ) {
+
+      setOrderStatusInternal_(
+        order,
+        nextStatus
+      );
+
+
+      appendOrderStatus_(
+        orderId,
+        nextStatus,
+        employeeId,
+        auth.role,
+        "Product added to order."
+      );
+    }
+
+
+    addAuditLogSafe({
+
+      action:
+        "PRODUCT_ADDED_TO_ORDER",
+
+      entityType:
+        "ORDER",
+
+      entityId:
+        orderId,
+
+      actorId:
+        employeeId,
+
+      actorRole:
+        auth.role,
+
+      details:
+        "Added " +
+        quantity +
+        " × " +
+        getField(
+          product,
+          [
+            "PRODUCT_NAME",
+            "NAME"
+          ],
+          productId
+        )
+    });
+
+
+    var freshOrder =
+      getOrderById_(
+        orderId
+      );
+
+
+    var orderItems =
+      getSheetData(
+        CONFIG.SHEETS.ORDER_ITEMS
+      );
+
+
+    var responseOrder =
+      buildOrderResponse_(
+        freshOrder,
+        orderItems
+      );
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      orderStatus:
+        responseOrder.status,
+
+      status:
+        responseOrder.status,
+
+      product: {
+
+        rowNumber:
+          findLastOrderItemRow_(
+            orderId,
+            productId
+          ),
+
+        productId:
+          productId,
+
+        product:
+          getField(
+            product,
+            [
+              "PRODUCT_NAME",
+              "NAME"
+            ],
+            ""
+          ),
+
+        productName:
+          getField(
+            product,
+            [
+              "PRODUCT_NAME",
+              "NAME"
+            ],
+            ""
+          ),
+
+        quantity:
+          quantity,
+
+        price:
+          price,
+
+        total:
+          roundMoney(
+            price *
+            quantity
+          ),
+
+        productStatus:
+          "PENDING"
+      },
+
+      order:
+        responseOrder,
+
+      totals:
+        updated
+    });
+
+
+  } catch (err) {
+
+    try { rollbackInventoryReservation_(inventoryReservation); } catch (rollbackError) {
+      console.error("Add-product inventory rollback failed:", rollbackError);
+    }
+
+    try {
+      deleteRowsSafe_(CONFIG.SHEETS.ORDER_ITEMS, itemRowNumber ? [itemRowNumber] : []);
+    } catch (rowRollbackError) {
+      console.error("Add-product row rollback failed:", rowRollbackError);
+    }
+
+    return authFailure(
+      err
+    );
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+/* =============================================================
+   UPDATE PRODUCT STATUS
+============================================================= */
+
+function releaseInventoryForItem_(productId, quantity) {
+
+  if (!productId || !quantity || quantity <= 0) {
+    return;
+  }
+
+  var sheet = getSheet(CONFIG.SHEETS.INVENTORY);
+  var headerMap = getHeaderMap(CONFIG.SHEETS.INVENTORY);
+  var productColumn = findColumn(headerMap, ["PRODUCT_ID"]);
+  var stockColumn = findColumn(headerMap, ["AVAILABLE_STOCK", "AVAILABLE_QTY", "STOCK", "QUANTITY", "CURRENT_STOCK"]);
+  var updatedColumn = findColumn(headerMap, ["UPDATED_AT"]);
+
+  if (!productColumn || !stockColumn) {
+    throw new Error("Inventory sheet is missing PRODUCT_ID or stock column.");
+  }
+
+  var values = sheet.getDataRange().getValues();
+  for (var r = 1; r < values.length; r++) {
+    if (String(values[r][productColumn - 1]) === String(productId)) {
+      var oldStock = Number(values[r][stockColumn - 1]) || 0;
+      var newStock = oldStock + Number(quantity);
+      values[r][stockColumn - 1] = newStock;
+      if (updatedColumn) {
+        values[r][updatedColumn - 1] = new Date();
+      }
+      sheet.getRange(r + 1, 1, 1, values[r].length).setValues([values[r]]);
+      return [{
+        rowNumber: r + 1,
+        oldStock: oldStock,
+        newStock: newStock
+      }];
+    }
+  }
+
+  throw new Error("Inventory record not found for product: " + productId);
+}
+
+
+function updateProductStatusSecure(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+  var inventoryReservation = null;
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var auth =
+      requireEmployee_(
+        data.idToken,
+        [
+          "STAFF",
+          "MANAGER",
+          "ADMIN"
+        ]
+      );
+
+
+    var orderId =
+      String(
+        getField(
+          data,
+          [
+            "orderId",
+            "ORDER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var rowNumber =
+      Number(
+        getField(
+          data,
+          [
+            "rowNumber",
+            "ROW_NUMBER"
+          ],
+          0
+        )
+      );
+
+
+    var nextProductStatus =
+      String(
+        getField(
+          data,
+          [
+            "productStatus",
+            "PRODUCT_STATUS"
+          ],
+          ""
+        )
+      )
+      .trim()
+      .toUpperCase();
+
+
+    if (!orderId) {
+
+      return failure(
+        "Order ID is required.",
+        "ORDER_ID_REQUIRED"
+      );
+    }
+
+
+    if (
+      !rowNumber ||
+      rowNumber < 2
+    ) {
+
+      return failure(
+        "Order item row number is required.",
+        "ROW_NUMBER_REQUIRED"
+      );
+    }
+
+
+    if (
+      CONFIG.PRODUCT_STATUS
+        .indexOf(
+          nextProductStatus
+        ) === -1
+    ) {
+
+      return failure(
+        "Invalid product status.",
+        "INVALID_PRODUCT_STATUS"
+      );
+    }
+
+
+    var order =
+      getOrderById_(
+        orderId
+      );
+
+
+    if (!order) {
+
+      return failure(
+        "Order not found.",
+        "ORDER_NOT_FOUND"
+      );
+    }
+
+
+    var orderStatusForItem = String(
+      getField(order, ["ORDER_STATUS", "STATUS"], "")
+    ).toUpperCase();
+
+    if (["DELIVERED", "CANCELLED"].indexOf(orderStatusForItem) !== -1) {
+      return failure(
+        "Order items cannot be changed after the order is completed or cancelled.",
+        "ORDER_NOT_MODIFIABLE"
+      );
+    }
+
+
+    var itemSheet =
+      getSheet(
+        CONFIG.SHEETS.ORDER_ITEMS
+      );
+
+
+    var lastColumn =
+      itemSheet.getLastColumn();
+
+
+    var values =
+      itemSheet
+        .getRange(
+          rowNumber,
+          1,
+          1,
+          lastColumn
+        )
+        .getValues()[0];
+
+
+    var headers =
+      itemSheet
+        .getRange(
+          1,
+          1,
+          1,
+          lastColumn
+        )
+        .getValues()[0];
+
+
+    var headerMap = {};
+
+
+    headers.forEach(function(header, index) {
+
+      headerMap[
+        String(
+          header || ""
+        )
+        .trim()
+        .toUpperCase()
+      ] =
+        index + 1;
+    });
+
+
+    var orderIdColumn =
+      findColumn(
+        headerMap,
+        [
+          "ORDER_ID"
+        ]
+      );
+
+
+    if (
+      !orderIdColumn
+    ) {
+
+      return failure(
+        "ORDER_ID column not found in 08_ORDER_ITEMS.",
+        "ORDER_ID_COLUMN_MISSING"
+      );
+    }
+
+
+    var itemOrderId =
+      String(
+        values[
+          orderIdColumn - 1
+        ]
+        || ""
+      );
+
+
+    if (
+      itemOrderId !==
+      String(orderId)
+    ) {
+
+      return failure(
+        "Order item does not belong to this order.",
+        "ORDER_ITEM_NOT_AUTHORIZED"
+      );
+    }
+
+
+    var statusColumn =
+      findColumn(
+        headerMap,
+        [
+          "PRODUCT_STATUS",
+          "STATUS"
+        ]
+      );
+
+
+    if (
+      !statusColumn
+    ) {
+
+      return failure(
+        "PRODUCT_STATUS column not found in 08_ORDER_ITEMS.",
+        "PRODUCT_STATUS_COLUMN_MISSING"
+      );
+    }
+
+
+    var oldStatus =
+      String(
+        values[
+          statusColumn - 1
+        ]
+        || "PENDING"
+      )
+      .toUpperCase();
+
+    validateProductStatusTransition_(oldStatus, nextProductStatus);
+
+    var itemProductColumn = findColumn(headerMap, ["PRODUCT_ID"]);
+    var itemQuantityColumn = findColumn(headerMap, ["QUANTITY"]);
+
+    if (!itemProductColumn || !itemQuantityColumn) {
+      throw new Error("ORDER_ITEMS is missing PRODUCT_ID or QUANTITY.");
+    }
+
+    var itemProductId = String(values[itemProductColumn - 1] || "");
+    var itemQuantity = Number(values[itemQuantityColumn - 1]) || 0;
+
+
+    if (
+      ["UNAVAILABLE", "CANCELLED", "REPLACED"].indexOf(nextProductStatus) !== -1 &&
+      ["UNAVAILABLE", "CANCELLED", "REPLACED"].indexOf(oldStatus) === -1
+    ) {
+      inventoryReservation = releaseInventoryForItem_(itemProductId, itemQuantity);
+    }
+
+    if (
+      ["AVAILABLE", "CONFIRMED"].indexOf(nextProductStatus) !== -1 &&
+      ["UNAVAILABLE", "CANCELLED"].indexOf(oldStatus) !== -1
+    ) {
+      inventoryReservation = reserveInventoryForOrder_([
+        { productId: itemProductId, quantity: itemQuantity }
+      ]);
+    }
+
+    values[
+      statusColumn - 1
+    ] =
+      nextProductStatus;
+
+
+    var updatedColumn =
+      findColumn(
+        headerMap,
+        [
+          "UPDATED_AT"
+        ]
+      );
+
+
+    if (
+      updatedColumn
+    ) {
+
+      values[
+        updatedColumn - 1
+      ] =
+        new Date();
+    }
+
+
+    itemSheet
+      .getRange(
+        rowNumber,
+        1,
+        1,
+        lastColumn
+      )
+      .setValues([
+        values
+      ]);
+
+
+    var employeeId =
+      getField(
+        auth.employee,
+        [
+          "EMPLOYEE_ID"
+        ],
+        ""
+      );
+
+
+    /*
+     * Recalculate order.
+     */
+
+    var totals =
+      recalculateOrderTotals_(
+        orderId
+      );
+
+
+    /*
+     * Determine authoritative order status.
+     */
+
+    var nextOrderStatus =
+      calculateOrderStatusFromItems_(
+        orderId
+      );
+
+
+    var currentOrderStatus =
+      String(
+        getField(
+          order,
+          [
+            "ORDER_STATUS",
+            "STATUS"
+          ],
+          "PLACED"
+        )
+      )
+      .toUpperCase();
+
+
+    if (
+      nextOrderStatus &&
+      nextOrderStatus !==
+      currentOrderStatus
+    ) {
+
+      setOrderStatusInternal_(
+        order,
+        nextOrderStatus
+      );
+
+
+      appendOrderStatus_(
+        orderId,
+        nextOrderStatus,
+        employeeId,
+        auth.role,
+        "Order status recalculated after product status change."
+      );
+    }
+
+
+    addAuditLogSafe({
+
+      action:
+        "PRODUCT_STATUS_UPDATED",
+
+      entityType:
+        "ORDER_ITEM",
+
+      entityId:
+        String(rowNumber),
+
+      actorId:
+        employeeId,
+
+      actorRole:
+        auth.role,
+
+      details:
+        oldStatus +
+        " → " +
+        nextProductStatus +
+        " | Order " +
+        orderId
+    });
+
+
+    var freshOrder =
+      getOrderById_(
+        orderId
+      );
+
+
+    return success({
+
+      orderId:
+        orderId,
+
+      orderStatus:
+        String(
+          getField(
+            freshOrder,
+            [
+              "ORDER_STATUS",
+              "STATUS"
+            ],
+            nextOrderStatus
+          )
+        ).toUpperCase(),
+
+      status:
+        String(
+          getField(
+            freshOrder,
+            [
+              "ORDER_STATUS",
+              "STATUS"
+            ],
+            nextOrderStatus
+          )
+        ).toUpperCase(),
+
+      productStatus:
+        nextProductStatus,
+
+      totals:
+        totals
+    });
+
+
+  } catch (err) {
+
+    try { rollbackInventoryReservation_(inventoryReservation); } catch (rollbackError) {
+      console.error("Product inventory rollback failed:", rollbackError);
+    }
+
+    return authFailure(
+      err
+    );
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+function validateProductStatusTransition_(oldStatus, newStatus) {
+
+  if (oldStatus === newStatus) {
+    throw new AuthError("Product is already in this status.", "STATUS_UNCHANGED");
+  }
+
+  var transitions = {
+    PENDING: ["CONFIRMED", "AVAILABLE", "UNAVAILABLE", "CANCELLED", "ISSUE"],
+    CONFIRMED: ["AVAILABLE", "UNAVAILABLE", "CANCELLED", "ISSUE"],
+    AVAILABLE: ["UNAVAILABLE", "REPLACED", "CANCELLED"],
+    UNAVAILABLE: ["AVAILABLE", "REPLACED", "CANCELLED"],
+    ISSUE: ["CONFIRMED", "UNAVAILABLE", "CANCELLED"],
+    REPLACED: [],
+    CANCELLED: []
+  };
+
+  if (!transitions[oldStatus] || transitions[oldStatus].indexOf(newStatus) === -1) {
+    throw new AuthError(
+      "Invalid product status transition: " + oldStatus + " → " + newStatus,
+      "INVALID_PRODUCT_STATUS_TRANSITION"
+    );
+  }
+}
+
+
+
+
+
+/* =============================================================
+   CALCULATE ORDER STATUS FROM ITEMS
+============================================================= */
+
+function calculateOrderStatusFromItems_(
+  orderId
+) {
+
+  var items =
+    getSheetData(
+      CONFIG.SHEETS.ORDER_ITEMS
+    )
+    .filter(function(item) {
+
+      return String(
+        getField(
+          item,
+          [
+            "ORDER_ID"
+          ],
+          ""
+        )
+      ) ===
+      String(orderId);
+
+    });
+
+
+  if (!items.length) {
+    return null;
+  }
+
+
+  var statuses =
+    items.map(function(item) {
+
+      return String(
+        getField(
+          item,
+          [
+            "PRODUCT_STATUS",
+            "STATUS"
+          ],
+          "PENDING"
+        )
+      )
+      .toUpperCase();
+
+    });
+
+
+  /*
+   * If any product has an issue.
+   */
+
+  if (
+    statuses.indexOf(
+      "ISSUE"
+    ) !== -1
+  ) {
+
+    return "PRODUCT_ISSUE";
+  }
+
+
+  if (
+    statuses.indexOf(
+      "UNAVAILABLE"
+    ) !== -1
+  ) {
+
+    return "PRODUCT_ISSUE";
+  }
+
+
+  /*
+   * If all are cancelled.
+   */
+
+  var activeStatuses =
+    statuses.filter(function(status) {
+
+      return (
+        status !== "CANCELLED"
+      );
+
+    });
+
+
+  if (
+    activeStatuses.length === 0
+  ) {
+
+    return "CANCELLED";
+  }
+
+
+  /*
+   * If all products confirmed/available.
+   */
+
+  var allConfirmed =
+    activeStatuses.every(function(status) {
+
+      return [
+        "CONFIRMED",
+        "AVAILABLE",
+        "REPLACED"
+      ].indexOf(status) !== -1;
+
+    });
+
+
+  if (
+    allConfirmed
+  ) {
+
+    return "PACKING";
+  }
+
+
+  /*
+   * Otherwise retain preparation stage.
+   */
+
+  return "PICKING";
+}
+
+
+/* =============================================================
+   SET INTERNAL ORDER STATUS
+============================================================= */
+
+function setOrderStatusInternal_(
+  order,
+  newStatus
+) {
+
+  var sheet =
+    getSheet(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  var headerMap =
+    getHeaderMap(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  var statusColumn =
+    findColumn(
+      headerMap,
+      [
+        "ORDER_STATUS",
+        "STATUS"
+      ]
+    );
+
+
+  if (
+    statusColumn
+  ) {
+
+    sheet
+      .getRange(
+        order._rowNumber,
+        statusColumn
+      )
+      .setValue(
+        newStatus
+      );
+  }
+
+
+  var updatedColumn =
+    findColumn(
+      headerMap,
+      [
+        "UPDATED_AT"
+      ]
+    );
+
+
+  if (
+    updatedColumn
+  ) {
+
+    sheet
+      .getRange(
+        order._rowNumber,
+        updatedColumn
+      )
+      .setValue(
+        new Date()
+      );
+  }
+}
+
+
+/* =============================================================
+   FIND LAST ORDER ITEM ROW
+============================================================= */
+
+function findLastOrderItemRow_(
+  orderId,
+  productId
+) {
+
+  var items =
+    getSheetData(
+      CONFIG.SHEETS.ORDER_ITEMS
+    );
+
+
+  var found = 0;
+
+
+  items.forEach(function(item) {
+
+    if (
+      String(
+        getField(
+          item,
+          [
+            "ORDER_ID"
+          ],
+          ""
+        )
+      ) ===
+      String(orderId) &&
+
+      String(
+        getField(
+          item,
+          [
+            "PRODUCT_ID"
+          ],
+          ""
+        )
+      ) ===
+      String(productId)
+    ) {
+
+      found =
+        item._rowNumber;
+    }
+  });
+
+
+  return found;
+}
+
+
+/* =============================================================
+   RECALCULATE ORDER TOTALS
+============================================================= */
+
+function recalculateOrderTotals_(
+  orderId
+) {
+
+  var items =
+    getSheetData(
+      CONFIG.SHEETS.ORDER_ITEMS
+    )
+    .filter(function(item) {
+
+      return String(
+        getField(
+          item,
+          [
+            "ORDER_ID"
+          ],
+          ""
+        )
+      ) ===
+      String(orderId);
+
+    });
+
+
+  var subtotal = 0;
+
+
+  items.forEach(function(item) {
+
+    var status =
+      String(
+        getField(
+          item,
+          [
+            "PRODUCT_STATUS",
+            "STATUS"
+          ],
+          "PENDING"
+        )
+      )
+      .toUpperCase();
+
+
+    if (
+      status === "CANCELLED" ||
+      status === "UNAVAILABLE"
+    ) {
+
+      return;
+    }
+
+
+    var total =
+      Number(
+        getField(
+          item,
+          [
+            "TOTAL",
+            "LINE_TOTAL"
+          ],
+          0
+        )
+      ) || 0;
+
+
+    subtotal +=
+      total;
+  });
+
+
+  var order =
+    getOrderById_(
+      orderId
+    );
+
+
+  if (!order) {
+    return {};
+  }
+
+
+  var discount =
+    Number(
+      getField(
+        order,
+        [
+          "DISCOUNT"
+        ],
+        0
+      )
+    ) || 0;
+
+
+  var deliveryCharge =
+    Number(
+      getField(
+        order,
+        [
+          "DELIVERY_CHARGE",
+          "DELIVERY_FEE"
+        ],
+        0
+      )
+    ) || 0;
+
+
+  var taxPercent =
+    Number(
+      getField(
+        order,
+        [
+          "TAX_PERCENT"
+        ],
+        0
+      )
+    ) || 0;
+
+
+  var taxable =
+    Math.max(
+      0,
+      subtotal -
+      discount
+    );
+
+
+  var tax =
+    taxable *
+    taxPercent /
+    100;
+
+
+  var total =
+    roundMoney(
+      taxable +
+      deliveryCharge +
+      tax
+    );
+
+
+  var sheet =
+    getSheet(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  var headerMap =
+    getHeaderMap(
+      CONFIG.SHEETS.ORDERS
+    );
+
+
+  setIfColumn_(
+    sheet,
+    headerMap,
+    order._rowNumber,
+    [
+      "SUBTOTAL"
+    ],
+    roundMoney(
+      subtotal
+    )
+  );
+
+
+  setIfColumn_(
+    sheet,
+    headerMap,
+    order._rowNumber,
+    [
+      "TAX"
+    ],
+    roundMoney(
+      tax
+    )
+  );
+
+
+  setIfColumn_(
+    sheet,
+    headerMap,
+    order._rowNumber,
+    [
+      "GRAND_TOTAL",
+      "TOTAL"
+    ],
+    total
+  );
+
+
+  setIfColumn_(
+    sheet,
+    headerMap,
+    order._rowNumber,
+    [
+      "UPDATED_AT"
+    ],
+    new Date()
+  );
+
+
+  return {
+
+    subtotal:
+      roundMoney(
+        subtotal
+      ),
+
+    discount:
+      roundMoney(
+        discount
+      ),
+
+    deliveryCharge:
+      roundMoney(
+        deliveryCharge
+      ),
+
+    tax:
+      roundMoney(
+        tax
+      ),
+
+    total:
+      total
+  };
+}
+
+
+/* =============================================================
+   SET IF COLUMN EXISTS
+============================================================= */
+
+function setIfColumn_(
+  sheet,
+  headerMap,
+  rowNumber,
+  aliases,
+  value
+) {
+
+  var column =
+    findColumn(
+      headerMap,
+      aliases
+    );
+
+
+  if (
+    column
+  ) {
+
+    sheet
+      .getRange(
+        rowNumber,
+        column
+      )
+      .setValue(
+        value
+      );
+  }
+}
+
+
+/* =============================================================
+   ROUND MONEY
+============================================================= */
+
+function roundMoney(
+  value
+) {
+
+  return Math.round(
+    (
+      Number(value) || 0
+    ) *
+    100
+  ) / 100;
+}
+
+
+/* =============================================================
+   EMPLOYEE PROFILE
+============================================================= */
+
+function getEmployeeProfile(
+  idToken
+) {
+
+  try {
+
+    var auth =
+      requireEmployee_(
+        idToken
+      );
+
+
+    return success({
+
+      employee:
+        sanitizeEmployee(
+          auth.employee
+        ),
+
+      role:
+        auth.role
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   EMPLOYEE ORDERS
+============================================================= */
+
+function getEmployeeOrders(
+  idToken,
+  allowedRoles
+) {
+
+  try {
+
+    var auth =
+      requireEmployee_(
+        idToken,
+        allowedRoles
+      );
+
+
+    var orders =
+      getSheetData(
+        CONFIG.SHEETS.ORDERS
+      );
+
+
+    var items =
+      getSheetData(
+        CONFIG.SHEETS.ORDER_ITEMS
+      );
+
+
+    /*
+     * DELIVERY sees assigned orders.
+     *
+     * STAFF/MANAGER/ADMIN see operational orders.
+     */
+
+    if (
+      auth.role ===
+      "DELIVERY"
+    ) {
+
+      var employeeId =
+        String(
+          getField(
+            auth.employee,
+            [
+              "EMPLOYEE_ID"
+            ],
+            ""
+          )
+        );
+
+
+      orders =
+        orders.filter(function(order) {
+
+          return String(
+            getField(
+              order,
+              [
+                "DELIVERY_PERSON_ID",
+                "RIDER_ID"
+              ],
+              ""
+            )
+          ) ===
+          employeeId;
+
+        });
+    }
+
+
+    var result =
+      orders.map(function(order) {
+
+        return buildOrderResponse_(
+          order,
+          items
+        );
+
+      });
+
+
+    return success({
+
+      orders:
+        result,
+
+      employee:
+        sanitizeEmployee(
+          auth.employee
+        ),
+
+      role:
+        auth.role
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   CUSTOMER ADDRESS
+============================================================= */
+
+function getAddressById_(addressId) {
+
+  var addresses =
+    getSheetData(
+      CONFIG.SHEETS.ADDRESSES
+    );
+
+  for (var i = 0; i < addresses.length; i++) {
+    if (
+      String(getField(addresses[i], ["ADDRESS_ID"], "")) ===
+      String(addressId)
+    ) {
+      return addresses[i];
+    }
+  }
+
+  return null;
+}
+
+
+function getCustomerAddress_(
+  customerId,
+  addressId
+) {
+
+  var addresses =
+    getSheetData(
+      CONFIG.SHEETS.ADDRESSES
+    );
+
+
+  for (
+    var i = 0;
+    i < addresses.length;
+    i++
+  ) {
+
+    var id =
+      String(
+        getField(
+          addresses[i],
+          [
+            "ADDRESS_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var owner =
+      String(
+        getField(
+          addresses[i],
+          [
+            "CUSTOMER_ID",
+            "USER_ID"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      id ===
+      String(addressId) &&
+
+      owner ===
+      String(customerId)
+    ) {
+
+      return addresses[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   BUILD ADDRESS TEXT
+============================================================= */
+
+function buildAddressText(
+  address
+) {
+
+  if (!address) {
+    return "";
+  }
+
+
+  var parts = [
+
+    getField(
+      address,
+      [
+        "HOUSE_FLAT",
+        "HOUSE",
+        "FLAT"
+      ],
+      ""
+    ),
+
+    getField(
+      address,
+      [
+        "BUILDING"
+      ],
+      ""
+    ),
+
+    getField(
+      address,
+      [
+        "STREET"
+      ],
+      ""
+    ),
+
+    getField(
+      address,
+      [
+        "AREA"
+      ],
+      ""
+    ),
+
+    getField(
+      address,
+      [
+        "CITY"
+      ],
+      ""
+    ),
+
+    getField(
+      address,
+      [
+        "PINCODE",
+        "PIN_CODE"
+      ],
+      ""
+    )
+  ];
+
+
+  return parts
+    .filter(function(x) {
+
+      return String(x)
+        .trim() !== "";
+
+    })
+    .join(", ");
+}
+
+
+/* =============================================================
+   SAVE ADDRESS
+============================================================= */
+
+function validateAddressInput_(data) {
+
+  var fields = [
+    ["houseFlat", 100],
+    ["building", 150],
+    ["street", 150],
+    ["area", 150],
+    ["city", 100],
+    ["pincode", 6],
+    ["landmark", 200],
+    ["mapAddress", 500],
+    ["mapsLink", 1000],
+    ["address", 700],
+    ["deliveryAddress", 700]
+  ];
+
+  fields.forEach(function(item) {
+    var value = getField(data, [item[0]], null);
+    if (value !== null && String(value).length > item[1]) {
+      throw new AuthError(
+        "Address field is too long: " + item[0],
+        "INPUT_TOO_LONG"
+      );
+    }
+  });
+
+  var pincode = String(getField(data, ["pincode", "PINCODE", "PIN_CODE"], "")).trim();
+  if (pincode && !/^\d{6}$/.test(pincode)) {
+    throw new AuthError(
+      "Pincode must contain exactly 6 digits.",
+      "INVALID_PINCODE"
+    );
+  }
+
+  var mapsLink = String(getField(data, ["mapsLink", "MAPS_LINK"], "")).trim();
+  if (mapsLink && !/^https:\/\//i.test(mapsLink)) {
+    throw new AuthError(
+      "Maps link must use HTTPS.",
+      "INVALID_URL"
+    );
+  }
+
+  var lat = getField(data, ["latitude", "LATITUDE"], "");
+  var lng = getField(data, ["longitude", "LONGITUDE"], "");
+
+  if (lat !== "" && (!isFinite(Number(lat)) || Number(lat) < -90 || Number(lat) > 90)) {
+    throw new AuthError("Invalid latitude.", "INVALID_LOCATION");
+  }
+
+  if (lng !== "" && (!isFinite(Number(lng)) || Number(lng) < -180 || Number(lng) > 180)) {
+    throw new AuthError("Invalid longitude.", "INVALID_LOCATION");
+  }
+}
+
+
+function getCustomerAddressesSecure(
+  data
+) {
+
+  try {
+
+    var auth =
+      requireCustomer_(
+        data.idToken
+      );
+
+    var customerId =
+      getField(
+        auth.customer,
+        ["CUSTOMER_ID"],
+        ""
+      );
+
+    var addresses =
+      getSheetData(
+        CONFIG.SHEETS.ADDRESSES
+      );
+
+    var result = [];
+
+    addresses.forEach(function(address) {
+
+      if (
+        String(
+          getField(
+            address,
+            ["CUSTOMER_ID", "USER_ID"],
+            ""
+          )
+        ) !==
+        String(customerId)
+      ) {
+        return;
+      }
+
+      result.push({
+        addressId:
+          getField(
+            address,
+            ["ADDRESS_ID"],
+            ""
+          ),
+
+        houseFlat:
+          getField(
+            address,
+            ["HOUSE_FLAT"],
+            ""
+          ),
+
+        building:
+          getField(
+            address,
+            ["BUILDING"],
+            ""
+          ),
+
+        street:
+          getField(
+            address,
+            ["STREET"],
+            ""
+          ),
+
+        area:
+          getField(
+            address,
+            ["AREA"],
+            ""
+          ),
+
+        city:
+          getField(
+            address,
+            ["CITY"],
+            ""
+          ),
+
+        pincode:
+          getField(
+            address,
+            ["PINCODE", "PIN_CODE"],
+            ""
+          ),
+
+        landmark:
+          getField(
+            address,
+            ["LANDMARK"],
+            ""
+          ),
+
+        mapAddress:
+          getField(
+            address,
+            ["MAP_ADDRESS"],
+            ""
+          ),
+
+        latitude:
+          getField(
+            address,
+            ["LATITUDE"],
+            ""
+          ),
+
+        longitude:
+          getField(
+            address,
+            ["LONGITUDE"],
+            ""
+          ),
+
+        mapsLink:
+          getField(
+            address,
+            ["MAPS_LINK"],
+            ""
+          ),
+
+        fullAddress:
+          getField(
+            address,
+            ["FULL_ADDRESS", "ADDRESS"],
+            ""
+          )
+      });
+    });
+
+    return success({
+      addresses: result
+    });
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  }
+}
+
+
+function saveAddressSecure(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var auth =
+      requireCustomer_(
+        data.idToken
+      );
+
+
+    var customerId =
+      getField(
+        auth.customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    var addressId =
+      String(
+        getField(
+          data,
+          [
+            "addressId",
+            "ADDRESS_ID"
+          ],
+          ""
+        )
+      );
+
+
+    var addressObject = {
+
+      ADDRESS_ID:
+        addressId ||
+        generateId(
+          "ADDR"
+        ),
+
+      CUSTOMER_ID:
+        customerId,
+
+      USER_ID:
+        customerId,
+
+      HOUSE_FLAT:
+        getField(
+          data,
+          [
+            "houseFlat",
+            "HOUSE_FLAT"
+          ],
+          ""
+        ),
+
+      BUILDING:
+        getField(
+          data,
+          [
+            "building",
+            "BUILDING"
+          ],
+          ""
+        ),
+
+      STREET:
+        getField(
+          data,
+          [
+            "street",
+            "STREET"
+          ],
+          ""
+        ),
+
+      AREA:
+        getField(
+          data,
+          [
+            "area",
+            "AREA"
+          ],
+          ""
+        ),
+
+      CITY:
+        getField(
+          data,
+          [
+            "city",
+            "CITY"
+          ],
+          ""
+        ),
+
+      PINCODE:
+        getField(
+          data,
+          [
+            "pincode",
+            "PINCODE",
+            "PIN_CODE"
+          ],
+          ""
+        ),
+
+      LANDMARK:
+        getField(
+          data,
+          [
+            "landmark",
+            "LANDMARK"
+          ],
+          ""
+        ),
+
+      MAP_ADDRESS:
+        getField(
+          data,
+          [
+            "mapAddress",
+            "MAP_ADDRESS"
+          ],
+          ""
+        ),
+
+      LATITUDE:
+        getField(
+          data,
+          [
+            "latitude",
+            "LATITUDE"
+          ],
+          ""
+        ),
+
+      LONGITUDE:
+        getField(
+          data,
+          [
+            "longitude",
+            "LONGITUDE"
+          ],
+          ""
+        ),
+
+      MAPS_LINK:
+        getField(
+          data,
+          [
+            "mapsLink",
+            "MAPS_LINK"
+          ],
+          ""
+        ),
+
+      FULL_ADDRESS:
+        getField(
+          data,
+          [
+            "address",
+            "deliveryAddress",
+            "FULL_ADDRESS"
+          ],
+          ""
+        ),
+
+      UPDATED_AT:
+        new Date()
+    };
+
+
+    validateAddressInput_(data);
+
+    var existing = null;
+
+    if (addressId) {
+      existing = getCustomerAddress_(
+        customerId,
+        addressId
+      );
+
+      if (!existing) {
+        /* An address ID supplied by a client may not create a new identity. */
+        var addressIdExists = getAddressById_(addressId);
+
+        if (addressIdExists) {
+          return failure(
+            "Address does not belong to this customer.",
+            "ADDRESS_NOT_AUTHORIZED"
+          );
+        }
+
+        return failure(
+          "Address ID is invalid. Omit addressId when creating a new address.",
+          "INVALID_ADDRESS_ID"
+        );
+      }
+    }
+
+    if (existing) {
+
+      updateObjectRow(
+        CONFIG.SHEETS.ADDRESSES,
+        existing._rowNumber,
+        addressObject
+      );
+
+    } else {
+
+      addressObject.CREATED_AT =
+        new Date();
+
+
+      appendObject(
+        CONFIG.SHEETS.ADDRESSES,
+        addressObject
+      );
+    }
+
+
+    return success({
+
+      addressId:
+        addressObject.ADDRESS_ID,
+
+      address:
+        addressObject
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+/* =============================================================
+   UPDATE CUSTOMER PROFILE
+============================================================= */
+
+function updateCustomerProfileSecure(
+  data
+) {
+
+  var lock = LockService.getScriptLock();
+
+  try {
+
+    lock.waitLock(CONFIG.LOCK_TIMEOUT_MS);
+
+    var auth =
+      requireCustomer_(
+        data.idToken
+      );
+
+
+    var customer =
+      auth.customer;
+
+
+    var customerId =
+      getField(
+        customer,
+        [
+          "CUSTOMER_ID"
+        ],
+        ""
+      );
+
+
+    var phone =
+      getField(
+        data,
+        [
+          "phone",
+          "PHONE",
+          "mobile"
+        ],
+        null
+      );
+
+
+    var name =
+      getField(
+        data,
+        [
+          "name",
+          "FULL_NAME"
+        ],
+        null
+      );
+
+
+    if (phone !== null && String(phone).replace(/\D/g, "").length > 10) {
+      throw new AuthError("Invalid phone number.", "INVALID_PHONE");
+    }
+
+    if (name !== null && String(name).trim().length > 100) {
+      throw new AuthError("Name is too long.", "INPUT_TOO_LONG");
+    }
+
+    var updates = {
+
+      UPDATED_AT:
+        new Date(),
+
+      LAST_LOGIN:
+        getField(
+          customer,
+          [
+            "LAST_LOGIN"
+          ],
+          new Date()
+        )
+    };
+
+
+    if (
+      phone !== null
+    ) {
+
+      updates.PHONE = normalizePhone_(phone);
+    }
+
+
+    if (
+      name !== null
+    ) {
+
+      updates.FULL_NAME =
+        String(
+          name
+        ).trim();
+    }
+
+
+    updateObjectRow(
+      CONFIG.SHEETS.CUSTOMERS,
+      customer._rowNumber,
+      updates
+    );
+
+
+    var fresh =
+      getCustomerByGoogleSub_(
+        auth.claims.sub
+      );
+
+
+    addAuditLogSafe({
+
+      action:
+        "CUSTOMER_PROFILE_UPDATED",
+
+      entityType:
+        "CUSTOMER",
+
+      entityId:
+        customerId,
+
+      actorId:
+        customerId,
+
+      actorRole:
+        "CUSTOMER",
+
+      details:
+        "Customer profile updated."
+    });
+
+
+    return success({
+
+      customer:
+        sanitizeCustomer(
+          fresh
+        )
+    });
+
+
+  } catch (err) {
+
+    return authFailure(
+      err
+    );
+  } finally {
+    try { lock.releaseLock(); } catch (ignore) {}
+  }
+}
+
+
+/* =============================================================
+   AUDIT LOG
+============================================================= */
+
+function addAuditLogSafe(
+  data
+) {
+
+  try {
+
+    var sheet =
+      getOptionalSheet(
+        CONFIG.SHEETS.AUDIT_LOG
+      );
+
+
+    /*
+     * Audit log is optional because your current
+     * screenshot shows sheets through 15_SETTING.
+     */
+
+    if (!sheet) {
+      return;
+    }
+
+
+    appendObject(
+      CONFIG.SHEETS.AUDIT_LOG,
+      {
+
+        AUDIT_ID:
+          generateId(
+            "AUD"
+          ),
+
+        ACTION:
+          data.action ||
+          "",
+
+        ENTITY_TYPE:
+          data.entityType ||
+          "",
+
+        ENTITY_ID:
+          data.entityId ||
+          "",
+
+        ACTOR_ID:
+          data.actorId ||
+          "",
+
+        ACTOR_ROLE:
+          data.actorRole ||
+          "",
+
+        DETAILS:
+          data.details ||
+          "",
+
+        CREATED_AT:
+          new Date()
+      }
+    );
+
+
+  } catch (err) {
+
+    /*
+     * Audit failure must never break the primary
+     * customer/order operation.
+     */
+
+    console.error(
+      "Audit log failed:",
+      err
+    );
+  }
+}
+
+
+/* =============================================================
+   LEGACY COMPATIBILITY FUNCTIONS
+============================================================= */
+
+/*
+ * These functions are intentionally retained so older
+ * frontend code does not immediately break if it still calls
+ * getUserByEmail() or similar functions.
+ *
+ * IMPORTANT:
+ * They are NOT used for authorization.
+ */
+
+
+/* =============================================================
+   GET CUSTOMER BY EMAIL
+============================================================= */
+
+function getCustomerByEmail(
+  email
+) {
+
+  var target =
+    normalizeEmail(
+      email
+    );
+
+
+  var customers =
+    getSheetData(
+      CONFIG.SHEETS.CUSTOMERS
+    );
+
+
+  for (
+    var i = 0;
+    i < customers.length;
+    i++
+  ) {
+
+    var current =
+      normalizeEmail(
+        getField(
+          customers[i],
+          [
+            "GOOGLE_EMAIL"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      current === target
+    ) {
+
+      return customers[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   GET EMPLOYEE BY EMAIL
+============================================================= */
+
+function getEmployeeByEmail(
+  email
+) {
+
+  var target =
+    normalizeEmail(
+      email
+    );
+
+
+  var employees =
+    getSheetData(
+      CONFIG.SHEETS.EMPLOYEES
+    );
+
+
+  for (
+    var i = 0;
+    i < employees.length;
+    i++
+  ) {
+
+    var current =
+      normalizeEmail(
+        getField(
+          employees[i],
+          [
+            "GOOGLE_EMAIL"
+          ],
+          ""
+        )
+      );
+
+
+    if (
+      current === target
+    ) {
+
+      return employees[i];
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =============================================================
+   SIMPLE HEALTH CHECK
+============================================================= */
+
+function healthCheck() {
+
+  try {
+
+    var spreadsheet =
+      getSpreadsheet();
+
+
+    var sheetNames =
+      spreadsheet
+        .getSheets()
+        .map(function(sheet) {
+
+          return sheet.getName();
+
+        });
+
+
+    return success({
+
+      api:
+        "Ridhi Super Market API",
+
+      version:
+        "2.0.0",
+
+      status:
+        "ONLINE",
+
+      spreadsheet:
+        spreadsheet.getName(),
+
+      sheets:
+        sheetNames,
+
+      googleClientConfigured:
+        (
+          CONFIG.GOOGLE_CLIENT_ID &&
+          CONFIG.GOOGLE_CLIENT_ID !==
+          "PUT_RIDHI_GOOGLE_CLIENT_ID_HERE"
+        )
+    });
+
+
+  } catch (err) {
+
+    return failure(
+      err.message,
+      "HEALTH_CHECK_ERROR"
+    );
+  }
+}
+
+
+/* =============================================================
+   DEBUG / TEST FUNCTIONS
+============================================================= */
+
+/*
+ * Run this manually from Apps Script if you want to test
+ * that the spreadsheet and required sheets are available.
+ */
+
+function testRidhiBackend() {
+
+  var result =
+    healthCheck();
+
+
+  console.log(
+    JSON.stringify(
+      result,
+      null,
+      2
+    )
+  );
+
+
+  return result;
+}
+
+
+/*
+ * Check the exact required identity headers.
+ */
+
+function testIdentitySheets() {
+
+  var result = {
+
+    customers:
+      getHeaderMap(
+        CONFIG.SHEETS.CUSTOMERS
+      ),
+
+    employees:
+      getHeaderMap(
+        CONFIG.SHEETS.EMPLOYEES
+      )
+  };
+
+
+  console.log(
+    JSON.stringify(
+      result,
+      null,
+      2
+    )
+  );
+
+
+  return result;
+}
