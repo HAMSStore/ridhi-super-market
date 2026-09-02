@@ -122,6 +122,54 @@ const GOOGLE_CLIENT_ID =
 
 
 /* ============================================================
+   RIDHI AUTHENTICATED API HELPER
+   ============================================================ */
+
+async function ridhiPost(action, payload = {}) {
+
+    const idToken = window.ridhiGoogleIdToken;
+
+    if (!idToken) {
+        throw new Error("Customer session is not available. Please sign in again.");
+    }
+
+    const r = await fetch(
+        API_URL,
+        {
+            method: "POST",
+            cache: "no-store",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify({
+                action: action,
+                idToken: idToken,
+                ...payload
+            })
+        }
+    );
+
+    if (!r.ok) {
+        throw new Error(
+            "Ridhi backend request failed. HTTP " + r.status
+        );
+    }
+
+    const data = await r.json();
+
+    if (!data.success) {
+        throw new Error(
+            data.error ||
+            data.message ||
+            "Ridhi API request failed."
+        );
+    }
+
+    return data;
+}
+
+
+/* ============================================================
    INITIALIZE GOOGLE LOGIN
    ============================================================ */
 
@@ -203,23 +251,24 @@ async function handleGoogleCredential(response) {
 
         /* ----------------------------------------------------
            SEND GOOGLE ID TOKEN TO RIDHI BACKEND
+           Secure authenticated requests use POST.
+           The ID token is sent in the request body, not the URL.
            ---------------------------------------------------- */
-
-        const url =
-            API_URL +
-            "?action=verifyCustomerGoogle" +
-            "&idToken=" +
-            encodeURIComponent(response.credential);
-
 
         console.log("Calling Ridhi backend...");
 
-
         const r = await fetch(
-            url,
+            API_URL,
             {
-                method: "GET",
-                cache: "no-store"
+                method: "POST",
+                cache: "no-store",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "verifyCustomerGoogle",
+                    idToken: response.credential
+                })
             }
         );
 
@@ -266,15 +315,16 @@ async function handleGoogleCredential(response) {
             data.customer || {};
 
 
-        /* Save temporarily */
+        /*
+         * Store the profile for this browser session.
+         * Keep the Google ID token out of localStorage because it is
+         * an authentication credential. The token is kept in memory
+         * for the current page session and will be used by future
+         * authenticated POST API calls.
+         */
+        window.ridhiGoogleIdToken = response.credential;
 
-        localStorage.setItem(
-            "ridhiCustomerGoogleToken",
-            response.credential
-        );
-
-
-        localStorage.setItem(
+        sessionStorage.setItem(
             "ridhiCustomerProfile",
             JSON.stringify(customer)
         );
