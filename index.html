@@ -309,10 +309,15 @@ async function handleGoogleCredential(response) {
 
         /* ----------------------------------------------------
            LOGIN SUCCESS
+           Apps Script returns:
+           { success: true, data: { customer: {...} } }
            ---------------------------------------------------- */
 
+        const payload =
+            data.data || data;
+
         const customer =
-            data.customer || {};
+            payload.customer || {};
 
 
         /*
@@ -338,7 +343,7 @@ async function handleGoogleCredential(response) {
             customer.FULL_NAME ||
             customer.fullName ||
             customer.name ||
-            data.name ||
+            payload.name ||
             "Customer";
 
 
@@ -346,7 +351,7 @@ async function handleGoogleCredential(response) {
             customer.GOOGLE_EMAIL ||
             customer.googleEmail ||
             customer.email ||
-            data.email ||
+            payload.email ||
             "";
 
 
@@ -354,7 +359,7 @@ async function handleGoogleCredential(response) {
             customer.PROFILE_IMAGE ||
             customer.profileImage ||
             customer.picture ||
-            data.picture ||
+            payload.picture ||
             "";
 
 
